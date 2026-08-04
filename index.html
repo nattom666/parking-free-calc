@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>駐車券クロック — 兵庫・大阪・奈良</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --concrete:#DDE0DA; --concrete-dk:#C9CDC5; --paper:#FCFCFA;
+  --ink:#16191B; --ink-2:#5B625F;
+  --green:#0A6E4E; --red:#A32B22; --amber:#B8720C; --line:#D5D9D1;
+  --mono:'Roboto Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --jp:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic',YuGothic,Meiryo,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--concrete);color:var(--ink);font-family:var(--jp);line-height:1.6;padding:20px 14px 64px;min-height:100vh}
+.wrap{max-width:520px;margin:0 auto}
+.masthead{margin-bottom:18px}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--ink-2)}
+.masthead h1{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-top:4px}
+.masthead p{font-size:12.5px;color:var(--ink-2);margin-top:6px}
+.count{font-family:var(--mono);font-size:11px;color:var(--ink-2);margin-top:8px}
+
+.ticket{position:relative;background:var(--paper);border:1px solid var(--concrete-dk);
+  box-shadow:0 1px 0 rgba(0,0,0,.05),0 10px 26px -18px rgba(0,0,0,.4);padding:0 0 18px}
+.ticket::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:7px;
+  background:radial-gradient(circle at 6px 0, transparent 5.5px, var(--paper) 6px) repeat-x;background-size:12px 12px}
+.stub{background:var(--ink);color:var(--paper);padding:10px 16px 9px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.stub .code{font-family:var(--mono);font-size:10.5px;letter-spacing:.28em;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.barcode{flex:0 0 auto;height:16px;width:78px;
+  background:repeating-linear-gradient(90deg,var(--paper) 0 1px,transparent 1px 3px,var(--paper) 3px 5px,transparent 5px 6px,var(--paper) 6px 9px,transparent 9px 11px);opacity:.85}
+.field{padding:14px 16px;border-bottom:1px dashed var(--line)}
+.field:last-of-type{border-bottom:0}
+label,.lbl{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-2);margin-bottom:7px}
+select,input[type=time],input[type=number],textarea{width:100%;font-family:var(--mono);font-size:17px;color:var(--ink);
+  background:transparent;border:0;border-bottom:2px solid var(--ink);padding:4px 2px;border-radius:0;-webkit-appearance:none;appearance:none}
+select{font-family:var(--jp);font-size:15.5px;font-weight:600}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.row{display:flex;gap:10px;align-items:flex-end}
+.row>*{flex:1}
+.mini{flex:0 0 auto;font-family:var(--mono);font-size:11px;letter-spacing:.1em;background:var(--ink);color:var(--paper);border:0;padding:8px 12px;cursor:pointer}
+.mini.ghost{background:transparent;color:var(--ink);border:1px solid var(--concrete-dk)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+.chip{font-family:var(--mono);font-size:12px;padding:6px 10px;cursor:pointer;background:transparent;border:1px solid var(--concrete-dk);color:var(--ink-2)}
+.chip:hover{border-color:var(--ink)}
+.toggle{display:flex;align-items:center;gap:9px;padding:8px 0;cursor:pointer;font-size:13.5px}
+.toggle input{width:18px;height:18px;accent-color:var(--green);flex:0 0 auto}
+.toggle span.sub{color:var(--ink-2);font-size:11.5px}
+.toggle.warn{border-top:1px solid var(--line);margin-top:6px;padding-top:12px}
+
+.readout{margin-top:26px;background:var(--ink);color:var(--paper);padding:20px 18px}
+.readout .state{font-family:var(--mono);font-size:10px;letter-spacing:.3em;opacity:.62;text-transform:uppercase}
+.readout .big{font-family:var(--mono);font-weight:700;font-size:46px;line-height:1.05;letter-spacing:-.03em;margin:6px 0 2px}
+.readout .big.free{color:#4ADE9B}
+.readout .big.paid{color:#FFB26B}
+.readout .big.none{color:#9AA3A0;font-size:30px}
+.readout .sub{font-size:13.5px;opacity:.88}
+.meter{height:5px;background:rgba(255,255,255,.16);margin:16px 0 12px;position:relative;overflow:hidden}
+.meter i{position:absolute;inset:0 auto 0 0;background:#4ADE9B;transition:width .5s ease}
+.meter i.over{background:#FFB26B}
+@media (prefers-reduced-motion:reduce){.meter i{transition:none}}
+.advice{border-top:1px solid rgba(255,255,255,.18);margin-top:14px;padding-top:13px;font-size:13.5px;display:flex;gap:9px;align-items:flex-start}
+.advice b{font-family:var(--mono);color:#4ADE9B}
+
+details{margin-top:14px;background:var(--paper);border:1px solid var(--concrete-dk)}
+summary{cursor:pointer;padding:12px 15px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:" ＋";float:right}
+details[open] summary::after{content:" －"}
+.detail-body{padding:0 15px 16px;font-size:13px}
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12.5px;margin:4px 0 12px}
+th,td{text-align:left;padding:6px 4px;border-bottom:1px solid var(--line)}
+th{font-size:10px;letter-spacing:.14em;color:var(--ink-2);text-transform:uppercase}
+td.num{text-align:right}
+.note{font-size:12px;color:var(--ink-2);padding-left:1em;text-indent:-1em;margin-top:5px}
+.flag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;padding:2px 6px;border:1px solid currentColor}
+.flag.ok{color:var(--green)}
+.flag.chk{color:var(--amber)}
+.flag.no{color:var(--red)}
+a{color:var(--green)}
+textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);padding:9px;height:190px;background:#fff}
+.disclaimer{margin-top:22px;font-size:11.5px;color:var(--ink-2);border-top:1px solid var(--concrete-dk);padding-top:12px}
+.err{color:var(--red);font-size:12px;margin-top:6px;min-height:1em}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">Hyogo / Osaka / Nara</div>
+    <h1>駐車券クロック</h1>
+    <p>入庫時刻と買い物金額を入れると、無料が切れる時刻・いま出た場合の料金・あといくら買えば延びるかを出します。</p>
+    <div class="count" id="count"></div>
+  </header>
+
+  <section class="ticket">
+    <div class="stub">
+      <span class="code" id="stubCode">PARKING TICKET</span>
+      <span class="barcode" aria-hidden="true"></span>
+    </div>
+
+    <div class="field">
+      <label for="pref">都道府県</label>
+      <select id="pref">
+        <option value="all">すべて</option>
+        <option value="兵庫">兵庫</option>
+        <option value="大阪">大阪</option>
+        <option value="奈良">奈良</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="fac">施設</label>
+      <select id="fac"></select>
+    </div>
+
+    <div class="field">
+      <label for="entry">入庫時刻</label>
+      <div class="row">
+        <input type="time" id="entry">
+        <button class="mini" id="nowBtn" type="button">今</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="spend">今日の買い物合計（税込）</label>
+      <input type="number" id="spend" min="0" step="100" value="0" inputmode="numeric">
+      <div class="chips">
+        <button class="chip" data-add="500" type="button">+500</button>
+        <button class="chip" data-add="1000" type="button">+1,000</button>
+        <button class="chip" data-add="3000" type="button">+3,000</button>
+        <button class="chip" data-add="5000" type="button">+5,000</button>
+        <button class="chip" data-add="0" type="button">クリア</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="lbl">追加サービス</span>
+      <div id="extras"></div>
+      <label class="toggle" for="holidayOvr">
+        <input type="checkbox" id="holidayOvr">
+        <span>土日祝の料金で計算する <span class="sub" id="dayAuto"></span></span>
+      </label>
+      <div id="specialWrap"></div>
+    </div>
+  </section>
+
+  <section class="readout" aria-live="polite">
+    <div class="state" id="stateLbl">現在の状況</div>
+    <div class="big" id="bigNum">—</div>
+    <div class="sub" id="subLine">施設を選んでください</div>
+    <div class="meter"><i id="meterBar" style="width:0%"></i></div>
+    <div class="sub" id="timeLine" style="font-family:var(--mono);font-size:12.5px;opacity:.7"></div>
+    <div class="advice" id="advice" hidden><span>▸</span><span id="adviceTxt"></span></div>
+  </section>
+
+  <details open>
+    <summary>この施設の条件</summary>
+    <div class="detail-body" id="condBody"></div>
+  </details>
+
+  <details>
+    <summary>データを直す・施設を足す</summary>
+    <div class="detail-body">
+      <p style="margin-bottom:9px">選択中の施設の設定です。数値を直して「反映する」を押すとこの画面だけに反映されます。恒久的に残すには、このHTMLの <code>FACILITIES</code> 配列に貼り替えてください。</p>
+      <textarea id="jsonBox" spellcheck="false"></textarea>
+      <div class="err" id="jsonErr"></div>
+      <div class="chips" style="margin-top:8px">
+        <button class="mini" id="applyJson" type="button">反映する</button>
+        <button class="mini ghost" id="copyAll" type="button">全施設のデータをコピー</button>
+      </div>
+    </div>
+  </details>
+
+  <p class="disclaimer">
+    条件は変更されます。金額が大きいときは必ず施設の公式ページで確認してください。
+    <span class="flag ok">公式確認済</span> は公式サイトの記載、
+    <span class="flag chk">要確認</span> は二次情報、
+    <span class="flag no">条件未収録</span> は有料と分かっているが詳細が未取得のものです。データ収集日：2026-08-03。
+  </p>
+</div>
+
+<script>
+/* =========================================================================
+   FACILITIES — ここを編集すれば施設を追加・修正できます
+   tiers: [買い上げ金額, その金額での「合計」無料分数]  ※加算ではなく合計値
+   special: 特定日・イベント日など、通常と別建ての料金
+   noData: true → 有料だが条件を未取得（計算せず案内のみ）
+   ========================================================================= */
+const FACILITIES = [
+
+/* ============================== 兵庫 ============================== */
+{
+  id:"koshien", name:"ららぽーと甲子園", pref:"兵庫", area:"西宮市",
+  src:"secondary", url:"https://mitsui-shopping-park.com/lalaport/koshien/access/parking.html",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120],[2000,180]]},
+  holiday:{freeAllDay:false, tiers:[[0,120],[2000,180]]},
+  extras:[{id:"card", label:"三井ショッピングパークカード／アプリ", min:60, days:"all"}],
+  notes:[
+    "買い上げの段階表は公式サイトが画像掲載のため未検証。現地の掲示で確認してください。",
+    "野球開催日は長時間駐車に特別料金6,000円が加算される。キッザニア利用時など免除条件あり。",
+    "入庫は9:30〜（キッザニア第1部利用時のみA駐車場が7:00〜）。高さ制限2.2m。"
+  ]
+},
+{
+  id:"nishinomiya-gardens", name:"阪急西宮ガーデンズ", pref:"兵庫", area:"西宮市",
+  src:"official", url:"https://nishinomiya-gardens.com/access/car",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,60],[3000,120],[10000,180]]},
+  holiday:{freeAllDay:false, tiers:[[0,60],[3000,120],[10000,180]]},
+  extras:[
+    {id:"annex", label:"別館駐車場に停めた（最初の無料が2時間）", min:60, days:"all"},
+    {id:"toho", label:"TOHOシネマズ西宮OS（映画1本）", min:120, days:"all"},
+    {id:"odekake", label:"阪急阪神おでかけカード（平日のみ）", min:60, days:"weekday"}
+  ],
+  notes:[
+    "本館（百貨店・中央・南）は最初の1時間、別館は最初の2時間無料。",
+    "買い上げは西宮阪急・イズミヤを含めて合算できる。",
+    "西宮阪急・イズミヤ分は各サービスカウンターで手続きが必要。インフォメーションでは不可。",
+    "平日16時以降が無料になるキャンペーンを実施する月がある。"
+  ]
+},
+{
+  id:"umie", name:"神戸ハーバーランドumie 立体駐車場", pref:"兵庫", area:"神戸市中央区（ハーバーランド）",
+  src:"official", url:"https://umie.jp/static-pages/access",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,180],[2000,240]]},
+  holiday:{freeAllDay:false, tiers:[[0,120],[2000,180]]},
+  extras:[
+    {id:"app", label:"umieメンバーズアプリ提示", min:60, days:"all"},
+    {id:"cinema", label:"OSシネマズ神戸ハーバーランド利用", min:120, days:"all"}
+  ],
+  notes:[
+    "対象はumie立体・地下・モザイク駐車場。30分ごとに200円（無料サービス時間の経過後）。",
+    "平日は3時間、土日祝は2時間無料。2,000円以上の買上げでさらに1時間無料。",
+    "umieメンバーズアプリ提示でさらに1時間、OSシネマズ利用でさらに2時間無料。最大無料は平日7時間・土日祝6時間。",
+    "神戸アンパンマンこどもミュージアム＆モール、バイキンひみつ基地は駐車サービス対象外。立体駐車場は7:30〜24:30（入庫22:30まで）。"
+  ]
+},
+{
+  id:"aeon-kobeminami", name:"イオンモール神戸南", pref:"兵庫", area:"神戸市兵庫区",
+  src:"official", url:"https://kobeminami.aeonmall.jp/access",
+  rate:{unitMin:60, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,180]], maxFreeMin:240},
+  holiday:{freeAllDay:false, tiers:[[0,180]], maxFreeMin:240},
+  extras:[{id:"app", label:"イオンモールアプリ会員", min:60, days:"all"}],
+  special:{label:"特定日（混雑日・イベント日）", rate:{unitMin:30, yen:500},
+           tiers:[[0,180]], maxFreeMin:180, noExtras:true},
+  notes:[
+    "買い上げ金額による段階はなく、誰でも入庫後3時間無料。3時間以内なら精算操作も不要。",
+    "通常日は24時間最大800円。特定日は最大料金の適用がなく、30分500円と高い。",
+    "アプリ会員の追加1時間は特定日には付かない。",
+    "カメラで車のナンバーを読むスマートパーク方式。"
+  ]
+},
+{
+  id:"aeon-itami", name:"イオンモール伊丹", pref:"兵庫", area:"伊丹市",
+  src:"official", url:"https://itami.aeonmall.jp/access",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120]], maxFreeMin:420},
+  holiday:{freeAllDay:false, tiers:[[0,60]], maxFreeMin:360},
+  extras:[
+    {id:"app", label:"イオンモールアプリの1時間無料クーポン", min:60, days:"all"},
+    {id:"qr", label:"5,000円以上でもらえるQR駐車サービス券", min:60, days:"all"},
+    {id:"cinema", label:"TOHOシネマズ伊丹（割引券発行機）", min:120, days:"all"}
+  ],
+  notes:[
+    "平日は2時間、土日祝は1時間まで精算不要。JR伊丹駅直結。",
+    "QRサービス券とシネマ割引の無料時間は公式に明記がなく未確認。現地で確認してください。",
+    "電子マネーWAONへのチャージはQRサービス券の対象外。",
+    "2024年7月から駐車券を廃止し車両ナンバー認識に。帰りは館内の事前精算機で。",
+    "駐車場開放は7:45〜0:30。"
+  ]
+},
+{
+  id:"aeon-itamikoya", name:"イオンモール伊丹昆陽", pref:"兵庫", area:"伊丹市",
+  src:"secondary", url:"https://www.aeon.jp/sc/itamikoya/access/parking.html",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["駐車場は無料（駐輪場は有料）。利用時間8:30〜23:00。","無料であることは公式ページで明示されていないため要確認。"]
+},
+{
+  id:"aeon-kobekita", name:"イオンモール神戸北", pref:"兵庫", area:"神戸市北区",
+  src:"secondary", url:"https://kobekita.aeonmall.jp/",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["無料とみられるが公式ページで未確認。現地で確認してください。","約4,000台。"]
+},
+{
+  id:"aeon-himeji-river", name:"イオンモール姫路リバーシティー", pref:"兵庫", area:"姫路市",
+  src:"secondary", url:"https://www.aeon.jp/sc/himeji-rivercity/access/parking.html",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["無料とみられるが公式ページに料金表の記載がなく要確認。","立体駐車場は高さ制限2.1m。"]
+},
+{
+  id:"aeon-himeji-otsu", name:"イオンモール姫路大津", pref:"兵庫", area:"姫路市",
+  src:"secondary", url:"https://www.aeon.jp/sc/himejiootsu/access/",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["無料とみられるが公式ページで未確認。約2,600台。"]
+},
+{
+  id:"aeon-kasai", name:"イオンモール加西北条", pref:"兵庫", area:"加西市",
+  src:"secondary", url:"https://kasaihojo.aeonmall.jp/",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["無料とみられるが公式ページで未確認。駐車場の利用時間は9:00〜23:00。約2,100台。"]
+},
+{
+  id:"aeon-inagawa", name:"イオンモール猪名川", pref:"兵庫", area:"川辺郡猪名川町",
+  src:"secondary", url:"https://inagawa.aeonmall.jp/",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["無料とみられるが公式ページで未確認。約2,000台。"]
+},
+
+/* ============================== 大阪 ============================== */
+{
+  id:"expocity", name:"ららぽーとEXPOCITY", pref:"大阪", area:"吹田市",
+  src:"official", url:"https://mitsui-shopping-park.com/lalaport/expocity/access/parking.html",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:true, tiers:[]},
+  holiday:{freeAllDay:false, tiers:[[0,60],[2000,120],[5000,180],[10000,240]], maxFreeMin:300},
+  extras:[
+    {id:"card", label:"三井ショッピングパークカード／ポイントカード", min:60, days:"all"},
+    {id:"cinema", label:"109シネマズ大阪エキスポシティ", min:180, days:"all"},
+    {id:"ent", label:"NIFREL・VS PARK・ムラサキパーク", min:120, days:"all"}
+  ],
+  notes:[
+    "平日は買い物なしでも終日無料。土日祝は最大5時間まで。",
+    "入庫は8:00〜26:00、高さ制限2.3m。",
+    "万博記念公園側の駐車場に停めるとサービス対象外。",
+    "お盆・年末年始・繁忙期は平日でも土日祝料金になることがある。"
+  ]
+},
+{
+  id:"kadoma", name:"ららぽーと門真／三井アウトレットパーク大阪門真", pref:"大阪", area:"門真市",
+  src:"official", url:"https://mitsui-shopping-park.com/lalaport/kadoma/access/parking.html",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120],[2000,180],[5000,240],[10000,300]], maxFreeMin:540,
+           member:{freeAllDay:true, tiers:[]}},
+  holiday:{freeAllDay:false, tiers:[[0,60],[2000,120],[5000,180],[10000,240]], maxFreeMin:480,
+           member:{freeAllDay:false, tiers:[[0,120],[2000,180],[5000,240],[10000,300]]}},
+  extras:[
+    {id:"member", label:"三井ショッピングパークポイント会員", min:0, days:"all", isMember:true},
+    {id:"cinema", label:"TOHOシネマズ ららぽーと門真", min:180, days:"all"}
+  ],
+  notes:[
+    "ポイント会員は平日なら買い物なしでも終日無料。",
+    "コストコ門真倉庫店のレシートは対象外。",
+    "利用時間 8:00〜24:00、高さ制限2.3m（超える車は平面へ）。",
+    "車番認証のチケットレス方式。"
+  ]
+},
+{
+  id:"sakai", name:"ららぽーと堺", pref:"大阪", area:"堺市美原区",
+  src:"official", url:"https://mitsui-shopping-park.com/lalaport/sakai/access/parking.html",
+  rate:{unitMin:30, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["終日無料。買い物金額の条件なし。"]
+},
+{
+  id:"abeno-qs", name:"あべのキューズモール", pref:"大阪", area:"大阪市阿倍野区",
+  src:"secondary", url:"https://qs-mall.jp/abeno/access/",
+  rate:{unitMin:30, yen:350},
+  weekday:{freeAllDay:false, tiers:[[0,30],[1000,90],[5000,150],[20000,210]], maxFreeMin:420},
+  holiday:{freeAllDay:false, tiers:[[0,30],[1000,90],[5000,150],[20000,210]], maxFreeMin:420},
+  extras:[
+    {id:"friend", label:"キューズモールフレンド会員", min:30, days:"all"},
+    {id:"iy", label:"イトーヨーカドーで1,000円以上（別枠）", min:60, days:"all"}
+  ],
+  notes:[
+    "キューズモール各店の買い上げは合算されるが、イトーヨーカドーとは合算されない（別枠で加算）。",
+    "利用時間 8:45〜23:30。",
+    "超過料金は30分350円（300円との情報もあり要確認）。",
+    "インフォメーションでは駐車サービスを受け付けていない。毎回レジで駐車券を出すこと。"
+  ]
+},
+{
+  id:"aeon-shijonawate", name:"イオンモール四條畷", pref:"大阪", area:"四條畷市",
+  src:"secondary", url:"https://shijonawate.aeonmall.jp/",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["大阪府内のイオンモールでは珍しく無料駐車場（約4,250台）。","公式ページで最新の記載を確認してください。"]
+},
+{
+  id:"aeon-domecity", name:"イオンモール大阪ドームシティ", pref:"大阪", area:"大阪市西区",
+  src:"secondary", url:"https://osakadomecity.aeonmall.jp/",
+  rate:{unitMin:20, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120],[1000,240],[5000,300]]},
+  holiday:{freeAllDay:false, tiers:[[0,120],[1000,240],[5000,300]]},
+  extras:[],
+  special:{label:"京セラドームのイベント・野球開催日", rate:{unitMin:20, yen:200},
+           tiers:[[0,120]], noExtras:true},
+  notes:[
+    "京セラドーム大阪でイベント・コンサート・野球がある日は特別日となり、条件も上限料金も変わる。",
+    "通常日は24時間最大700円、イベント日は24時間最大2,600円との情報あり。",
+    "段階表・料金とも二次情報のため要確認。金額が大きい日は必ず現地掲示を見てください。"
+  ]
+},
+{
+  id:"aeon-sakaikitahanada", name:"イオンモール堺北花田", pref:"大阪", area:"堺市北区",
+  src:"nodata", noData:true, url:"https://sakaikitahanada.aeonmall.jp/access",
+  rate:{unitMin:30, yen:0},
+  weekday:{freeAllDay:false, tiers:[]}, holiday:{freeAllDay:false, tiers:[]},
+  extras:[],
+  notes:["有料の駐車場だが、無料時間と買い上げ条件を未取得。公式ページで確認してください。"]
+},
+
+/* ============================== 奈良 ============================== */
+{
+  id:"aeon-yamatokoriyama", name:"イオンモール大和郡山", pref:"奈良", area:"大和郡山市",
+  src:"official", url:"https://yamatokoriyama-aeonmall.com/static/detail/access",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["全駐車場が無料。約4,200台。"]
+},
+{
+  id:"aeon-kashihara", name:"イオンモール橿原", pref:"奈良", area:"橿原市",
+  src:"official", url:"https://kashihara-aeonmall.com/special/lists/chusya_jyoho",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["駐車場・駐輪場とも無料。土日祝は西平面のF区画も開放。"]
+},
+{
+  id:"aeon-tomigaoka", name:"イオンモール奈良登美ヶ丘", pref:"奈良", area:"生駒市",
+  src:"secondary", url:"https://www.aeon.jp/sc/naratomigaoka/access/parking.html",
+  rate:{unitMin:60, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,60],[2000,120],[3000,180],[20000,240]]},
+  holiday:{freeAllDay:false, tiers:[[0,60],[2000,120],[3000,180],[20000,240]]},
+  extras:[{id:"app", label:"イオンモールアプリのQRコード提示", min:60, days:"all"}],
+  notes:[
+    "最初の60分無料、以降は60分ごと200円。",
+    "買い物なしで長時間停める場合は入庫後24時間ごとの上限料金あり（平面・4F 1,000円／屋上 800円）。",
+    "段階表は二次情報のため要確認。"
+  ]
+},
+{
+  id:"nara-family", name:"ならファミリー", pref:"奈良", area:"奈良市",
+  src:"secondary", url:"https://www.d-kintetsu.co.jp/nara/access/",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120]]},
+  holiday:{freeAllDay:false, tiers:[[0,120]]},
+  extras:[{id:"flat", label:"平面（北・北第2・北第3・南）に停めた", min:60, days:"all"}],
+  notes:[
+    "ならファミリー利用で最初の2時間無料。平面の北・北第2・北第3・南は最初の3時間無料。",
+    "買い上げ金額による追加サービスの有無は未確認。現地掲示で確認してください。"
+  ]
+}
+];
+
+/* 日本の祝日（振替休日・国民の休日を含む）2026-2027 */
+const HOLIDAYS = new Set([
+"2026-01-01","2026-01-12","2026-02-11","2026-02-23","2026-03-20","2026-04-29",
+"2026-05-03","2026-05-04","2026-05-05","2026-05-06","2026-07-20","2026-08-11",
+"2026-09-21","2026-09-22","2026-09-23","2026-10-12","2026-11-03","2026-11-23",
+"2027-01-01","2027-01-11","2027-02-11","2027-02-23","2027-03-21","2027-03-22",
+"2027-04-29","2027-05-03","2027-05-04","2027-05-05","2027-07-19","2027-08-11",
+"2027-09-20","2027-09-23","2027-10-11","2027-11-03","2027-11-23"
+]);
+
+let data = JSON.parse(JSON.stringify(FACILITIES));
+let current = null;
+const on = {};
+
+const $ = id => document.getElementById(id);
+const yen = n => "¥" + n.toLocaleString("ja-JP");
+const pad = n => String(n).padStart(2,"0");
+
+function isHolidayToday(){
+  const d = new Date();
+  const key = d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+  return d.getDay()===0 || d.getDay()===6 || HOLIDAYS.has(key);
+}
+function hhmm(d){ return pad(d.getHours())+":"+pad(d.getMinutes()); }
+function dur(min){
+  if(min<=0) return "0分";
+  const h=Math.floor(min/60), m=min%60;
+  return (h?h+"時間":"")+(m?m+"分":(h?"":"0分"));
+}
+function isSpecial(){ const el=$("specialDay"); return !!(el && el.checked); }
+
+function fillFacilities(){
+  const p = $("pref").value;
+  const list = data.filter(f => p==="all" || f.pref===p);
+  $("fac").innerHTML = list.map(f =>
+    '<option value="'+f.id+'">'+f.name+'（'+f.area+'）</option>').join("");
+  const byPref = {};
+  data.forEach(f => byPref[f.pref] = (byPref[f.pref]||0)+1);
+  $("count").textContent = "収録 " + data.length + "施設　兵庫 " + (byPref["兵庫"]||0) +
+    "／大阪 " + (byPref["大阪"]||0) + "／奈良 " + (byPref["奈良"]||0);
+  select(list[0] ? list[0].id : null);
+}
+function select(id){
+  current = data.find(f => f.id===id) || null;
+  Object.keys(on).forEach(k => delete on[k]);
+  renderExtras(); renderSpecial(); renderCond(); renderJson(); compute();
+}
+function renderSpecial(){
+  const w = $("specialWrap");
+  if(!current || !current.special){ w.innerHTML=""; return; }
+  w.innerHTML = '<label class="toggle warn" for="specialDay"><input type="checkbox" id="specialDay">' +
+    '<span>' + current.special.label + 'の料金で計算する</span></label>';
+  $("specialDay").addEventListener("change", () => { renderCond(); compute(); });
+}
+function renderExtras(){
+  const box = $("extras");
+  if(!current || !current.extras.length){
+    box.innerHTML = '<p style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">この施設に追加サービスの設定はありません。</p>';
+    return;
+  }
+  box.innerHTML = current.extras.map(e =>
+    '<label class="toggle" for="x_'+e.id+'"><input type="checkbox" id="x_'+e.id+'" data-x="'+e.id+'">' +
+    '<span>'+e.label + (e.days==="weekday"?' <span class="sub">平日のみ</span>':'') +
+    (e.min?' <span class="sub">+'+dur(e.min)+'</span>':'') + '</span></label>').join("");
+  box.querySelectorAll("input[data-x]").forEach(el =>
+    el.addEventListener("change", () => { on[el.dataset.x] = el.checked; compute(); }));
+}
+function dayRule(){
+  if(!current) return null;
+  if(isSpecial() && current.special) return current.special;
+  const base = $("holidayOvr").checked ? current.holiday : current.weekday;
+  if(on.member && base.member) return Object.assign({}, base, base.member);
+  return base;
+}
+function activeRate(){
+  if(isSpecial() && current.special && current.special.rate) return current.special.rate;
+  return current.rate;
+}
+function freeMinutes(){
+  const rule = dayRule();
+  if(!rule) return {min:0, allDay:false, tierMin:0};
+  if(rule.freeAllDay) return {min:Infinity, allDay:true, tierMin:0};
+  const spend = Math.max(0, Number($("spend").value)||0);
+  let t = 0;
+  (rule.tiers||[]).forEach(pair => { if(spend >= pair[0]) t = Math.max(t, pair[1]); });
+  let total = t;
+  if(!rule.noExtras){
+    const hol = $("holidayOvr").checked;
+    current.extras.forEach(e => {
+      if(!on[e.id] || e.isMember) return;
+      if(e.days==="weekday" && hol) return;
+      total += e.min;
+    });
+  }
+  if(rule.maxFreeMin) total = Math.min(total, rule.maxFreeMin);
+  return {min:total, allDay:false, tierMin:t};
+}
+function nextTier(){
+  const rule = dayRule();
+  if(!rule || rule.freeAllDay) return null;
+  const spend = Math.max(0, Number($("spend").value)||0);
+  const cur = freeMinutes().tierMin;
+  const nx = (rule.tiers||[]).filter(p => p[0] > spend).sort((a,b)=>a[0]-b[0])[0];
+  if(!nx || nx[1] <= cur) return null;
+  return {need: nx[0]-spend, gain: nx[1]-cur};
+}
+
+function compute(){
+  if(!current) return;
+  $("stubCode").textContent = current.id.toUpperCase().replace(/-/g," ");
+
+  if(current.noData){
+    $("stateLbl").textContent = "条件未収録";
+    $("bigNum").textContent = "？";
+    $("bigNum").className = "big none";
+    $("subLine").textContent = "有料の駐車場ですが、無料時間の条件を持っていません。公式ページで確認してください。";
+    $("meterBar").style.width = "0%"; $("meterBar").className = "";
+    $("timeLine").textContent = ""; $("advice").hidden = true;
+    return;
+  }
+
+  const parts = ($("entry").value || hhmm(new Date())).split(":");
+  const now = new Date();
+  const entry = new Date(now);
+  entry.setHours(Number(parts[0]), Number(parts[1]), 0, 0);
+  if(entry > now) entry.setDate(entry.getDate()-1);
+  const parked = Math.max(0, Math.floor((now - entry)/60000));
+
+  const f = freeMinutes();
+  const rate = activeRate();
+
+  if(f.allDay || rate.yen === 0){
+    $("stateLbl").textContent = "無料";
+    $("bigNum").textContent = "¥0";
+    $("bigNum").className = "big free";
+    $("subLine").textContent = rate.yen === 0
+      ? "この施設は駐車料金がかかりません。" : "この条件なら時間を気にせず大丈夫です。";
+    $("meterBar").style.width = "100%"; $("meterBar").className = "";
+    $("timeLine").textContent = "駐車 " + dur(parked);
+    $("advice").hidden = true;
+    return;
+  }
+
+  const over = Math.max(0, parked - f.min);
+  const fee = Math.ceil(over / rate.unitMin) * rate.yen;
+  const until = new Date(entry.getTime() + f.min*60000);
+
+  $("bigNum").textContent = fee === 0 ? "無料" : yen(fee);
+  $("bigNum").className = "big " + (fee === 0 ? "free" : "paid");
+  $("stateLbl").textContent = fee === 0 ? "いま出れば" : "いま出ると";
+
+  if(fee === 0){
+    $("subLine").textContent = "無料は " + hhmm(until) + " まで。残り " + dur(f.min - parked) + "。";
+  }else{
+    const nextUp = rate.unitMin - (over % rate.unitMin || rate.unitMin);
+    $("subLine").textContent = "無料は " + hhmm(until) + " まででした。あと " +
+      dur(nextUp) + " で " + yen(fee + rate.yen) + " に上がります。";
+  }
+  $("meterBar").style.width = (f.min ? Math.min(100, parked / f.min * 100) : 100) + "%";
+  $("meterBar").className = parked > f.min ? "over" : "";
+  $("timeLine").textContent = "駐車 " + dur(parked) + "　/　無料枠 " + dur(f.min) +
+    "　/　超過 " + rate.unitMin + "分ごと " + yen(rate.yen);
+
+  const nt = nextTier();
+  if(nt){
+    $("advice").hidden = false;
+    $("adviceTxt").innerHTML = "あと <b>" + yen(nt.need) + "</b> 買うと無料枠が <b>+" + dur(nt.gain) + "</b> 延びます。";
+  }else{
+    $("advice").hidden = true;
+  }
+}
+
+function renderCond(){
+  if(!current) return;
+  const flags = {official:'<span class="flag ok">公式確認済</span>',
+                 secondary:'<span class="flag chk">要確認</span>',
+                 nodata:'<span class="flag no">条件未収録</span>'};
+  const tbl = (rule, label) => {
+    if(!rule) return "";
+    if(rule.freeAllDay) return '<p style="margin:4px 0 10px"><b>'+label+'</b>：買い物なしでも終日無料</p>';
+    if(!rule.tiers || !rule.tiers.length) return "";
+    return '<p style="margin:4px 0 2px"><b>'+label+'</b></p><table><tr><th>買い上げ</th><th class="num">無料になる合計時間</th></tr>' +
+      rule.tiers.map(p => '<tr><td>'+(p[0]===0?"なし":yen(p[0])+" 以上")+'</td><td class="num">'+dur(p[1])+'</td></tr>').join("") +
+      '</table>';
+  };
+  let html = '<p style="margin-bottom:10px">' + (flags[current.src]||flags.secondary) +
+    ' <a href="'+current.url+'" target="_blank" rel="noopener">公式ページを開く</a></p>';
+  if(!current.noData){
+    const r = current.rate;
+    html += '<p style="margin-bottom:8px;font-family:var(--mono);font-size:12px">超過料金 ' +
+      (r.yen === 0 ? "なし" : r.unitMin+"分ごと "+yen(r.yen)) + '</p>';
+    html += tbl(current.weekday, "平日");
+    if(current.weekday.member) html += tbl(Object.assign({},current.weekday,current.weekday.member), "平日（会員）");
+    html += tbl(current.holiday, "土・日・祝");
+    if(current.holiday.member) html += tbl(Object.assign({},current.holiday,current.holiday.member), "土・日・祝（会員）");
+    if(current.special){
+      html += tbl(current.special, current.special.label);
+      if(current.special.rate) html += '<p style="margin:-6px 0 12px;font-family:var(--mono);font-size:12px">' +
+        'この日の超過料金 ' + current.special.rate.unitMin + '分ごと ' + yen(current.special.rate.yen) + '</p>';
+    }
+    const ex = current.extras.filter(e => !e.isMember);
+    if(ex.length){
+      html += '<p style="margin:4px 0 2px"><b>併用できるサービス</b></p><table>' +
+        ex.map(e => '<tr><td>'+e.label+'</td><td class="num">+'+dur(e.min)+'</td></tr>').join("") + '</table>';
+    }
+  }
+  html += current.notes.map(n => '<p class="note">・'+n+'</p>').join("");
+  $("condBody").innerHTML = html;
+}
+function renderJson(){
+  if(!current) return;
+  $("jsonBox").value = JSON.stringify(current, null, 2);
+  $("jsonErr").textContent = "";
+}
+
+$("pref").addEventListener("change", fillFacilities);
+$("fac").addEventListener("change", e => select(e.target.value));
+$("entry").addEventListener("input", compute);
+$("spend").addEventListener("input", compute);
+$("holidayOvr").addEventListener("change", () => { renderCond(); compute(); });
+$("nowBtn").addEventListener("click", () => { $("entry").value = hhmm(new Date()); compute(); });
+document.querySelectorAll(".chip[data-add]").forEach(b =>
+  b.addEventListener("click", () => {
+    const add = Number(b.dataset.add);
+    $("spend").value = add === 0 ? 0 : (Number($("spend").value)||0) + add;
+    compute();
+  }));
+$("applyJson").addEventListener("click", () => {
+  try{
+    const obj = JSON.parse($("jsonBox").value);
+    if(!obj.id || !obj.name) throw new Error("id と name は必須です");
+    const i = data.findIndex(f => f.id === current.id);
+    if(i >= 0) data[i] = obj; else data.push(obj);
+    $("jsonErr").textContent = "";
+    fillFacilities();
+    $("fac").value = obj.id; select(obj.id);
+  }catch(err){ $("jsonErr").textContent = "読み込めません：" + err.message; }
+});
+$("copyAll").addEventListener("click", async e => {
+  const txt = "const FACILITIES = " + JSON.stringify(data, null, 2) + ";";
+  try{ await navigator.clipboard.writeText(txt); e.target.textContent = "コピーしました"; }
+  catch(err){ e.target.textContent = "コピーできません"; }
+  setTimeout(() => e.target.textContent = "全施設のデータをコピー", 1800);
+});
+
+$("entry").value = hhmm(new Date());
+$("holidayOvr").checked = isHolidayToday();
+$("dayAuto").textContent = "（今日は自動で" + (isHolidayToday() ? "土日祝" : "平日") + "判定）";
+fillFacilities();
+setInterval(compute, 20000);
+</script>
+</body>
+</html>
