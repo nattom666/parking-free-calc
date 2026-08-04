@@ -251,15 +251,22 @@ const FACILITIES = [
 },
 {
   id:"corowa-koshien", name:"コロワ甲子園", pref:"兵庫", area:"西宮市（甲子園）",
-  src:"nodata", noData:true, url:"https://corowa.jp/parking/",
+  src:"official", url:"https://corowa.jp/parking/",
   rate:{unitMin:30, yen:500},
-  weekday:{freeAllDay:false, tiers:[]}, holiday:{freeAllDay:false, tiers:[]},
+  weekday:{freeAllDay:false, tiers:[[2000,120],[10000,240]], maxFee:500},
+  holiday:{freeAllDay:false, tiers:[[2000,120],[10000,240]], maxFee:500},
   extras:[],
+  special:{label:"特定日（甲子園のイベント開催日など）",
+           tiers:[[2000,120],[10000,240]], maxFee:5000},
   notes:[
-    "公式の駐車場ページが画像掲載で、通常日の基本料金と買い上げサービスを確認できていない。二次情報も60分300円と30分500円で食い違うため計算に載せていない。",
-    "甲子園でのイベント開催日など「特定日」は当日最大5,000円（公式に明記）。2026年8月の特定日は5〜23日と28〜30日。",
-    "23:00〜翌8:00は30分ごと500円で、最大料金の適用がない（公式に明記）。",
-    "野球開催日に長時間停めると高額になる。必ず現地の掲示で確認してください。"
+    "買い物をしないと無料時間がない。2,000円以上で最大2時間、10,000円以上で最大4時間無料。複数店舗の合算ができる。",
+    "超過は30分ごと500円。上限は8:00〜23:00の間だけで、通常日500円・特定日5,000円。",
+    "23:00〜翌8:00は30分ごと500円で上限の適用がない。この画面は入庫からの経過時間だけで計算するので、深夜をまたぐと実際と違う。",
+    "2026年8月の特定日は5〜23日と28〜30日。特定日カレンダーは公式ページで確認してください。",
+    "駐車場の営業は8:00〜23:00。23:00以降は入出庫できない。",
+    "駐車サービスを受けるには駐車券が必要。イオンでの買い上げ分はイオンサービスカウンターで対応。",
+    "商品券・図書カード・POSAカードの購入と電子マネーチャージは対象外。一部対象外店舗あり。",
+    "事前精算後に30分以上たってから出庫すると追加料金がかかる場合がある。"
   ]
 },
 {
@@ -828,7 +835,11 @@ function compute(){
   }
 
   const over = Math.max(0, parked - f.min);
-  const fee = Math.ceil(over / rate.unitMin) * rate.yen;
+  const raw = Math.ceil(over / rate.unitMin) * rate.yen;
+  const rule = dayRule();
+  const cap = (rule && rule.maxFee) ? rule.maxFee : null;
+  const fee = cap === null ? raw : Math.min(raw, cap);
+  const atCap = cap !== null && raw >= cap;
   const until = new Date(entry.getTime() + f.min*60000);
 
   $("bigNum").textContent = fee === 0 ? "無料" : yen(fee);
@@ -837,15 +848,20 @@ function compute(){
 
   if(fee === 0){
     $("subLine").textContent = "無料は " + hhmm(until) + " まで。残り " + dur(f.min - parked) + "。";
+  }else if(atCap){
+    $("subLine").textContent = "無料は " + hhmm(until) + " まででした。上限の " + yen(cap) +
+      " に達しているので、これ以上は増えません。";
   }else{
     const nextUp = rate.unitMin - (over % rate.unitMin || rate.unitMin);
+    const nextFee = cap === null ? raw + rate.yen : Math.min(raw + rate.yen, cap);
     $("subLine").textContent = "無料は " + hhmm(until) + " まででした。あと " +
-      dur(nextUp) + " で " + yen(fee + rate.yen) + " に上がります。";
+      dur(nextUp) + " で " + yen(nextFee) + " に上がります。";
   }
   $("meterBar").style.width = (f.min ? Math.min(100, parked / f.min * 100) : 100) + "%";
   $("meterBar").className = parked > f.min ? "over" : "";
   $("timeLine").textContent = "駐車 " + dur(parked) + "　/　無料枠 " + dur(f.min) +
-    "　/　超過 " + rate.unitMin + "分ごと " + yen(rate.yen);
+    "　/　超過 " + rate.unitMin + "分ごと " + yen(rate.yen) +
+    (cap === null ? "" : "　/　上限 " + yen(cap));
 
   const nt = nextTier();
   if(nt){
@@ -867,7 +883,9 @@ function renderCond(){
     if(!rule.tiers || !rule.tiers.length) return "";
     return '<p style="margin:4px 0 2px"><b>'+label+'</b></p><table><tr><th>買い上げ</th><th class="num">無料になる合計時間</th></tr>' +
       rule.tiers.map(p => '<tr><td>'+(p[0]===0?"なし":yen(p[0])+" 以上")+'</td><td class="num">'+dur(p[1])+'</td></tr>').join("") +
-      '</table>';
+      '</table>' +
+      (rule.maxFee ? '<p style="margin:-6px 0 10px;font-family:var(--mono);font-size:12px">上限 ' +
+        yen(rule.maxFee) + '</p>' : '');
   };
   let html = '<p style="margin-bottom:10px">' + (flags[current.src]||flags.secondary) +
     ' <a href="'+current.url+'" target="_blank" rel="noopener">公式ページを開く</a></p>';
