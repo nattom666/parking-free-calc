@@ -527,14 +527,15 @@ const FACILITIES = [
   id:"aeon-domecity", name:"イオンモール大阪ドームシティ", pref:"大阪", area:"大阪市西区",
   src:"secondary", url:"https://osakadomecity.aeonmall.jp/",
   rate:{unitMin:20, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,120],[1000,240],[5000,300]]},
-  holiday:{freeAllDay:false, tiers:[[0,120],[1000,240],[5000,300]]},
+  weekday:{freeAllDay:false, tiers:[[0,120],[1000,240],[5000,300]], maxFee:700},
+  holiday:{freeAllDay:false, tiers:[[0,120],[1000,240],[5000,300]], maxFee:700},
   extras:[],
   special:{label:"京セラドームのイベント・野球開催日", rate:{unitMin:20, yen:200},
-           tiers:[[0,120]], noExtras:true},
+           tiers:[[0,120]], noExtras:true, maxFee:2600},
   notes:[
     "京セラドーム大阪でイベント・コンサート・野球がある日は特別日となり、条件も上限料金も変わる。",
     "通常日は24時間最大700円、イベント日は24時間最大2,600円との情報あり。",
+    "この上限は二次情報で、公式ページでは確認できていない。上限があるものとして計算しているので、上限そのものが無い・違う場合は表示より高くなる。",
     "段階表・料金とも二次情報のため要確認。金額が大きい日は必ず現地掲示を見てください。"
   ]
 },
@@ -662,12 +663,14 @@ const FACILITIES = [
   id:"aeon-tomigaoka", name:"イオンモール奈良登美ヶ丘", pref:"奈良", area:"生駒市",
   src:"secondary", url:"https://www.aeon.jp/sc/naratomigaoka/access/parking.html",
   rate:{unitMin:60, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,60],[2000,120],[3000,180],[20000,240]]},
-  holiday:{freeAllDay:false, tiers:[[0,60],[2000,120],[3000,180],[20000,240]]},
+  weekday:{freeAllDay:false, tiers:[[0,60],[2000,120],[3000,180],[20000,240]], maxFee:1000},
+  holiday:{freeAllDay:false, tiers:[[0,60],[2000,120],[3000,180],[20000,240]], maxFee:1000},
   extras:[{id:"app", label:"イオンモールアプリのQRコード提示", min:60, days:"all"}],
   notes:[
     "最初の60分無料、以降は60分ごと200円。",
     "買い物なしで長時間停める場合は入庫後24時間ごとの上限料金あり（平面・4F 1,000円／屋上 800円）。",
+    "上限は停めた場所で違うため、この画面では高いほうの1,000円で頭打ちにしている。屋上なら実際は800円で止まる。",
+    "この上限は二次情報で、公式ページでは確認できていない。上限そのものが無い・違う場合は表示より高くなる。",
     "段階表は二次情報のため要確認。"
   ]
 },
