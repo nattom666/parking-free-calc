@@ -239,8 +239,8 @@ const FACILITIES = [
   id:"acta-nishinomiya", name:"アクタ西宮", pref:"兵庫", area:"西宮市（西宮北口）",
   src:"secondary", url:"https://actafan.com/parking.html",
   rate:{unitMin:30, yen:150},
-  weekday:{freeAllDay:false, tiers:[[1000,30],[2000,60],[3000,120]]},
-  holiday:{freeAllDay:false, tiers:[[1000,30],[2000,60],[3000,120]]},
+  weekday:{freeAllDay:false, tiers:[[1000,30],[2000,60],[3000,120]], maxFee:1200},
+  holiday:{freeAllDay:false, tiers:[[1000,30],[2000,60],[3000,120]], maxFee:1200},
   extras:[],
   notes:[
     "買い物をしないと無料時間がない。1,000円以上で30分、2,000円以上で1時間、3,000円以上で2時間。対象店とコープ食彩館の合算ができる。",
@@ -273,7 +273,7 @@ const FACILITIES = [
   id:"ebista-nishinomiya", name:"エビスタ西宮", pref:"兵庫", area:"西宮市（阪神西宮）",
   src:"official", url:"https://www.ebista.com/access/",
   rate:{unitMin:60, yen:300},
-  weekday:{freeAllDay:false, tiers:[[2000,60],[4000,120]], maxFreeMin:240},
+  weekday:{freeAllDay:false, tiers:[[2000,60],[4000,120]], maxFreeMin:240, maxFee:1500},
   holiday:{freeAllDay:false, tiers:[[2000,60],[4000,120]], maxFreeMin:240},
   extras:[{id:"odekake", label:"阪急阪神おでかけアプリ会員（3,000円以上）", min:60, days:"all"}],
   notes:[
@@ -288,8 +288,8 @@ const FACILITIES = [
   id:"frente-nishinomiya", name:"フレンテ西宮", pref:"兵庫", area:"西宮市（JR西宮）",
   src:"official", url:"https://www.frente-nishinomiya.com/facility/",
   rate:{unitMin:20, yen:100},
-  weekday:{freeAllDay:false, tiers:[[1000,120],[10000,180]]},
-  holiday:{freeAllDay:false, tiers:[[1000,120],[10000,180]]},
+  weekday:{freeAllDay:false, tiers:[[1000,120],[10000,180]], maxFee:900},
+  holiday:{freeAllDay:false, tiers:[[1000,120],[10000,180]], maxFee:900},
   extras:[],
   notes:[
     "買い物をしないと無料時間がない。1,000円以上で2時間、10,000円以上で3時間。",
@@ -318,8 +318,8 @@ const FACILITIES = [
   id:"amagasaki-qs", name:"あまがさきキューズモール", pref:"兵庫", area:"尼崎市",
   src:"official", url:"https://qs-mall.jp/amagasaki/access/",
   rate:{unitMin:60, yen:400},
-  weekday:{freeAllDay:false, tiers:[[0,60],[4000,120]], maxFreeMin:420},
-  holiday:{freeAllDay:false, tiers:[[0,60],[4000,120]], maxFreeMin:420},
+  weekday:{freeAllDay:false, tiers:[[0,60],[4000,120]], maxFreeMin:420, maxFee:1100},
+  holiday:{freeAllDay:false, tiers:[[0,60],[4000,120]], maxFreeMin:420, maxFee:1100},
   extras:[
     {id:"friend", label:"キューズモールフレンズ会員", min:60, days:"all"},
     {id:"movix", label:"MOVIXあまがさき利用", min:120, days:"all"},
@@ -328,6 +328,7 @@ const FACILITIES = [
   notes:[
     "最初の1時間無料。4,000円以上の買い上げで2時間になる。以降は60分ごと400円。",
     "24時間の最大料金は1,100円。駐車サービスが付くと最大800円。",
+    "この画面の上限は安全側に倒して1,100円で頭打ちにしている。サービスが付いていれば実際は800円で止まる。",
     "公式は併用で最大7時間無料としているが、記載の内訳を足すと6時間にしかならない。現地の掲示で確認してください。",
     "利用時間 8:30〜25:30（4階は10:00〜）。約1,400台。平日は6階・7階を閉鎖。"
   ]
@@ -336,8 +337,8 @@ const FACILITIES = [
   id:"aeon-kobeminami", name:"イオンモール神戸南", pref:"兵庫", area:"神戸市兵庫区",
   src:"official", url:"https://kobeminami.aeonmall.jp/access",
   rate:{unitMin:60, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,180]], maxFreeMin:240},
-  holiday:{freeAllDay:false, tiers:[[0,180]], maxFreeMin:240},
+  weekday:{freeAllDay:false, tiers:[[0,180]], maxFreeMin:240, maxFee:800},
+  holiday:{freeAllDay:false, tiers:[[0,180]], maxFreeMin:240, maxFee:800},
   extras:[{id:"app", label:"イオンモールアプリ会員", min:60, days:"all"}],
   special:{label:"特定日（混雑日・イベント日）", rate:{unitMin:30, yen:500},
            tiers:[[0,180]], maxFreeMin:180, noExtras:true},
@@ -483,7 +484,7 @@ const FACILITIES = [
   id:"minoh-qs", name:"みのおキューズモール", pref:"大阪", area:"箕面市",
   src:"official", url:"https://qs-mall.jp/minoh/access/",
   rate:{unitMin:30, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,120],[1,180],[1000,240],[5000,300],[20000,360]], maxFreeMin:480},
+  weekday:{freeAllDay:false, tiers:[[0,120],[1,180],[1000,240],[5000,300],[20000,360]], maxFreeMin:480, maxFee:1000},
   holiday:{freeAllDay:false, tiers:[[0,60],[1,120],[1000,180],[5000,240],[20000,300]], maxFreeMin:540},
   extras:[
     {id:"cinema-wd", label:"109シネマズ箕面を利用", min:60, days:"weekday"},
@@ -495,6 +496,7 @@ const FACILITIES = [
     "平日は最初の2時間、土日祝は最初の1時間無料。買い上げ分はこれに加算される（1円以上+1時間／1,000円以上+2時間／5,000円以上+3時間／20,000円以上+4時間）。",
     "最大は平日8時間・土日祝9時間。以降は30分ごと200円。",
     "平日（土日祝を除く）は当日1日最大1,000円。1円以上の買い上げで最大800円に下がる。土日祝の最大料金は記載なし。",
+    "この画面の上限は安全側に倒して平日1,000円で頭打ちにしている。買い物をしていれば実際は800円で止まる。",
     "映画とジムの無料時間は平日1時間・土日祝2時間で違う。曜日の切り替えで表示も入れ替わる。",
     "利用時間 EAST・WEST 7:30〜24:30、CENTER 5:00〜24:30。高さ制限 EAST 2.2m／WEST 2.1m／CENTER 2.3m。"
   ]
@@ -581,7 +583,7 @@ const FACILITIES = [
   id:"aeon-tsurumiryokuchi", name:"イオンモール鶴見緑地", pref:"大阪", area:"大阪市鶴見区",
   src:"official", url:"https://tsurumiryokuchi.aeonmall.jp/access",
   rate:{unitMin:30, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,120],[5000,180]]},
+  weekday:{freeAllDay:false, tiers:[[0,120],[5000,180]], maxFee:500},
   holiday:{freeAllDay:false, tiers:[[0,120]]},
   extras:[{id:"app", label:"イオンモールアプリのクーポン提示", min:60, days:"all"}],
   notes:[
