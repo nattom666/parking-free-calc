@@ -180,7 +180,7 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
     条件は変更されます。金額が大きいときは必ず施設の公式ページで確認してください。
     <span class="flag ok">公式確認済</span> は公式サイトの記載、
     <span class="flag chk">要確認</span> は二次情報、
-    <span class="flag no">条件未収録</span> は有料と分かっているが詳細が未取得のものです。データ収集日：2026-08-03。
+    <span class="flag no">条件未収録</span> は有料と分かっているが詳細が未取得のものです。データ収集日：2026-08-05。
   </p>
 </div>
 
@@ -240,6 +240,24 @@ const FACILITIES = [
     "平日は3時間、土日祝は2時間無料。2,000円以上の買上げでさらに1時間無料。",
     "umieメンバーズアプリ提示でさらに1時間、OSシネマズ利用でさらに2時間無料。最大無料は平日7時間・土日祝6時間。",
     "神戸アンパンマンこどもミュージアム＆モール、バイキンひみつ基地は駐車サービス対象外。立体駐車場は7:30〜24:30（入庫22:30まで）。"
+  ]
+},
+{
+  id:"amagasaki-qs", name:"あまがさきキューズモール", pref:"兵庫", area:"尼崎市",
+  src:"official", url:"https://qs-mall.jp/amagasaki/access/",
+  rate:{unitMin:60, yen:400},
+  weekday:{freeAllDay:false, tiers:[[0,60],[4000,120]], maxFreeMin:420},
+  holiday:{freeAllDay:false, tiers:[[0,60],[4000,120]], maxFreeMin:420},
+  extras:[
+    {id:"friend", label:"キューズモールフレンズ会員", min:60, days:"all"},
+    {id:"movix", label:"MOVIXあまがさき利用", min:120, days:"all"},
+    {id:"central", label:"セントラルスポーツ利用", min:60, days:"all"}
+  ],
+  notes:[
+    "最初の1時間無料。4,000円以上の買い上げで2時間になる。以降は60分ごと400円。",
+    "24時間の最大料金は1,100円。駐車サービスが付くと最大800円。",
+    "公式は併用で最大7時間無料としているが、記載の内訳を足すと6時間にしかならない。現地の掲示で確認してください。",
+    "利用時間 8:30〜25:30（4階は10:00〜）。約1,400台。平日は6階・7階を閉鎖。"
   ]
 },
 {
@@ -390,6 +408,40 @@ const FACILITIES = [
   ]
 },
 {
+  id:"minoh-qs", name:"みのおキューズモール", pref:"大阪", area:"箕面市",
+  src:"official", url:"https://qs-mall.jp/minoh/access/",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120],[1,180],[1000,240],[5000,300],[20000,360]], maxFreeMin:480},
+  holiday:{freeAllDay:false, tiers:[[0,60],[1,120],[1000,180],[5000,240],[20000,300]], maxFreeMin:540},
+  extras:[
+    {id:"cinema-wd", label:"109シネマズ箕面を利用", min:60, days:"weekday"},
+    {id:"cinema-hd", label:"109シネマズ箕面を利用", min:120, days:"holiday"},
+    {id:"cospa-wd", label:"コ・ス・パ箕面萱野24を利用", min:60, days:"weekday"},
+    {id:"cospa-hd", label:"コ・ス・パ箕面萱野24を利用", min:120, days:"holiday"}
+  ],
+  notes:[
+    "平日は最初の2時間、土日祝は最初の1時間無料。買い上げ分はこれに加算される（1円以上+1時間／1,000円以上+2時間／5,000円以上+3時間／20,000円以上+4時間）。",
+    "最大は平日8時間・土日祝9時間。以降は30分ごと200円。",
+    "平日（土日祝を除く）は当日1日最大1,000円。1円以上の買い上げで最大800円に下がる。土日祝の最大料金は記載なし。",
+    "映画とジムの無料時間は平日1時間・土日祝2時間で違う。曜日の切り替えで表示も入れ替わる。",
+    "利用時間 EAST・WEST 7:30〜24:30、CENTER 5:00〜24:30。高さ制限 EAST 2.2m／WEST 2.1m／CENTER 2.3m。"
+  ]
+},
+{
+  id:"morinomiya-qs", name:"もりのみやキューズモールBASE", pref:"大阪", area:"大阪市中央区",
+  src:"official", url:"https://qs-mall.jp/morinomiya/access/",
+  rate:{unitMin:30, yen:300},
+  weekday:{freeAllDay:false, tiers:[[0,30],[1000,60],[5000,120],[20000,180]]},
+  holiday:{freeAllDay:false, tiers:[[0,30],[1000,60],[5000,120],[20000,180]]},
+  extras:[{id:"friend", label:"キューズモールフレンズ会員", min:30, days:"all"}],
+  notes:[
+    "最初の30分無料。1,000円以上で1時間、5,000円以上で2時間、20,000円以上で3時間。以降は30分ごと300円。",
+    "公式は会員分を足して最大7時間無料としているが、記載の内訳では3時間30分にしかならない。現地の掲示で確認してください。",
+    "最大料金の上限がない日程があると公式に注意書きがある。",
+    "利用時間 WEST 9:30〜24:00、EAST 8:30〜23:30。高さ制限は2.3m。"
+  ]
+},
+{
   id:"aeon-shijonawate", name:"イオンモール四條畷", pref:"大阪", area:"四條畷市",
   src:"secondary", url:"https://shijonawate.aeonmall.jp/",
   rate:{unitMin:60, yen:0},
@@ -419,6 +471,100 @@ const FACILITIES = [
   weekday:{freeAllDay:false, tiers:[]}, holiday:{freeAllDay:false, tiers:[]},
   extras:[],
   notes:["有料の駐車場だが、無料時間と買い上げ条件を未取得。公式ページで確認してください。"]
+},
+
+{
+  id:"aeon-ibaraki", name:"イオンモール茨木", pref:"大阪", area:"茨木市",
+  src:"secondary", url:"https://www.aeon.jp/sc/ibaraki/access/parking.html",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120],[2000,240]], maxFreeMin:420},
+  holiday:{freeAllDay:false, tiers:[[0,120],[2000,240]], maxFreeMin:420},
+  extras:[
+    {id:"cinema", label:"イオンシネマ茨木を利用", min:180, days:"all"},
+    {id:"konami", label:"コナミスポーツクラブを利用", min:180, days:"all"}
+  ],
+  notes:[
+    "入庫から2時間無料。2,000円以上の買い上げで合計4時間。最大7時間まで。",
+    "公式ページは料金表を画像で載せているため本文から検証できていない。現地の掲示で確認してください。",
+    "16時以降に入庫すると当日24:30までの出庫で無料になるキャンペーンを実施中（当面の間）。この計算には反映していない。",
+    "2,500台。高さ制限2.1m。"
+  ]
+},
+{
+  id:"aeon-dainichi", name:"イオンモール大日", pref:"大阪", area:"守口市",
+  src:"secondary", url:"https://www.aeon.jp/sc/dainichi/access/parking.html",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120],[2000,240],[5000,300]], maxFreeMin:420},
+  holiday:{freeAllDay:false, tiers:[[0,120],[2000,240],[5000,300]], maxFreeMin:420},
+  extras:[{id:"cinema", label:"イオンシネマ大日を利用", min:120, days:"all"}],
+  special:{label:"大日WEEK・20日30日のお客さま感謝デー", freeAllDay:true, tiers:[]},
+  notes:[
+    "曜日を問わず入庫から2時間無料。2,000円以上で合計4時間、5,000円以上で合計5時間。以降は30分ごと200円。",
+    "公式ページは料金表を画像で載せているため本文から検証できていない。現地の掲示で確認してください。",
+    "大日WEEKと20日・30日のお客さま感謝デーは全員無料（公式の駐車場おトクカレンダーに記載）。",
+    "2025年2月21日から車両ナンバー認識方式に変わり、精算時にナンバー下4桁を入力する。"
+  ]
+},
+{
+  id:"aeon-tsurumiryokuchi", name:"イオンモール鶴見緑地", pref:"大阪", area:"大阪市鶴見区",
+  src:"official", url:"https://tsurumiryokuchi.aeonmall.jp/access",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120],[5000,180]]},
+  holiday:{freeAllDay:false, tiers:[[0,120]]},
+  extras:[{id:"app", label:"イオンモールアプリのクーポン提示", min:60, days:"all"}],
+  notes:[
+    "最初の2時間無料。5,000円以上で+1時間は平日限定で、土日祝は買い上げによる延長がない。",
+    "平日（月〜金 6:30〜23:00）は最大500円。土日祝と特定日は最大料金の適用がない。",
+    "特定日は8/13〜8/15と12/30〜1/3。",
+    "2023年10月20日から車両ナンバー認識方式。2,170台。",
+    "1階は6:30〜23:00。2階〜屋上は平日8:45〜23:00・土日祝8:30〜23:00（4階・7階・屋上は平日閉鎖）。"
+  ]
+},
+{
+  id:"aeon-sakaiteppocho", name:"イオンモール堺鉄砲町", pref:"大阪", area:"堺市堺区",
+  src:"official", url:"https://sakaiteppocho.aeonmall.jp/access",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,180],[3000,240]]},
+  holiday:{freeAllDay:false, tiers:[[0,120],[3000,180]]},
+  extras:[{id:"app", label:"イオンモールアプリのQRクーポン提示", min:60, days:"all"}],
+  notes:[
+    "平日は3時間、土日祝は2時間無料。3,000円以上の買い上げで+1時間。以降は30分ごと200円。",
+    "最大料金は公式ページに記載がない。長時間停める場合は現地で確認してください。",
+    "利用時間 8:30〜23:30。約2,300台。"
+  ]
+},
+{
+  id:"aeon-rinkusennan", name:"イオンモールりんくう泉南", pref:"大阪", area:"泉南市",
+  src:"official", url:"https://rinkusennan.aeonmall.jp/access",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["すべての駐車場を無料で利用できると公式に明記されている。約4,300台。"]
+},
+{
+  id:"aeon-hineno", name:"イオンモール日根野", pref:"大阪", area:"泉佐野市",
+  src:"nodata", noData:true, url:"https://www.aeon.jp/sc/hineno/access/parking.html",
+  rate:{unitMin:30, yen:0},
+  weekday:{freeAllDay:false, tiers:[]}, holiday:{freeAllDay:false, tiers:[]},
+  extras:[],
+  notes:[
+    "公式ページには約1,400台とあるだけで、無料か有料かも料金も書かれていない。",
+    "入庫後3時間無料で買い上げによる延長はない、という二次情報があるが未確認。",
+    "駐車場の管理は外部会社（ピットデザイン）。"
+  ]
+},
+{
+  id:"aeon-senrito", name:"イオンSENRITO専門館", pref:"大阪", area:"豊中市（千里中央）",
+  src:"nodata", noData:true, url:"https://senrito.aeonmall.jp/access",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[]}, holiday:{freeAllDay:false, tiers:[]},
+  extras:[],
+  notes:[
+    "入庫後の無料時間がなく、買い上げでもらうサービス券で割り引く方式のため、この画面の計算には載せていない。",
+    "SENRITOよみうり駐車場は60分ごと500円（5階は最大2,000円、6階・7階は最大900円）。サービス券は駐車券1枚につき最大4枚。",
+    "第1〜第3立体駐車場は最初の1時間400円・以降30分ごと200円（第3は最大1,200円、第2は上限なし）。サービス券は最大3枚。",
+    "何円の買い上げでサービス券が何枚もらえるかは公式ページに記載がない。"
+  ]
 },
 
 /* ============================== 奈良 ============================== */
@@ -521,13 +667,20 @@ function renderSpecial(){
 }
 function renderExtras(){
   const box = $("extras");
-  if(!current || !current.extras.length){
-    box.innerHTML = '<p style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">この施設に追加サービスの設定はありません。</p>';
+  const hol = $("holidayOvr").checked;
+  const list = !current ? [] : current.extras.filter(e =>
+    !(e.days==="weekday" && hol) && !(e.days==="holiday" && !hol));
+  if(!list.length){
+    box.innerHTML = '<p style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">' +
+      (current && current.extras.length ? "この曜日に使える追加サービスはありません。"
+                                        : "この施設に追加サービスの設定はありません。") + '</p>';
     return;
   }
-  box.innerHTML = current.extras.map(e =>
-    '<label class="toggle" for="x_'+e.id+'"><input type="checkbox" id="x_'+e.id+'" data-x="'+e.id+'">' +
+  box.innerHTML = list.map(e =>
+    '<label class="toggle" for="x_'+e.id+'"><input type="checkbox" id="x_'+e.id+'" data-x="'+e.id+'"' +
+    (on[e.id] ? ' checked' : '') + '>' +
     '<span>'+e.label + (e.days==="weekday"?' <span class="sub">平日のみ</span>':'') +
+    (e.days==="holiday"?' <span class="sub">土日祝のみ</span>':'') +
     (e.min?' <span class="sub">+'+dur(e.min)+'</span>':'') + '</span></label>').join("");
   box.querySelectorAll("input[data-x]").forEach(el =>
     el.addEventListener("change", () => { on[el.dataset.x] = el.checked; compute(); }));
@@ -556,6 +709,7 @@ function freeMinutes(){
     current.extras.forEach(e => {
       if(!on[e.id] || e.isMember) return;
       if(e.days==="weekday" && hol) return;
+      if(e.days==="holiday" && !hol) return;
       total += e.min;
     });
   }
@@ -684,7 +838,7 @@ $("pref").addEventListener("change", fillFacilities);
 $("fac").addEventListener("change", e => select(e.target.value));
 $("entry").addEventListener("input", compute);
 $("spend").addEventListener("input", compute);
-$("holidayOvr").addEventListener("change", () => { renderCond(); compute(); });
+$("holidayOvr").addEventListener("change", () => { renderExtras(); renderCond(); compute(); });
 $("nowBtn").addEventListener("click", () => { $("entry").value = hhmm(new Date()); compute(); });
 document.querySelectorAll(".chip[data-add]").forEach(b =>
   b.addEventListener("click", () => {
