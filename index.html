@@ -226,6 +226,61 @@ const FACILITIES = [
   ]
 },
 {
+  id:"acta-nishinomiya", name:"アクタ西宮", pref:"兵庫", area:"西宮市（西宮北口）",
+  src:"secondary", url:"https://actafan.com/parking.html",
+  rate:{unitMin:30, yen:150},
+  weekday:{freeAllDay:false, tiers:[[1000,30],[2000,60],[3000,120]]},
+  holiday:{freeAllDay:false, tiers:[[1000,30],[2000,60],[3000,120]]},
+  extras:[],
+  notes:[
+    "買い物をしないと無料時間がない。1,000円以上で30分、2,000円以上で1時間、3,000円以上で2時間。対象店とコープ食彩館の合算ができる。",
+    "料金は西宮市立北口駐車場として市の公式ページで確認（30分150円、7:00〜24:00の当日最大1,200円、587台）。買い上げの段階はACTA公式が画像掲載のため未検証。",
+    "24:00〜7:00は一律700円。この時間帯は途中の入出庫ができない。",
+    "東館・西館の地下1階にある割引認証機で、各店のQRコード付きレシートを読ませる。"
+  ]
+},
+{
+  id:"corowa-koshien", name:"コロワ甲子園", pref:"兵庫", area:"西宮市（甲子園）",
+  src:"nodata", noData:true, url:"https://corowa.jp/parking/",
+  rate:{unitMin:30, yen:500},
+  weekday:{freeAllDay:false, tiers:[]}, holiday:{freeAllDay:false, tiers:[]},
+  extras:[],
+  notes:[
+    "公式の駐車場ページが画像掲載で、通常日の基本料金と買い上げサービスを確認できていない。二次情報も60分300円と30分500円で食い違うため計算に載せていない。",
+    "甲子園でのイベント開催日など「特定日」は当日最大5,000円（公式に明記）。2026年8月の特定日は5〜23日と28〜30日。",
+    "23:00〜翌8:00は30分ごと500円で、最大料金の適用がない（公式に明記）。",
+    "野球開催日に長時間停めると高額になる。必ず現地の掲示で確認してください。"
+  ]
+},
+{
+  id:"ebista-nishinomiya", name:"エビスタ西宮", pref:"兵庫", area:"西宮市（阪神西宮）",
+  src:"official", url:"https://www.ebista.com/access/",
+  rate:{unitMin:60, yen:300},
+  weekday:{freeAllDay:false, tiers:[[2000,60],[4000,120]], maxFreeMin:240},
+  holiday:{freeAllDay:false, tiers:[[2000,60],[4000,120]], maxFreeMin:240},
+  extras:[{id:"odekake", label:"阪急阪神おでかけアプリ会員（3,000円以上）", min:60, days:"all"}],
+  notes:[
+    "買い物をしないと無料時間がない。2,000円以上で1時間、4,000円以上で2時間。エビスタ専門街と阪神・にしのみやで共通。",
+    "各種サービスを合算しても1回の駐車につき最大4時間まで。",
+    "阪神・にしのみやの1階食料品と2階アフタヌーンティー・ティールームは合わせて1店舗扱い。2階デコホーム・N+・ダイソー&スタンダードプロダクツは各1店舗扱い。",
+    "平日の1日最大料金は1,500円。土日祝の最大料金は記載がない。",
+    "営業時間 6:00〜25:00。520台。"
+  ]
+},
+{
+  id:"frente-nishinomiya", name:"フレンテ西宮", pref:"兵庫", area:"西宮市（JR西宮）",
+  src:"official", url:"https://www.frente-nishinomiya.com/facility/",
+  rate:{unitMin:20, yen:100},
+  weekday:{freeAllDay:false, tiers:[[1000,120],[10000,180]]},
+  holiday:{freeAllDay:false, tiers:[[1000,120],[10000,180]]},
+  extras:[],
+  notes:[
+    "買い物をしないと無料時間がない。1,000円以上で2時間、10,000円以上で3時間。",
+    "全日20分ごと100円。入庫から24時間の最大は900円。",
+    "営業時間 6:00〜25:00。500台。"
+  ]
+},
+{
   id:"umie", name:"神戸ハーバーランドumie 立体駐車場", pref:"兵庫", area:"神戸市中央区（ハーバーランド）",
   src:"official", url:"https://umie.jp/static-pages/access",
   rate:{unitMin:30, yen:200},
