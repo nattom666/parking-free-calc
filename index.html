@@ -826,6 +826,18 @@ const FACILITIES = [
 },
 
 {
+  id:"mop-kisarazu", name:"三井アウトレットパーク木更津", pref:"千葉", area:"木更津市",
+  src:"secondary", url:"https://mitsui-shopping-park.com/mop/kisarazu/access/",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:[
+    "駐車料金は無料。営業時間は9:30〜21:30。",
+    "公式ページの本文に料金の記載がなく二次情報のため要確認。",
+    "同じ木更津市にあるイオンモール木更津とは別の施設。"
+  ]
+},
+{
   id:"aeon-kisarazu", name:"イオンモール木更津", pref:"千葉", area:"木更津市",
   src:"official", url:"https://kisarazu.aeonmall.jp/access",
   rate:{unitMin:60, yen:0},
@@ -867,6 +879,23 @@ const FACILITIES = [
   ]
 },
 
+{
+  id:"cocoon-city", name:"コクーンシティ", pref:"埼玉", area:"さいたま市大宮区",
+  src:"secondary", url:"https://www.cocoon-city.com/",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[1000,60],[2000,120],[10000,180],[30000,300]]},
+  holiday:{freeAllDay:false, tiers:[[1000,60],[2000,120],[10000,180],[30000,300]]},
+  extras:[
+    {id:"card", label:"コクーンシティカード会員", min:60, days:"all"},
+    {id:"movix", label:"MOVIXさいたまを利用", min:180, days:"all"}
+  ],
+  notes:[
+    "買い物をしないと無料時間がない。1,000円以上で1時間、2,000円以上で2時間、10,000円以上で3時間、30,000円以上で5時間。",
+    "超過は30分ごと200円。最大料金は未確認。",
+    "段階表・料金とも二次情報のため要確認。公式ページで確認してください。",
+    "4か所以上の駐車場で合計約3,000台。P3立体は8:30〜25:00。"
+  ]
+},
 {
   id:"aeon-kawaguchi", name:"イオンモール川口", pref:"埼玉", area:"川口市",
   src:"official", url:"https://kawaguchi.aeonmall.jp/access",
@@ -923,6 +952,48 @@ const FACILITIES = [
 },
 
 /* ============================== 神奈川 ============================== */
+{
+  id:"lazona-kawasaki", name:"ラゾーナ川崎プラザ", pref:"神奈川", area:"川崎市幸区",
+  src:"secondary", url:"https://mitsui-shopping-park.com/lazona-kawasaki/access/car.html",
+  rate:{unitMin:20, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,30],[1100,90],[3300,150],[33000,210]]},
+  holiday:{freeAllDay:false, tiers:[[0,30],[1100,90],[3300,150],[33000,210]]},
+  extras:[{id:"cinema", label:"109シネマズ川崎で映画を鑑賞", min:120, days:"all"}],
+  notes:[
+    "最初の30分無料。1,100円以上で合計1時間30分、3,300円以上で2時間30分、33,000円以上で3時間30分。",
+    "超過は20分ごと200円と刻みが細かく、川崎駅前なので長時間は高くつく。",
+    "公式ページの本文に料金表が見当たらず二次情報のため要確認。現地の掲示で確認してください。",
+    "サービスを受けるには1階総合案内所（10:00〜21:00）に駐車券とレシートを出す。"
+  ]
+},
+{
+  id:"terrace-mall-shonan", name:"テラスモール湘南", pref:"神奈川", area:"藤沢市（辻堂）",
+  src:"official", url:"https://shonan.terracemall.com/access/",
+  rate:{unitMin:30, yen:150},
+  weekday:{freeAllDay:false, tiers:[[0,60],[1000,120],[3000,180],[10000,240]], maxFreeMin:420},
+  holiday:{freeAllDay:false, tiers:[[0,60],[1000,120],[3000,180],[10000,240]], maxFreeMin:420},
+  extras:[],
+  notes:[
+    "最初の1時間無料。1,000円以上で2時間、3,000円以上で3時間、10,000円以上で4時間。",
+    "他のサービスと併用して最大7時間まで無料。超過は30分ごと150円。",
+    "映画館の駐車サービスがあるという二次情報があるが、無料になる時間が公式ページに明記されていない。",
+    "6:00〜25:00。営業時間外は入庫できないが、出庫は24時間できる。"
+  ]
+},
+{
+  id:"mop-yokohama-bayside", name:"三井アウトレットパーク横浜ベイサイド", pref:"神奈川", area:"横浜市金沢区",
+  src:"official", url:"https://mitsui-shopping-park.com/mop/yokohama/access/",
+  rate:{unitMin:30, yen:250},
+  weekday:{freeAllDay:false, tiers:[[0,120]]},
+  holiday:{freeAllDay:false, tiers:[[0,120]]},
+  extras:[],
+  notes:[
+    "買い物をしなくても2時間無料と公式に明記されている。以降は30分ごと250円。",
+    "プレミアムメダル会員には限定特典があるが、内容が公式ページに明記されていない。",
+    "入庫は9:30〜20:30、出庫は9:30〜22:30。",
+    "高さ制限はPB・P2が2.3m、P1・P3・P4が2.1m。駐車券を失くすと2,000円かかる。"
+  ]
+},
 {
   id:"aeon-yamato", name:"イオンモール大和", pref:"神奈川", area:"大和市",
   src:"official", url:"https://yamato.aeonmall.jp/access",
