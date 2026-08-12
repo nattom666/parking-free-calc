@@ -865,6 +865,79 @@ const FACILITIES = [
 },
 
 {
+  id:"newoman-takanawa", name:"ニュウマン高輪（TAKANAWA GATEWAY CITY）", pref:"東京", area:"港区（高輪ゲートウェイ）",
+  src:"official", url:"https://www.newoman.jp/takanawa/access/",
+  rate:{unitMin:30, yen:500},
+  weekday:{freeAllDay:false, tiers:[[5000,60],[20000,120]], maxFee:2500},
+  holiday:{freeAllDay:false, tiers:[[5000,60],[20000,120]], maxFee:2500},
+  extras:[{id:"ilumine", label:"i LUMINE受取カウンターを利用", min:60, days:"all"}],
+  notes:[
+    "無料時間がない。オールタイム30分ごと500円（時間1,000円）で、収録中もっとも高い。",
+    "サービスは時間ではなく金額。5,000円以上で1,000円分、20,000円以上で2,000円分。この画面では30分500円で割って1時間・2時間として計算している。単価が変わると換算がずれる。",
+    "駐車後24時間まで最大2,500円。",
+    "2025年3月に開業した高輪ゲートウェイシティの駐車場。"
+  ]
+},
+{
+  id:"azabudai-hills", name:"麻布台ヒルズ", pref:"東京", area:"港区",
+  src:"official", url:"https://www.azabudai-hills.com/access/index.html",
+  rate:{unitMin:15, yen:200},
+  weekday:{freeAllDay:false, tiers:[[3000,60],[6000,120],[20000,240]]},
+  holiday:{freeAllDay:false, tiers:[[3000,60],[6000,120],[20000,240]]},
+  extras:[{id:"hillscard", label:"ヒルズカード Mastercard を提示", min:60, days:"all"}],
+  notes:[
+    "無料時間がない。15分ごと200円（時間800円）で全日同じ。",
+    "3,000円以上で1時間、6,000円以上で2時間、20,000円以上で4時間無料。",
+    "ヒルズカード Mastercard があれば毎回1時間無料。",
+    "最大料金の記載がないので、長時間停めると青天井になる。",
+    "割引はヒルズアプリかヒルズカードで事前精算機に適用する。"
+  ]
+},
+{
+  id:"midtown-yaesu", name:"東京ミッドタウン八重洲", pref:"東京", area:"中央区（東京駅）",
+  src:"official", url:"https://www.yaesu.tokyo-midtown.com/information/detail/666983",
+  rate:{unitMin:30, yen:300},
+  weekday:{freeAllDay:false, tiers:[[3000,60],[6000,120],[20000,240]]},
+  holiday:{freeAllDay:false, tiers:[[3000,60],[6000,120],[20000,240]]},
+  extras:[{id:"saison", label:"三井ショッピングパークカード《セゾン》会員", min:60, days:"all"}],
+  notes:[
+    "無料時間がない。B3階の駐車場で30分ごと300円。",
+    "3,000円以上で1時間、6,000円以上で2時間、20,000円以上で4時間無料。",
+    "コンビニと一部飲食店は対象外（5Fチカバキッチン、3F山内農場・目利きの銀次・FLOWS GRILL｜BAR、2Fファミマ!!、B1Fセブン-イレブン、B2Fファミリーマート）。",
+    "最大料金の記載がない。東京駅前なので長時間は高くつく。"
+  ]
+},
+{
+  id:"ariake-garden", name:"有明ガーデン", pref:"東京", area:"江東区（有明）",
+  src:"secondary", url:"https://www.shopping-sumitomo-rd.com/ariake/",
+  rate:{unitMin:30, yen:400},
+  weekday:{freeAllDay:false, tiers:[[0,60],[4000,120],[6000,180],[8000,240]], maxFreeMin:300},
+  holiday:{freeAllDay:false, tiers:[[0,60],[4000,120],[6000,180],[8000,240]], maxFreeMin:300},
+  extras:[],
+  special:{label:"特定日（近隣施設のイベントで混雑する日）", rate:{unitMin:30, yen:500},
+           tiers:[[0,60],[4000,120],[6000,180],[8000,240]], maxFreeMin:300},
+  notes:[
+    "入庫から1時間は誰でも無料。4,000円以上で2時間、6,000円以上で3時間、8,000円以上で4時間、併用して最大5時間。",
+    "特定日は基本料金が30分400円から500円に上がり、最大料金の適用がなくなる。東京ガーデンシアターなど近隣のイベント日が該当する。",
+    "住友不動産ショッピングシティイオンカード会員は平日+5時間で合計6時間無料。この画面には入れていない。",
+    "約1,800台。料金は二次情報のため要確認。特定日カレンダーは公式で確認してください。"
+  ]
+},
+{
+  id:"aquacity-odaiba", name:"アクアシティお台場", pref:"東京", area:"港区（台場）",
+  src:"secondary", url:"https://www.aquacity.jp/", rateUnknown:true,
+  rate:{unitMin:30, yen:0},
+  weekday:{freeAllDay:false, tiers:[[3000,120],[6000,240],[9000,360]]},
+  holiday:{freeAllDay:false, tiers:[[3000,60],[6000,120],[9000,180]]},
+  extras:[],
+  notes:[
+    "1会計3,000円以上ごとに駐車サービス券が1枚もらえて、最大3枚まで。",
+    "券1枚あたり平日2時間・土日祝1時間の計算で、平日最大6時間・土日祝最大3時間まで無料になる。",
+    "1会計ごとの判定なので、同じ3,000円でも1回で買うか3回に分けるかで結果が変わる。この画面は合計金額で計算しているため目安として見てください。",
+    "超過料金を確認できていないため、無料枠を過ぎたあとの金額は出せない。二次情報のため要確認。"
+  ]
+},
+{
   id:"sunshine-city", name:"サンシャインシティ", pref:"東京", area:"豊島区（池袋）",
   src:"secondary", url:"https://sunshinecity.jp/information/access_car.html",
   rate:{unitMin:30, yen:400},
@@ -1042,6 +1115,24 @@ const FACILITIES = [
   notes:["すべての駐車場を無料で利用できると公式に明記されている。収容台数の記載はない。"]
 },
 
+{
+  id:"lalaport-kashiwanoha", name:"ららぽーと柏の葉", pref:"千葉", area:"柏市",
+  src:"official", url:"https://mitsui-shopping-park.com/lalaport/kashiwa/access/parking.html",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120],[1000,180],[2000,240],[3000,300],[4000,360]]},
+  holiday:{freeAllDay:false, tiers:[[0,120],[1000,180],[2000,240],[3000,300],[4000,360]]},
+  extras:[
+    {id:"point", label:"三井ショッピングパークポイントカード会員", min:60, days:"all"},
+    {id:"saison", label:"三井ショッピングパークカード《セゾン》会員", min:120, days:"all"}
+  ],
+  notes:[
+    "最初の2時間無料。買い上げ分はこれに加算され、1,000円ごとに1時間ずつ増えて4,000円以上で+4時間。",
+    "ポイントカード会員は最初が3時間になり、買い上げと合わせて最大6時間まで。",
+    "超過は30分ごと200円。最大料金の記載はない。",
+    "ポイントカードとセゾンは別のサービス。両方をチェックすると実際より長く出る可能性がある。",
+    "本館立体と北館で合計2,590台。"
+  ]
+},
 {
   id:"aeon-futtsu", name:"イオンモール富津", pref:"千葉", area:"富津市",
   src:"official", url:"https://futtsu.aeonmall.jp/access",
@@ -1312,6 +1403,21 @@ const FACILITIES = [
 },
 
 /* ============================== 神奈川 ============================== */
+{
+  id:"lalaport-ebina", name:"ららぽーと海老名", pref:"神奈川", area:"海老名市",
+  src:"secondary", url:"https://mitsui-shopping-park.com/lalaport/ebina/access/parking.html",
+  rate:{unitMin:30, yen:0}, rateUnknown:true,
+  weekday:{freeAllDay:false, tiers:[[0,30],[1000,60],[2000,120],[5000,180]]},
+  holiday:{freeAllDay:false, tiers:[[1000,60],[2000,120],[5000,180]]},
+  extras:[],
+  notes:[
+    "平日だけ最初の30分無料。土日祝は買い物をしないと無料時間がない。",
+    "1,000円以上で1時間、2,000円以上で2時間、5,000円以上で3時間。買い物をしても3時間までしか延びない。",
+    "公式ページは料金表を画像で載せているため未検証。超過料金も分からない。",
+    "本館1,800台のほか臨時駐車場（Aエリア108台・Bエリア59台）がある。",
+    "三井ショッピングパークカード会員向けの優待もあるが、内容を確認できていない。"
+  ]
+},
 {
   id:"tressa-yokohama", name:"トレッサ横浜", pref:"神奈川", area:"横浜市港北区",
   src:"official", url:"https://www.tressa-yokohama.jp/guide/parking.jsp",
