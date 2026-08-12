@@ -776,6 +776,46 @@ const FACILITIES = [
   extras:[],
   notes:["すべての駐車場を無料で利用できると公式に明記されている。約3,500台。"]
 },
+{
+  id:"kintetsu-wakayama", name:"近鉄百貨店 和歌山店", pref:"和歌山", area:"和歌山市（JR和歌山駅）",
+  src:"official", url:"https://www.d-kintetsu.co.jp/wakayama/access/",
+  rate:{unitMin:20, yen:100},
+  weekday:{freeAllDay:false, tiers:[[2000,90]]},
+  holiday:{freeAllDay:false, tiers:[[2000,90]]},
+  extras:[],
+  notes:[
+    "買い物をしないと無料時間がない。2,000円以上のレシートで1時間30分無料。",
+    "この画面は和歌山ターミナルビル駐車場（20分ごと100円）で計算している。けやき大通り地下駐車場は30分ごと150円だが、1時間あたりは同じ300円。",
+    "レシートと駐車券を各階の駐車券捺印所か地階食品サービスカウンターに出して証印を受ける。",
+    "どちらの駐車場も24時間営業。最大料金の記載はない。",
+    "シティイン駐車場の割引サービスは終了している。"
+  ]
+},
+{
+  id:"wakayama-mio", name:"和歌山ミオ", pref:"和歌山", area:"和歌山市（JR和歌山駅）",
+  src:"official", url:"https://www.wakayama-mio.co.jp/access",
+  rate:{unitMin:20, yen:100},
+  weekday:{freeAllDay:false, tiers:[[3000,90]]},
+  holiday:{freeAllDay:false, tiers:[[3000,90]]},
+  extras:[],
+  notes:[
+    "買い物をしないと無料時間がない。館内で合計3,000円以上で90分無料。",
+    "近鉄百貨店和歌山店と同じ和歌山ターミナルビル駐車場・けやき大通り地下駐車場を使う。単価はそちらの公式ページの値（20分ごと100円）を入れている。ミオ側のページには金額の記載がない。",
+    "和歌山MIO直営店舗、ホテルグランヴィア和歌山直営店舗、DAISO和歌山ターミナルビル店は割引の対象外。",
+    "近鉄百貨店で2,000円以上買えば1時間30分無料になるので、同じ駅ビルでも条件が違う。"
+  ]
+},
+{
+  id:"palm-city-wakayama", name:"パームシティ和歌山", pref:"和歌山", area:"和歌山市",
+  src:"secondary", url:"https://www.okuwa.net/store/wakayama/263.html",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:[
+    "駐車場は無料で2,000台。核店舗はスーパーセンターオークワ。",
+    "公式ページの本文で確認できておらず二次情報のため要確認。"
+  ]
+},
 
 /* ============================== 東京 ============================== */
 {
