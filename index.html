@@ -99,7 +99,6 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
 <div class="wrap">
 
   <header class="masthead">
-    <div class="eyebrow">Hyogo / Osaka / Nara</div>
     <h1>Free Parking Clock</h1>
     <p>入庫時刻と買い物金額を入れると、無料が切れる時刻・いま出た場合の料金・あといくら買えば延びるかを出します。</p>
     <div class="count" id="count"></div>
@@ -766,6 +765,15 @@ const FACILITIES = [
   ]
 },
 
+{
+  id:"aeon-hinode", name:"イオンモール日の出", pref:"東京", area:"西多摩郡日の出町",
+  src:"official", url:"https://hinode.aeonmall.jp/access",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["すべての駐車場を無料で利用できると公式に明記されている。約3,650台。"]
+},
+
 /* ============================== 千葉 ============================== */
 {
   id:"tokyo-bay", name:"ららぽーとTOKYO-BAY", pref:"千葉", area:"船橋市",
@@ -817,6 +825,23 @@ const FACILITIES = [
   ]
 },
 
+{
+  id:"aeon-kisarazu", name:"イオンモール木更津", pref:"千葉", area:"木更津市",
+  src:"official", url:"https://kisarazu.aeonmall.jp/access",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["すべての駐車場を無料で利用できると公式に明記されている。約4,000台。"]
+},
+{
+  id:"aeon-narita", name:"イオンモール成田", pref:"千葉", area:"成田市",
+  src:"official", url:"https://narita.aeonmall.jp/access",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["すべての駐車場を無料で利用できると公式に明記されている。収容台数の記載はない。"]
+},
+
 /* ============================== 埼玉 ============================== */
 {
   id:"fujimi", name:"ららぽーと富士見", pref:"埼玉", area:"富士見市",
@@ -842,7 +867,70 @@ const FACILITIES = [
   ]
 },
 
+{
+  id:"aeon-kawaguchi", name:"イオンモール川口", pref:"埼玉", area:"川口市",
+  src:"official", url:"https://kawaguchi.aeonmall.jp/access",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["すべての駐車場を無料で利用できると公式に明記されている。約2,800台。"]
+},
+{
+  id:"aeon-kawaguchimaekawa", name:"イオンモール川口前川", pref:"埼玉", area:"川口市",
+  src:"official", url:"https://kawaguchimaekawa.aeonmall.jp/access",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,180]], maxFee:600},
+  holiday:{freeAllDay:false, tiers:[[0,180]], maxFee:800},
+  extras:[{id:"app", label:"イオンモールアプリのクーポン提示", min:60, days:"all"}],
+  notes:[
+    "買い物なしでも入庫から3時間無料。アプリのクーポンで4時間まで延びる。",
+    "超過は全日30分ごと200円。最大は平日600円・土日祝800円。",
+    "同じ川口市にあるイオンモール川口（全駐車場無料）とは別の施設なので取り違えないこと。約2,400台。"
+  ]
+},
+{
+  id:"aeon-kasukabe", name:"イオンモール春日部", pref:"埼玉", area:"春日部市",
+  src:"official", url:"https://kasukabe.aeonmall.jp/access",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["すべての駐車場を無料で利用できると公式に明記されている。約2,900台。"]
+},
+{
+  id:"aeon-ageo", name:"イオンモール上尾", pref:"埼玉", area:"上尾市",
+  src:"official", url:"https://ageo.aeonmall.jp/access",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:[
+    "すべての駐車場を無料で利用できると公式に明記されている。約1,500台。",
+    "モールを利用しない駐車は遠慮するよう公式に書かれている。"
+  ]
+},
+{
+  id:"aeon-hanyu", name:"イオンモール羽生", pref:"埼玉", area:"羽生市",
+  src:"official", url:"https://hanyu.aeonmall.jp/access",
+  rate:{unitMin:60, yen:200},
+  weekday:{freeAllDay:false, tiers:[]},
+  holiday:{freeAllDay:false, tiers:[]},
+  extras:[],
+  notes:[
+    "無料時間がない。最初の60分が200円で、2時間目以降は60分ごと100円。",
+    "この画面は料金の単価を1つしか持てないため、高いほうの200円で通して計算している。2時間以上停めると実際より高く出る。",
+    "アプリのクーポンを出すと3時間まで100円になる（最大300円引き）。この割引は計算に入れていない。",
+    "約5,000台。"
+  ]
+},
+
 /* ============================== 神奈川 ============================== */
+{
+  id:"aeon-yamato", name:"イオンモール大和", pref:"神奈川", area:"大和市",
+  src:"official", url:"https://yamato.aeonmall.jp/access",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["すべての駐車場を無料で利用できると公式に明記されている。約1,800台。"]
+},
 {
   id:"aeon-zama", name:"イオンモール座間", pref:"神奈川", area:"座間市",
   src:"official", url:"https://zama.aeonmall.jp/access",
@@ -879,6 +967,9 @@ const HOLIDAYS = new Set([
 "2027-04-29","2027-05-03","2027-05-04","2027-05-05","2027-07-19","2027-08-11",
 "2027-09-20","2027-09-23","2027-10-11","2027-11-03","2027-11-23"
 ]);
+
+/* 起動時に選ばれる施設。この県が絞り込みから外れたときは先頭に戻る */
+const DEFAULT_ID = "nishinomiya-gardens";
 
 let data = JSON.parse(JSON.stringify(FACILITIES));
 let current = null;
@@ -923,7 +1014,9 @@ function fillFacilities(){
   data.forEach(f => byPref[f.pref] = (byPref[f.pref]||0)+1);
   $("count").textContent = "収録 " + data.length + "施設　" +
     prefOrder().map(p => p + " " + byPref[p]).join("／");
-  select(list[0] ? list[0].id : null);
+  const pick = list.some(f => f.id === DEFAULT_ID) ? DEFAULT_ID : (list[0] ? list[0].id : null);
+  if(pick) $("fac").value = pick;
+  select(pick);
 }
 function select(id){
   current = data.find(f => f.id===id) || null;
