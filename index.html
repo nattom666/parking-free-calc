@@ -115,9 +115,6 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
       <label for="pref">都道府県</label>
       <select id="pref">
         <option value="all">すべて</option>
-        <option value="兵庫">兵庫</option>
-        <option value="大阪">大阪</option>
-        <option value="奈良">奈良</option>
       </select>
     </div>
 
@@ -188,7 +185,7 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
     条件は変更されます。金額が大きいときは必ず施設の公式ページで確認してください。
     <span class="flag ok">公式確認済</span> は公式サイトの記載、
     <span class="flag chk">要確認</span> は二次情報、
-    <span class="flag no">条件未収録</span> は有料と分かっているが詳細が未取得のものです。データ収集日：2026-08-05。
+    <span class="flag no">条件未収録</span> は有料と分かっているが詳細が未取得のものです。データ収集日：関西 2026-08-05／関東 2026-08-12。
   </p>
 
   <p class="credit">built by nattom666</p>
@@ -685,6 +682,116 @@ const FACILITIES = [
     "ならファミリー利用で最初の2時間無料。平面の北・北第2・北第3・南は最初の3時間無料。",
     "買い上げ金額による追加サービスの有無は未確認。現地掲示で確認してください。"
   ]
+},
+
+/* ============================== 東京 ============================== */
+{
+  id:"toyosu", name:"アーバンドック ららぽーと豊洲", pref:"東京", area:"江東区",
+  src:"official", url:"https://mitsui-shopping-park.com/lalaport/toyosu/access/parking.html",
+  rate:{unitMin:30, yen:400},
+  weekday:{freeAllDay:false, tiers:[[0,60]],
+           member:{tiers:[[0,180],[2000,240],[3000,300]]}},
+  holiday:{freeAllDay:false, tiers:[[0,60]],
+           member:{tiers:[[0,120],[2000,180],[3000,240]]}},
+  extras:[{id:"member", label:"三井ショッピングパークポイントカード会員", min:0, days:"all", isMember:true}],
+  notes:[
+    "カードを持たない場合は最初の1時間だけ無料。以降は30分ごと400円と高い。",
+    "ポイントカード会員は買い物なしでも平日3時間・土日祝2時間、2,000円以上で平日4時間・土日祝3時間、3,000円以上で平日5時間・土日祝4時間。",
+    "セゾンカード会員はさらに長く、買い物なしで平日5時間・土日祝3時間、3,000円以上で平日7時間・土日祝5時間。この画面はポイントカード会員で計算している。",
+    "ユナイテッド・シネマ豊洲、キッザニア東京、ドゥ・スポーツプラザ利用者向けのサービスもあるが、無料になる時間が公式ページに明記されていない。",
+    "24時間営業。2,200台。高さ制限2.1m。"
+  ]
+},
+{
+  id:"tachikawa-tachihi", name:"ららぽーと立川立飛", pref:"東京", area:"立川市",
+  src:"official", url:"https://mitsui-shopping-park.com/lalaport/tachikawa/access/parking.html",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:[
+    "公式ページに「駐車料金無料」と明記されている。",
+    "細かい条件はPDFで案内されていて本文からは確認できていない。長時間停める場合は現地で確認してください。"
+  ]
+},
+
+/* ============================== 千葉 ============================== */
+{
+  id:"tokyo-bay", name:"ららぽーとTOKYO-BAY", pref:"千葉", area:"船橋市",
+  src:"official", url:"https://mitsui-shopping-park.com/lalaport/tokyo-bay/access/access_04.html",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,60],[1000,120],[3000,240],[5000,360],[10000,1440]]},
+  holiday:{freeAllDay:false, tiers:[[0,60],[1000,120],[3000,240],[5000,360],[10000,1440]]},
+  extras:[
+    {id:"card", label:"三井ショッピングパークカード会員", min:180, days:"all"},
+    {id:"point", label:"ポイントカード会員", min:120, days:"all"},
+    {id:"cinema", label:"シネマを利用", min:180, days:"all"},
+    {id:"clinic", label:"クリニックモールを利用", min:120, days:"all"}
+  ],
+  notes:[
+    "最初の1時間無料。1,000円以上で2時間、3,000円以上で4時間、5,000円以上で6時間、10,000円以上で終日無料。",
+    "10,000円以上の終日無料は、この画面では24時間として計算している。",
+    "P12・P13駐車場だけは平日のみ最初の4時間無料。この特例は反映していない。",
+    "三井ショッピングパークカードとポイントカードは別のサービス。両方をチェックすると実際より長く出る可能性がある。",
+    "駐車場ごとに営業時間が違う（P1は8:00〜23:00、P9は7:00〜23:00など）。"
+  ]
+},
+{
+  id:"aeon-makuhari", name:"イオンモール幕張新都心", pref:"千葉", area:"千葉市美浜区",
+  src:"official", url:"https://makuharishintoshin.aeonmall.jp/access",
+  rate:{unitMin:30, yen:300},
+  weekday:{freeAllDay:false, tiers:[[0,360]]},
+  holiday:{freeAllDay:false, tiers:[[0,240],[3000,360],[5000,480]]},
+  extras:[{id:"app", label:"iAEON／イオンモールアプリのクーポン提示", min:30, days:"holiday"}],
+  notes:[
+    "平日は6時間、土日祝は4時間まで無料。買い上げによる延長は土日祝だけで、3,000円以上で+2時間、5,000円以上で+4時間。",
+    "以降は30分ごと300円。最大料金の記載はない。",
+    "アプリのクーポンは土日祝の無料時間が30分延びる。サービス券は当日限り有効。",
+    "約7,300台。グランドモール・アクティブモール・ペットモールは6:00〜25:00、エキマエは5:30〜23:00。"
+  ]
+},
+
+/* ============================== 埼玉 ============================== */
+{
+  id:"fujimi", name:"ららぽーと富士見", pref:"埼玉", area:"富士見市",
+  src:"official", url:"https://mitsui-shopping-park.com/lalaport/fujimi/access/parking.html",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["公式ページに「終日無料」と明記されている。買い上げの条件もない。"]
+},
+{
+  id:"shinmisato", name:"ららぽーと新三郷", pref:"埼玉", area:"三郷市",
+  src:"official", url:"https://mitsui-shopping-park.com/lalaport/shinmisato/access/parking.html",
+  rate:{unitMin:30, yen:100},
+  weekday:{freeAllDay:false, tiers:[], maxFee:600},
+  holiday:{freeAllDay:false, tiers:[[0,120]], maxFee:700},
+  extras:[{id:"xebio", label:"スーパースポーツゼビオで2,200円以上（ANNEX・平日のみ）", min:120, days:"weekday"}],
+  notes:[
+    "平面駐車場は終日無料。この画面は有料の立体駐車場とANNEXで計算している。",
+    "立体・ANNEXは平日8:00〜22:00が30分100円で無料時間なし。土日祝は2時間無料。",
+    "22時以降は60分100円に下がるが、この画面は時間帯を見ていないため深夜は実際より高く出る。",
+    "当日最大は平日600円・土日祝700円。",
+    "全体で約2,700台（北立体1,600台・南立体600台・平面A〜D計500台）。平面は9:30〜22:30、立体とANNEXは24時間。"
+  ]
+},
+
+/* ============================== 神奈川 ============================== */
+{
+  id:"yokohama", name:"ららぽーと横浜", pref:"神奈川", area:"横浜市都筑区",
+  src:"official", url:"https://mitsui-shopping-park.com/lalaport/yokohama/access/parking.html",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:true, tiers:[]},
+  holiday:{freeAllDay:false, tiers:[[1000,60],[2000,120],[3000,180],[4000,240]], maxFreeMin:300},
+  extras:[
+    {id:"point", label:"三井ショッピングパークポイントカード会員", min:60, days:"holiday"},
+    {id:"toho", label:"TOHOシネマズを利用（4時間サービス券）", min:240, days:"all"}
+  ],
+  notes:[
+    "平日は無料。ただし繁忙期などの特定日は平日でも有料になる。",
+    "土日祝は買い物なしだと無料時間がない。1,000円ごとに1時間ずつ延び、4,000円以上で4時間。",
+    "ポイントカード会員は土日祝に+1時間で、会員の上限は5時間。",
+    "約4,600台。平面駐車場の高さ制限2.4m、その他は2.2m。入庫時間は駐車場ごとに違い、出庫は24時間できる。"
+  ]
 }
 ];
 
@@ -719,15 +826,28 @@ function dur(min){
 }
 function isSpecial(){ const el=$("specialDay"); return !!(el && el.checked); }
 
+/* 都道府県は FACILITIES に出てくる順。県を足しても UI を直す必要はない */
+function prefOrder(){
+  const seen = [];
+  data.forEach(f => { if(seen.indexOf(f.pref) < 0) seen.push(f.pref); });
+  return seen;
+}
+function fillPrefs(){
+  const sel = $("pref"), keep = sel.value;
+  sel.innerHTML = '<option value="all">すべて</option>' +
+    prefOrder().map(p => '<option value="'+p+'">'+p+'</option>').join("");
+  sel.value = Array.prototype.some.call(sel.options, o => o.value === keep) ? keep : "all";
+}
 function fillFacilities(){
+  fillPrefs();
   const p = $("pref").value;
   const list = data.filter(f => p==="all" || f.pref===p);
   $("fac").innerHTML = list.map(f =>
     '<option value="'+f.id+'">'+f.name+'（'+f.area+'）</option>').join("");
   const byPref = {};
   data.forEach(f => byPref[f.pref] = (byPref[f.pref]||0)+1);
-  $("count").textContent = "収録 " + data.length + "施設　兵庫 " + (byPref["兵庫"]||0) +
-    "／大阪 " + (byPref["大阪"]||0) + "／奈良 " + (byPref["奈良"]||0);
+  $("count").textContent = "収録 " + data.length + "施設　" +
+    prefOrder().map(p => p + " " + byPref[p]).join("／");
   select(list[0] ? list[0].id : null);
 }
 function select(id){
