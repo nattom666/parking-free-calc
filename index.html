@@ -1651,17 +1651,33 @@ function renderJson(){
   $("jsonErr").textContent = "";
 }
 
-$("pref").addEventListener("change", fillFacilities);
-$("fac").addEventListener("change", e => select(e.target.value));
+// アクセス解析（GA4）へ送る。タグを読めていないとき（file:// で開いた・ブロッカー）は何もしない。
+// 入力した時刻や金額そのものは送らない。送るのは選ばれた都道府県と施設名まで。
+const track = (name, params) => { if(window.gtag) gtag("event", name, params || {}); };
+
+// 初期表示の既定施設は「選ばれた」わけではないので送らない。change は利用者の操作でしか出ない。
+$("pref").addEventListener("change", e => {
+  fillFacilities();
+  track("select_pref", { pref: e.target.value });
+});
+$("fac").addEventListener("change", e => {
+  select(e.target.value);
+  track("select_facility", { facility: current ? current.name : e.target.value,
+                             pref: current ? current.pref : "" });
+});
 $("entry").addEventListener("input", compute);
 $("spend").addEventListener("input", compute);
 $("holidayOvr").addEventListener("change", () => { renderExtras(); renderCond(); compute(); });
-$("nowBtn").addEventListener("click", () => { $("entry").value = hhmm(new Date()); compute(); });
+$("nowBtn").addEventListener("click", () => {
+  $("entry").value = hhmm(new Date()); compute();
+  track("tap_now");
+});
 document.querySelectorAll(".chip[data-add]").forEach(b =>
   b.addEventListener("click", () => {
     const add = Number(b.dataset.add);
     $("spend").value = add === 0 ? 0 : (Number($("spend").value)||0) + add;
     compute();
+    track("tap_spend_chip", { amount: add });
   }));
 $("applyJson").addEventListener("click", () => {
   try{
