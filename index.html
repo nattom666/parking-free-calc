@@ -703,6 +703,46 @@ const FACILITIES = [
   ]
 },
 {
+  id:"aeon-kyotogojo", name:"イオンモール京都五条", pref:"京都", area:"京都市右京区",
+  src:"secondary", url:"https://kyotogojo.aeonmall.jp/access",
+  rate:{unitMin:30, yen:0}, rateUnknown:true,
+  weekday:{freeAllDay:false, tiers:[[0,180]]},
+  holiday:{freeAllDay:false, tiers:[[0,180]]},
+  extras:[{id:"coupon", label:"土日祝限定クーポン", min:60, days:"holiday"}],
+  notes:[
+    "最初の3時間無料。土日祝は限定クーポンでさらに1時間。",
+    "専門店やイオンスタイル京都五条のレシートをモールインフォメーションに出すと、当日無料になる二次元バーコードがもらえる。",
+    "公式ページは料金表を画像で載せているため未検証。超過料金も分からない。",
+    "1,700台。立体駐車場の高さ制限2.1m。精算はタイムズパーキングの管理。"
+  ]
+},
+{
+  id:"aeon-takanohara", name:"イオンモール高の原", pref:"京都", area:"木津川市",
+  src:"secondary", url:"https://www.aeon.jp/sc/takanohara/access/parking.html",
+  rate:{unitMin:30, yen:0}, rateUnknown:true,
+  weekday:{freeAllDay:false, tiers:[[0,120],[2000,180],[10000,240]], maxFreeMin:420},
+  holiday:{freeAllDay:false, tiers:[[0,120],[2000,180],[10000,240]], maxFreeMin:420},
+  extras:[{id:"cinema", label:"イオンシネマ高の原を利用", min:120, days:"all"}],
+  notes:[
+    "入庫から2時間無料。2,000円以上で合計3時間、10,000円以上で合計4時間。シネマ利用で+2時間、最大7時間。",
+    "屋上駐車場は最大600円で、平日はイオンモールアプリ会員だと400円（ここは公式に記載あり）。停める場所で変わるため上限は入れていない。",
+    "無料時間の段階は二次情報で未検証。超過料金も分からない。現地の掲示で確認してください。",
+    "所在は京都府木津川市だが、奈良市に隣接していて奈良側からの利用も多い。"
+  ]
+},
+{
+  id:"aeon-kyoto", name:"イオンモールKYOTO", pref:"京都", area:"京都市南区（京都駅前）",
+  src:"nodata", noData:true, url:"https://kyoto.aeonmall.jp/access",
+  rate:{unitMin:30, yen:0},
+  weekday:{freeAllDay:false, tiers:[]}, holiday:{freeAllDay:false, tiers:[]},
+  extras:[],
+  notes:[
+    "公式ページの料金表が画像掲載で、入庫後の無料時間も超過料金も読み取れないため計算に載せていない。",
+    "公式に書かれているのは、50,000円以上の買い上げで終日無料、平日の最大料金1,100円、駐車サービスの上限は5時間、約1,100台まで。",
+    "シネマを2本以上見ても割引は5時間が上限。京都駅前で長時間になりやすいので現地の掲示で確認してください。"
+  ]
+},
+{
   id:"aeon-kitaoji", name:"イオンモール北大路", pref:"京都", area:"京都市北区",
   src:"official", url:"https://kitaoji.aeonmall.jp/access",
   rate:{unitMin:30, yen:300},
@@ -774,6 +814,20 @@ const FACILITIES = [
   notes:["すべての駐車場を無料で利用できると公式に明記されている。約3,650台。"]
 },
 
+{
+  id:"tokyo-solamachi", name:"東京ソラマチ", pref:"東京", area:"墨田区（東京スカイツリータウン）",
+  src:"secondary", url:"https://www.tokyo-solamachi.jp/",
+  rate:{unitMin:30, yen:450},
+  weekday:{freeAllDay:false, tiers:[[3000,60],[5000,120],[7000,180]]},
+  holiday:{freeAllDay:false, tiers:[[3000,60],[5000,120],[7000,180]]},
+  extras:[],
+  notes:[
+    "買い物をしないと無料時間がない。3,000円以上で1時間、5,000円以上で2時間、7,000円以上で3時間。",
+    "超過は30分ごと450円と高い。観光地なので長時間になりやすい。",
+    "東京スカイツリー展望台の入場券やすみだ水族館など、駐車サービスの対象外になる施設がある。",
+    "公式の駐車場ページを見つけられず二次情報のみ。利用時間7:30〜23:00、入庫は22:00まで。"
+  ]
+},
 {
   id:"divercity-tokyo", name:"ダイバーシティ東京 プラザ", pref:"東京", area:"江東区（お台場）",
   src:"secondary", url:"https://mitsui-shopping-park.com/divercity-tokyo/access/parking.html",
@@ -1135,6 +1189,19 @@ const FACILITIES = [
 },
 
 /* ============================== 神奈川 ============================== */
+{
+  id:"grandtree-musashikosugi", name:"グランツリー武蔵小杉", pref:"神奈川", area:"川崎市中原区",
+  src:"secondary", url:"https://www.grandtree-musashikosugi.jp/",
+  rate:{unitMin:30, yen:300},
+  weekday:{freeAllDay:false, tiers:[], maxFee:2000},
+  holiday:{freeAllDay:false, tiers:[]},
+  extras:[],
+  notes:[
+    "30分ごと300円。平日は入庫当日24時までの最大料金2,000円。土日祝の最大料金は未確認。",
+    "買い物やセブンカード・nanacoの提示で1〜3時間の無料サービスがあるが、いくら買えば何時間になるかを確認できていない。",
+    "そのためこの画面は無料時間なしで計算している。実際にはもっと安くなる。現地の掲示で確認してください。"
+  ]
+},
 {
   id:"lazona-kawasaki", name:"ラゾーナ川崎プラザ", pref:"神奈川", area:"川崎市幸区",
   src:"secondary", url:"https://mitsui-shopping-park.com/lazona-kawasaki/access/car.html",
