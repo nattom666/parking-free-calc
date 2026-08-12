@@ -775,6 +775,36 @@ const FACILITIES = [
 },
 
 {
+  id:"divercity-tokyo", name:"ダイバーシティ東京 プラザ", pref:"東京", area:"江東区（お台場）",
+  src:"secondary", url:"https://mitsui-shopping-park.com/divercity-tokyo/access/parking.html",
+  rate:{unitMin:30, yen:250},
+  weekday:{freeAllDay:false, tiers:[[2000,60],[3000,120],[4000,180]], maxFreeMin:240},
+  holiday:{freeAllDay:false, tiers:[[2000,60],[3000,120],[4000,180]], maxFreeMin:240},
+  extras:[
+    {id:"point", label:"三井ショッピングパークポイントカード会員", min:60, days:"all"},
+    {id:"saison", label:"三井ショッピングパークカード（セゾン）会員", min:120, days:"all"}
+  ],
+  notes:[
+    "買い物をしないと無料時間がない。2,000円以上で1時間、3,000円以上で2時間、4,000円以上で3時間。併用しても最大4時間まで。",
+    "買い上げの段階と4時間の上限は公式ページで確認。基本料金（初回60分500円・以降30分250円）は料金表が画像のため二次情報。",
+    "ラウンドワンスタジアム・都会の農園の利用でも最大4時間まで無料になる。",
+    "24時間営業。約1,400台。高さ制限2.3m。精算は現金のみ。"
+  ]
+},
+{
+  id:"grandberry-park", name:"南町田グランベリーパーク", pref:"東京", area:"町田市",
+  src:"secondary", url:"https://minamimachida-grandberrypark.com/access/",
+  rate:{unitMin:30, yen:0}, rateUnknown:true,
+  weekday:{freeAllDay:false, tiers:[[0,120]]},
+  holiday:{freeAllDay:false, tiers:[[0,60]]},
+  extras:[],
+  notes:[
+    "平日は2時間、土日祝は1時間無料。買い上げによる延長サービスもある。",
+    "公式サイトのSSL証明書が期限切れでアクセスできず、二次情報しか取れていない。超過料金も分からない。",
+    "現地の掲示で確認してください。"
+  ]
+},
+{
   id:"aeon-tamadaira", name:"イオンモール多摩平の森", pref:"東京", area:"日野市",
   src:"official", url:"https://tamadairanomori.aeonmall.jp/access",
   rate:{unitMin:30, yen:200},
@@ -878,6 +908,20 @@ const FACILITIES = [
 },
 
 {
+  id:"ikspiari", name:"イクスピアリ", pref:"千葉", area:"浦安市（舞浜）",
+  src:"official", url:"https://www.ikspiari.com/info/access/",
+  rate:{unitMin:30, yen:400},
+  weekday:{freeAllDay:false, tiers:[]},
+  holiday:{freeAllDay:false, tiers:[]},
+  extras:[{id:"card", label:"イクスピアリカードを提示", min:120, days:"all"}],
+  notes:[
+    "無料時間がない。最初の1時間800円、以降30分ごと400円と収録中で最も高い部類。",
+    "イクスピアリカードがあれば2時間まで無料（12月31日と1月1日を除く）。",
+    "屋外のアネックス・パーキング（R5）は最初の1時間無料で、平日は最大4,000円。この画面は本館の駐車場で計算している。",
+    "買い物金額に応じた無料サービスがあるという二次情報があるが、公式ページには記載が見当たらない。"
+  ]
+},
+{
   id:"aeon-chiba-kashiwa", name:"イオンモール柏", pref:"千葉", area:"柏市",
   src:"official", url:"https://www.aeon.jp/sc/chiba-kashiwa/access/parking.html",
   rate:{unitMin:60, yen:200},
@@ -950,6 +994,20 @@ const FACILITIES = [
   ]
 },
 
+{
+  id:"mop-iruma", name:"三井アウトレットパーク入間", pref:"埼玉", area:"入間市",
+  src:"secondary", url:"https://mitsui-shopping-park.com/mop/iruma/access/",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,180],[3000,300]]},
+  holiday:{freeAllDay:false, tiers:[[0,120],[3000,240]]},
+  extras:[],
+  notes:[
+    "平日は3時間、土日祝は2時間無料。1店舗で3,000円以上の買い物か食事で2時間延びる。以降は30分ごと200円。",
+    "営業時間9:30〜21:30は公式ページで確認。料金は公式の本文に記載がなく二次情報のため要確認。",
+    "会員限定で平日の駐車料金が+2時間無料になるキャンペーンがある。",
+    "駐車券を失くすと3,000円かかる。"
+  ]
+},
 {
   id:"cocoon-city", name:"コクーンシティ", pref:"埼玉", area:"さいたま市大宮区",
   src:"secondary", url:"https://www.cocoon-city.com/",
