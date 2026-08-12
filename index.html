@@ -684,7 +684,59 @@ const FACILITIES = [
   ]
 },
 
+/* ============================== 京都 ============================== */
+{
+  id:"aeon-katsuragawa", name:"イオンモール京都桂川", pref:"京都", area:"京都市南区",
+  src:"official", url:"https://kyotokatsuragawa.aeonmall.jp/access",
+  rate:{unitMin:20, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,60],[1,120],[50000,1440]]},
+  holiday:{freeAllDay:false, tiers:[[0,60],[1,120],[50000,1440]]},
+  extras:[
+    {id:"twoshops", label:"2店舗以上で買い物した", min:60, days:"all"},
+    {id:"cinema", label:"映画館を利用", min:180, days:"all"},
+    {id:"fitness", label:"フィットネスを利用", min:180, days:"all"}
+  ],
+  notes:[
+    "全日同じ料金。最初の1時間無料、1円以上の買い上げでさらに1時間、2店舗以上でさらに1時間。",
+    "50,000円以上の買い上げで終日無料。この画面では24時間として計算している。",
+    "超過は20分ごと200円と刻みが細かい。最大料金の記載はない。",
+    "映画館とフィットネスは各3時間で、両方使うと6時間。約3,100台。"
+  ]
+},
+{
+  id:"aeon-kitaoji", name:"イオンモール北大路", pref:"京都", area:"京都市北区",
+  src:"official", url:"https://kitaoji.aeonmall.jp/access",
+  rate:{unitMin:30, yen:300},
+  weekday:{freeAllDay:false, tiers:[[1000,60],[2000,120],[7000,180]], maxFee:1500},
+  holiday:{freeAllDay:false, tiers:[[1000,60],[2000,120],[7000,180]], maxFee:1800},
+  extras:[],
+  notes:[
+    "買い物をしないと無料時間がない。1,000円以上で1時間、2,000円以上で2時間、7,000円以上で3時間。",
+    "超過は30分ごと300円。最大は平日1,500円・土日祝1,800円。",
+    "24:00〜翌7:00の泊まり料金は500円。この画面は時間帯を見ていないため深夜は実際と違う。",
+    "地下駐車場476台。営業時間7:00〜23:00。"
+  ]
+},
+
+/* ============================== 和歌山 ============================== */
+{
+  id:"aeon-wakayama", name:"イオンモール和歌山", pref:"和歌山", area:"和歌山市",
+  src:"official", url:"https://wakayama.aeonmall.jp/access",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["すべての駐車場を無料で利用できると公式に明記されている。約3,500台。"]
+},
+
 /* ============================== 東京 ============================== */
+{
+  id:"aeon-musashimurayama", name:"イオンモールむさし村山", pref:"東京", area:"武蔵村山市",
+  src:"official", url:"https://musashimurayama.aeonmall.jp/access",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["すべての駐車場を無料で利用できると公式に明記されている。約4,000台。"]
+},
 {
   id:"toyosu", name:"アーバンドック ららぽーと豊洲", pref:"東京", area:"江東区",
   src:"official", url:"https://mitsui-shopping-park.com/lalaport/toyosu/access/parking.html",
@@ -750,6 +802,21 @@ const FACILITIES = [
   ]
 },
 
+{
+  id:"aeon-chibanewtown", name:"イオンモール千葉ニュータウン", pref:"千葉", area:"印西市",
+  src:"official", url:"https://chibanewtown.aeonmall.jp/access",
+  rate:{unitMin:30, yen:0}, rateUnknown:true,
+  weekday:{freeAllDay:false, tiers:[[1,180],[3000,240]]},
+  holiday:{freeAllDay:false, tiers:[[1,180],[3000,240]]},
+  extras:[],
+  notes:[
+    "1円以上の買い上げで3時間、合計3,000円以上で4時間まで無料。イオン棟は合算の対象外。",
+    "特定店舗の利用で6時間無料になる場合がある。対象店舗は公式ページで確認してください。",
+    "超過料金が公式ページに書かれていないため、無料枠を過ぎたあとの金額は出せない。",
+    "約3,800台。棟ごとに営業時間が違う（イオン棟7:30〜22:00、モール棟8:00〜23:00、シネマ・スポーツ棟8:30〜23:00、エンジョイライフ棟8:30〜24:00、提携駐車場は24時間）。"
+  ]
+},
+
 /* ============================== 埼玉 ============================== */
 {
   id:"fujimi", name:"ららぽーと富士見", pref:"埼玉", area:"富士見市",
@@ -776,6 +843,14 @@ const FACILITIES = [
 },
 
 /* ============================== 神奈川 ============================== */
+{
+  id:"aeon-zama", name:"イオンモール座間", pref:"神奈川", area:"座間市",
+  src:"official", url:"https://zama.aeonmall.jp/access",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["すべての駐車場を無料で利用できると公式に明記されている。約2,500台。"]
+},
 {
   id:"yokohama", name:"ららぽーと横浜", pref:"神奈川", area:"横浜市都筑区",
   src:"official", url:"https://mitsui-shopping-park.com/lalaport/yokohama/access/parking.html",
@@ -947,7 +1022,7 @@ function compute(){
   const f = freeMinutes();
   const rate = activeRate();
 
-  if(f.allDay || rate.yen === 0){
+  if(f.allDay || (rate.yen === 0 && !current.rateUnknown)){
     $("stateLbl").textContent = "無料";
     $("bigNum").textContent = "¥0";
     $("bigNum").className = "big free";
@@ -960,12 +1035,25 @@ function compute(){
   }
 
   const over = Math.max(0, parked - f.min);
+  const until = new Date(entry.getTime() + f.min*60000);
+
+  /* 無料枠は分かっているが超過料金が公式に無い施設 */
+  if(current.rateUnknown && over > 0){
+    $("stateLbl").textContent = "無料枠を過ぎています";
+    $("bigNum").textContent = "？";
+    $("bigNum").className = "big none";
+    $("subLine").textContent = "無料は " + hhmm(until) + " まででした。この施設は超過料金を確認できていないため、金額を出せません。";
+    $("meterBar").style.width = "100%"; $("meterBar").className = "over";
+    $("timeLine").textContent = "駐車 " + dur(parked) + "　/　無料枠 " + dur(f.min) + "　/　超過 未確認";
+    $("advice").hidden = true;
+    return;
+  }
+
   const raw = Math.ceil(over / rate.unitMin) * rate.yen;
   const rule = dayRule();
   const cap = (rule && rule.maxFee) ? rule.maxFee : null;
   const fee = cap === null ? raw : Math.min(raw, cap);
   const atCap = cap !== null && raw >= cap;
-  const until = new Date(entry.getTime() + f.min*60000);
 
   $("bigNum").textContent = fee === 0 ? "無料" : yen(fee);
   $("bigNum").className = "big " + (fee === 0 ? "free" : "paid");
@@ -1017,7 +1105,7 @@ function renderCond(){
   if(!current.noData){
     const r = current.rate;
     html += '<p style="margin-bottom:8px;font-family:var(--mono);font-size:12px">超過料金 ' +
-      (r.yen === 0 ? "なし" : r.unitMin+"分ごと "+yen(r.yen)) + '</p>';
+      (current.rateUnknown ? "未確認" : r.yen === 0 ? "なし" : r.unitMin+"分ごと "+yen(r.yen)) + '</p>';
     html += tbl(current.weekday, "平日");
     if(current.weekday.member) html += tbl(Object.assign({},current.weekday,current.weekday.member), "平日（会員）");
     html += tbl(current.holiday, "土・日・祝");
