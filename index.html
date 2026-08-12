@@ -774,6 +774,29 @@ const FACILITIES = [
   notes:["すべての駐車場を無料で利用できると公式に明記されている。約3,650台。"]
 },
 
+{
+  id:"aeon-tamadaira", name:"イオンモール多摩平の森", pref:"東京", area:"日野市",
+  src:"official", url:"https://tamadairanomori.aeonmall.jp/access",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120]]},
+  holiday:{freeAllDay:false, tiers:[[0,120]]},
+  extras:[{id:"app", label:"イオンモールアプリまたはイオンカードで認証", min:60, days:"all"}],
+  notes:[
+    "入庫から2時間無料。アプリかイオンカードの認証でさらに1時間で、合計3時間まで。",
+    "超過は30分ごと200円。",
+    "平日の屋上階だけ6:30〜23:00で最大600円。停める階と曜日で条件が変わるため、この画面では上限を入れていない。",
+    "約950台。"
+  ]
+},
+{
+  id:"aeon-higashikurume", name:"イオンモール東久留米", pref:"東京", area:"東久留米市",
+  src:"official", url:"https://www.aeon.jp/sc/higashikurume/access/parking.html",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["駐車場・駐輪場とも無料と公式に明記されている。"]
+},
+
 /* ============================== 千葉 ============================== */
 {
   id:"tokyo-bay", name:"ららぽーとTOKYO-BAY", pref:"千葉", area:"船橋市",
@@ -852,6 +875,54 @@ const FACILITIES = [
   weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
   extras:[],
   notes:["すべての駐車場を無料で利用できると公式に明記されている。収容台数の記載はない。"]
+},
+
+{
+  id:"aeon-chiba-kashiwa", name:"イオンモール柏", pref:"千葉", area:"柏市",
+  src:"official", url:"https://www.aeon.jp/sc/chiba-kashiwa/access/parking.html",
+  rate:{unitMin:60, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120],[2000,180]], maxFee:600},
+  holiday:{freeAllDay:false, tiers:[[0,120],[2000,180]], maxFee:600},
+  extras:[{id:"app", label:"イオンモールアプリに登録", min:60, days:"all"}],
+  special:{label:"特定日", rate:{unitMin:30, yen:500}, tiers:[[0,120],[2000,180]]},
+  notes:[
+    "2026年8月3日から有料になった。入庫から2時間無料、アプリ登録で+1時間、2,000円以上の買い上げで+1時間の合計最大4時間。",
+    "通常日は60分ごと200円で最大600円。特定日は終日30分ごと500円で最大料金の適用がない。",
+    "特定日の無料時間が通常日と同じかどうかは公式に明記がない。この画面では同じものとして計算している。"
+  ]
+},
+{
+  id:"aeon-tsudanuma", name:"イオンモール津田沼", pref:"千葉", area:"習志野市",
+  src:"official", url:"https://www.aeon.jp/sc/tsudanuma/access/parking.html",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,150]]},
+  holiday:{freeAllDay:false, tiers:[[0,150]]},
+  extras:[{id:"shop", label:"対象店舗を利用", min:120, days:"all"}],
+  notes:[
+    "North駐車場は最初の2時間30分無料。以降は30分ごと200円。",
+    "対象店舗の利用で追加2時間または3時間無料になる。この画面は安全側に倒して2時間で計算している。",
+    "South（新津田沼駐車場）は別の体系で、対象店舗の利用で最大3時間まで。この画面はNorthで計算している。"
+  ]
+},
+{
+  id:"aeon-choshi", name:"イオンモール銚子", pref:"千葉", area:"銚子市",
+  src:"official", url:"https://www.aeon.jp/sc/choshi/access/parking.html",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["公式に「料金：無料」と明記されている。3,200台。利用時間7:00〜24:00。"]
+},
+{
+  id:"aeon-yachiyomidorigaoka", name:"イオンモール八千代緑が丘", pref:"千葉", area:"八千代市",
+  src:"secondary", url:"https://www.aeon.jp/sc/yachiyomidorigaoka/access/parking_info.html",
+  rate:{unitMin:30, yen:0}, rateUnknown:true,
+  weekday:{freeAllDay:false, tiers:[[0,180],[3000,300]]},
+  holiday:{freeAllDay:false, tiers:[[0,180],[3000,300]]},
+  extras:[],
+  notes:[
+    "3時間まで無料。3,000円以上の買い上げで2時間延びて最大5時間。約2,500台。",
+    "公式ページは料金表を画像で載せているため未検証。超過料金も分からない。現地の掲示で確認してください。"
+  ]
 },
 
 /* ============================== 埼玉 ============================== */
@@ -948,6 +1019,60 @@ const FACILITIES = [
     "この画面は料金の単価を1つしか持てないため、高いほうの200円で通して計算している。2時間以上停めると実際より高く出る。",
     "アプリのクーポンを出すと3時間まで100円になる（最大300円引き）。この割引は計算に入れていない。",
     "約5,000台。"
+  ]
+},
+
+{
+  id:"aeon-yono", name:"イオンモール与野", pref:"埼玉", area:"さいたま市中央区",
+  src:"official", url:"https://www.aeon.jp/sc/yono/access/parking.html",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:[
+    "公式に「料金：無料」と明記されている。",
+    "地下駐車場と立体駐車場は入庫が20:00まで。それ以降は平面駐車場を使う。"
+  ]
+},
+{
+  id:"aeon-kitatoda", name:"イオンモール北戸田", pref:"埼玉", area:"戸田市",
+  src:"official", url:"https://www.aeon.jp/sc/kitatoda/access/parking.html",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:[
+    "公式に「無料駐車場 約2,700台完備」と明記されている。",
+    "平面は7:00〜23:00。立体は平日11:00〜22:00、土日祝9:00〜22:00。"
+  ]
+},
+{
+  id:"aeon-urawamisono", name:"イオンモール浦和美園", pref:"埼玉", area:"さいたま市緑区",
+  src:"secondary", url:"https://www.aeon.jp/sc/urawamisono/access/parking.html",
+  rate:{unitMin:30, yen:0}, rateUnknown:true,
+  weekday:{freeAllDay:false, tiers:[[0,300]]},
+  holiday:{freeAllDay:false, tiers:[[0,300]]},
+  extras:[],
+  special:{label:"埼玉スタジアムのイベント開催日", tiers:[[0,120]]},
+  notes:[
+    "通常は5時間まで無料。埼玉スタジアムでイベントがある日は2時間に短くなる。",
+    "イベント日に料金が変わることは公式に明記されているが、金額は画像掲載のため読めていない。",
+    "無料時間は二次情報で未検証。超過料金も分からない。約3,000台。"
+  ]
+},
+{
+  id:"aeon-laketown", name:"イオンレイクタウン", pref:"埼玉", area:"越谷市",
+  src:"secondary", url:"https://www.aeon-laketown.jp/access/car.html",
+  rate:{unitMin:30, yen:100},
+  weekday:{freeAllDay:false, tiers:[[0,300]], maxFreeMin:420},
+  holiday:{freeAllDay:false, tiers:[[0,300]], maxFreeMin:420},
+  extras:[
+    {id:"app", label:"イオンモールアプリ会員", min:60, days:"all"},
+    {id:"cinema", label:"イオンシネマを利用", min:60, days:"all"}
+  ],
+  notes:[
+    "すべての駐車場で入庫から5時間無料。アプリ会員とイオンシネマ利用で各1時間ずつ延びて最大7時間。",
+    "超過は30分ごと100円。公式は料金表を画像で載せているため未検証。",
+    "mori・kaze・アウトレットの3施設からなる約10,400台の駐車場。立体は6:30〜24:30、平面は7:00〜24:30。",
+    "土日祝は12:00〜21:00に臨時駐車場が開く。"
   ]
 },
 
