@@ -14,6 +14,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- アクセス解析（GA4）。ページビューだけを見る。file:// で開いたときは読み込みに失敗するが、
+     gtag() の定義は残るのでエラーにはならない。 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7L1922J3BR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7L1922J3BR');
+</script>
 <style>
 :root{
   --concrete:#DDE0DA; --concrete-dk:#C9CDC5; --paper:#FCFCFA;
@@ -184,7 +193,8 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
     条件は変更されます。金額が大きいときは必ず施設の公式ページで確認してください。
     <span class="flag ok">公式確認済</span> は公式サイトの記載、
     <span class="flag chk">要確認</span> は二次情報、
-    <span class="flag no">条件未収録</span> は有料と分かっているが詳細が未取得のものです。データ収集日：関西 2026-08-05／関東 2026-08-12。
+    <span class="flag no">条件未収録</span> は有料と分かっているが詳細が未取得のものです。データ収集日：関西 2026-08-05／関東 2026-08-12。<br>
+    アクセス状況の把握に Google アナリティクスを使用しています。入力した時刻や金額は送信していません。
   </p>
 
   <p class="credit">built by nattom666</p>
@@ -815,6 +825,37 @@ const FACILITIES = [
 },
 
 {
+  id:"sunshine-city", name:"サンシャインシティ", pref:"東京", area:"豊島区（池袋）",
+  src:"secondary", url:"https://sunshinecity.jp/information/access_car.html",
+  rate:{unitMin:30, yen:400},
+  weekday:{freeAllDay:false, tiers:[[3000,120],[10000,180]]},
+  holiday:{freeAllDay:false, tiers:[[3000,120],[10000,180]]},
+  extras:[
+    {id:"aquarium", label:"サンシャイン水族館に2,000円以上で入場", min:60, days:"all"},
+    {id:"tenbo", label:"展望台てんぼうパークに1,000円以上で入場", min:60, days:"all"}
+  ],
+  notes:[
+    "買い物をしないと無料時間がない。アルパ・ALTAで3,000円以上の買い物か飲食で2時間、10,000円以上で3時間。",
+    "超過は30分ごと400円。6〜24時間の駐車は4,800円。",
+    "水族館と展望台は買い物とは別枠で、それぞれ1時間ずつ付く。",
+    "料金は二次情報のため要確認。現地の掲示で確認してください。"
+  ]
+},
+{
+  id:"futako-tamagawa-rise", name:"二子玉川ライズ", pref:"東京", area:"世田谷区",
+  src:"secondary", url:"https://www.tokyulifia.co.jp/parking/coin/156",
+  rate:{unitMin:30, yen:300},
+  weekday:{freeAllDay:false, tiers:[[0,30]], maxFee:3000},
+  holiday:{freeAllDay:false, tiers:[]},
+  extras:[],
+  notes:[
+    "P2駐車場の料金。平日だけ入庫から30分無料で、土日祝は無料時間がない。",
+    "平日7:00〜23:30が30分300円、土日祝は30分400円と上がる。この画面は単価を1つしか持てないため平日の300円で通している。土日祝は実際より安く出るので注意。",
+    "23:30〜7:00は60分200円。平日の最大料金は3,000円（7:00〜23:30）。",
+    "料金は二次情報のため要確認。買い物による無料サービスの有無も確認できていない。"
+  ]
+},
+{
   id:"tokyo-solamachi", name:"東京ソラマチ", pref:"東京", area:"墨田区（東京スカイツリータウン）",
   src:"secondary", url:"https://www.tokyo-solamachi.jp/",
   rate:{unitMin:30, yen:450},
@@ -962,6 +1003,22 @@ const FACILITIES = [
 },
 
 {
+  id:"aeon-futtsu", name:"イオンモール富津", pref:"千葉", area:"富津市",
+  src:"official", url:"https://futtsu.aeonmall.jp/access",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["すべての駐車場を無料で利用できると公式に明記されている。約1,028台。"]
+},
+{
+  id:"unimo-chiharadai", name:"ユニモちはら台", pref:"千葉", area:"市原市",
+  src:"official", url:"https://unimo-chiharadai.com/access/",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["公式に「無料駐車場」と明記されている。合計2,400台（A240・B140・C400・D970・屋上650）。"]
+},
+{
   id:"ikspiari", name:"イクスピアリ", pref:"千葉", area:"浦安市（舞浜）",
   src:"official", url:"https://www.ikspiari.com/info/access/",
   rate:{unitMin:30, yen:400},
@@ -1048,6 +1105,32 @@ const FACILITIES = [
   ]
 },
 
+{
+  id:"ario-kawaguchi", name:"アリオ川口", pref:"埼玉", area:"川口市",
+  src:"secondary", url:"https://kawaguchi.ario.jp/",
+  rate:{unitMin:60, yen:300},
+  weekday:{freeAllDay:false, tiers:[[0,180],[2000,240]], maxFreeMin:420},
+  holiday:{freeAllDay:false, tiers:[[0,180],[2000,240]], maxFreeMin:420},
+  extras:[{id:"cinema", label:"映画館を利用", min:180, days:"all"}],
+  notes:[
+    "買い物なしでも3時間無料。2,000円以上で+1時間、映画館の利用で+3時間、最大7時間。",
+    "超過は60分ごと300円。約1,700台。",
+    "料金は二次情報のため要確認。現地の掲示で確認してください。"
+  ]
+},
+{
+  id:"stella-town", name:"ステラタウン", pref:"埼玉", area:"さいたま市北区",
+  src:"secondary", url:"https://stellatown.jp/",
+  rate:{unitMin:30, yen:0}, rateUnknown:true,
+  weekday:{freeAllDay:false, tiers:[[0,120]]},
+  holiday:{freeAllDay:false, tiers:[[0,60]]},
+  extras:[],
+  notes:[
+    "平日と土曜は最初の2時間、日曜と祝日は最初の1時間無料。",
+    "この画面の土日祝は日曜・祝日の1時間で計算している。土曜は実際には2時間無料。",
+    "超過料金が確認できていないため、無料枠を過ぎたあとの金額は出せない。二次情報のため要確認。"
+  ]
+},
 {
   id:"mop-iruma", name:"三井アウトレットパーク入間", pref:"埼玉", area:"入間市",
   src:"secondary", url:"https://mitsui-shopping-park.com/mop/iruma/access/",
@@ -1189,6 +1272,30 @@ const FACILITIES = [
 },
 
 /* ============================== 神奈川 ============================== */
+{
+  id:"tressa-yokohama", name:"トレッサ横浜", pref:"神奈川", area:"横浜市港北区",
+  src:"official", url:"https://www.tressa-yokohama.jp/guide/parking.jsp",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:[
+    "公式に「駐車場 全日無料」と明記されている。買い上げの条件もない。",
+    "北棟1,300台・南棟1,400台の計2,700台。",
+    "南棟は9:30〜22:00。北棟は平日9:30〜23:30、土日9:30〜22:00。"
+  ]
+},
+{
+  id:"outlets-shonan-hiratsuka", name:"THE OUTLETS SHONAN HIRATSUKA", pref:"神奈川", area:"平塚市",
+  src:"secondary", url:"https://www.theoutlets-shonanhiratsuka.jp/",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:[
+    "約3,300台の駐車場が無料。",
+    "公式ページの本文で確認できておらず二次情報のため要確認。",
+    "同じ平塚市にあるららぽーと湘南平塚とは別の施設。"
+  ]
+},
 {
   id:"grandtree-musashikosugi", name:"グランツリー武蔵小杉", pref:"神奈川", area:"川崎市中原区",
   src:"secondary", url:"https://www.grandtree-musashikosugi.jp/",
