@@ -13,6 +13,23 @@
 <meta property="og:url" content="https://nattom666.github.io/parking-free-calc/">
 <meta property="og:image" content="https://nattom666.github.io/parking-free-calc/apple-touch-icon.png">
 <meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Free Parking Clock",
+  "alternateName": "駐車券クロック",
+  "url": "https://nattom666.github.io/parking-free-calc/",
+  "description": "入庫時刻と買い物金額から、駐車場の無料時間が切れる時刻といま出た場合の料金を計算する道具。関西と関東のショッピングモール100施設以上に対応。",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "browserRequirements": "JavaScript",
+  "inLanguage": "ja",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+}
+</script>
+<script type="application/ld+json" id="ldBreadcrumb"></script>
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <meta name="theme-color" content="#DDE0DA">
@@ -891,6 +908,66 @@ const FACILITIES = [
   ]
 },
 {
+  id:"tokyo-midtown", name:"東京ミッドタウン", pref:"東京", area:"港区（六本木）",
+  src:"official", url:"https://www.tokyo-midtown.com/jp/access/car-bike/",
+  rate:{unitMin:30, yen:400},
+  weekday:{freeAllDay:false, tiers:[[2500,60],[5000,120],[10000,240],[30000,720]]},
+  holiday:{freeAllDay:false, tiers:[[2500,60],[5000,120],[10000,240],[30000,720]]},
+  extras:[
+    {id:"saison", label:"東京ミッドタウンカード《セゾン》会員", min:60, days:"all"},
+    {id:"point", label:"ポイント会員（平日・1日1回）", min:60, days:"weekday"}
+  ],
+  notes:[
+    "無料時間がない。30分ごと400円。2,500円以上で1時間、5,000円以上で2時間、10,000円以上で4時間、30,000円以上で12時間無料。",
+    "ミッドタウンカード《セゾン》会員は買い上げ金額に関係なく1時間無料。ポイント会員は平日のみ1時間無料で、どちらも1日1回まで。",
+    "最大料金の記載がない。六本木ヒルズ（15分200円）とは料金体系が違う。"
+  ]
+},
+{
+  id:"shibuya-stream", name:"渋谷ストリーム駐車場", pref:"東京", area:"渋谷区",
+  src:"secondary", url:"https://shibuyastream.jp/",
+  rate:{unitMin:30, yen:400},
+  weekday:{freeAllDay:false, tiers:[[3000,60],[10000,120],[30000,180]], maxFreeMin:180, maxFee:2400},
+  holiday:{freeAllDay:false, tiers:[[3000,60],[10000,120],[30000,180]], maxFreeMin:180},
+  extras:[],
+  notes:[
+    "渋谷スクランブルスクエアには駐車場がない。渋谷ストリームの駐車場が最寄りで、渋谷ヒカリエ・渋谷ストリーム・渋谷スクランブルスクエア・渋谷フクラスの買い上げを合算できる（8回まで）。",
+    "3,000円以上で1時間、10,000円以上で2時間、30,000円以上で3時間。無料は最大3時間まで。",
+    "平日は30分300円、土日祝は30分400円。この画面は単価を1つしか持てないため高いほうの400円で通している。平日は実際より高く出る。",
+    "平日のみ最大2,400円。254台。6:50〜24:00（最終入庫23:30）。",
+    "料金は二次情報のため要確認。"
+  ]
+},
+{
+  id:"toyosu-senkyakubanrai", name:"豊洲 千客万来", pref:"東京", area:"江東区（豊洲市場）",
+  src:"secondary", url:"https://toyosu-senkyakubanrai.jp/",
+  rate:{unitMin:20, yen:300},
+  weekday:{freeAllDay:false, tiers:[[2000,120],[3000,180],[5000,300]]},
+  holiday:{freeAllDay:false, tiers:[[2000,120],[3000,180],[5000,300]]},
+  extras:[],
+  notes:[
+    "無料時間がない。2,000円以上で2時間、3,000円以上で3時間、5,000円以上で5時間無料。",
+    "超過は20分ごと300円（時間900円）と高い。買い物をしないまま停めると一気に効く。",
+    "駐車サービスは2階の「番屋」（総合案内）に各店のレシートを持参して受ける。",
+    "料金は二次情報のため要確認。"
+  ]
+},
+{
+  id:"tamagawa-takashimaya", name:"玉川高島屋S・C", pref:"東京", area:"世田谷区（二子玉川）",
+  src:"secondary", url:"https://www.takashimaya.co.jp/tamagawa/sc/information/access",
+  rate:{unitMin:60, yen:800},
+  weekday:{freeAllDay:false, tiers:[]},
+  holiday:{freeAllDay:false, tiers:[]},
+  extras:[],
+  notes:[
+    "2026年3月2日の改定で1時間800円。買い上げ金額に応じた無料時間があるが、いくらで何時間になるかを確認できていないため、この画面は無料時間なしで計算している。実際にはもっと安くなる。",
+    "タワーパーキングは、玉川高島屋S.C.で買い物をすれば金額を問わず終日無料。長時間ならここが有利。",
+    "東館とマロニエコートは西館より1時間長く無料になる。",
+    "飲食店・イートインで2,000円以上使うと無料時間が2時間延びる。",
+    "料金は二次情報のため要確認。現地の掲示で確認してください。"
+  ]
+},
+{
   id:"roppongi-hills", name:"六本木ヒルズ", pref:"東京", area:"港区（六本木）",
   src:"official", url:"https://www.roppongihills.com/access/index.html",
   rate:{unitMin:15, yen:200},
@@ -1185,6 +1262,20 @@ const FACILITIES = [
   notes:["すべての駐車場を無料で利用できると公式に明記されている。収容台数の記載はない。"]
 },
 
+{
+  id:"terrace-mall-matsudo", name:"テラスモール松戸", pref:"千葉", area:"松戸市",
+  src:"secondary", url:"https://terracemall.com/matsudo/access/",
+  rate:{unitMin:30, yen:0}, rateUnknown:true,
+  weekday:{freeAllDay:false, tiers:[[0,360]]},
+  holiday:{freeAllDay:false, tiers:[[0,240]]},
+  extras:[],
+  notes:[
+    "買い物なしでも4時間無料。平日はサービス拡大で6時間まで無料。",
+    "超過料金を確認できていないため、無料枠を過ぎたあとの金額は出せない。",
+    "約2,000台。利用時間8:00〜24:00。二次情報のため要確認。",
+    "同じテラスモールでも湘南（藤沢）は1時間無料からの体系で、条件がまったく違う。"
+  ]
+},
 {
   id:"lalaport-kashiwanoha", name:"ららぽーと柏の葉", pref:"千葉", area:"柏市",
   src:"official", url:"https://mitsui-shopping-park.com/lalaport/kashiwa/access/parking.html",
@@ -1702,6 +1793,18 @@ function updateMeta(){
   set('meta[property="og:url"]', "content", SITE_URL + "?id=" + current.id);
   set('link[rel="canonical"]', "href", SITE_URL + "?id=" + current.id);
   if(history.replaceState) history.replaceState(null, "", "?id=" + current.id);
+
+  /* パンくずの構造化データ。検索結果に「トップ > 兵庫 > 施設名」の階層を伝える */
+  const crumb = $("ldBreadcrumb");
+  if(crumb) crumb.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Free Parking Clock", "item": SITE_URL },
+      { "@type": "ListItem", "position": 2, "name": current.pref, "item": SITE_URL + "?id=" + current.id },
+      { "@type": "ListItem", "position": 3, "name": current.name }
+    ]
+  });
 }
 function select(id){
   current = data.find(f => f.id===id) || null;
