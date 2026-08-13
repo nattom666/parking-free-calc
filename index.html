@@ -193,7 +193,7 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
     条件は変更されます。金額が大きいときは必ず施設の公式ページで確認してください。
     <span class="flag ok">公式確認済</span> は公式サイトの記載、
     <span class="flag chk">要確認</span> は二次情報、
-    <span class="flag no">条件未収録</span> は有料と分かっているが詳細が未取得のものです。データ収集日：関西 2026-08-05／関東 2026-08-12。<br>
+    <span class="flag no">条件未収録</span> は有料と分かっているが詳細が未取得のものです。データ収集日：関西 2026-08-05／関東 2026-08-13。<br>
     アクセス状況の把握に Google アナリティクスを使用しています。入力した時刻や金額は送信していません。
   </p>
 
@@ -876,6 +876,64 @@ const FACILITIES = [
     "サービスは時間ではなく金額。5,000円以上で1,000円分、20,000円以上で2,000円分。この画面では30分500円で割って1時間・2時間として計算している。単価が変わると換算がずれる。",
     "駐車後24時間まで最大2,500円。",
     "2025年3月に開業した高輪ゲートウェイシティの駐車場。"
+  ]
+},
+{
+  id:"roppongi-hills", name:"六本木ヒルズ", pref:"東京", area:"港区（六本木）",
+  src:"official", url:"https://www.roppongihills.com/access/index.html",
+  rate:{unitMin:15, yen:200},
+  weekday:{freeAllDay:false, tiers:[[5000,120],[10000,240],[30000,360]]},
+  holiday:{freeAllDay:false, tiers:[[5000,120],[10000,240],[30000,360]]},
+  extras:[
+    {id:"hillscard", label:"ヒルズカード Mastercard を提示", min:120, days:"all"},
+    {id:"toho", label:"TOHOシネマズ六本木ヒルズの半券", min:120, days:"all"}
+  ],
+  notes:[
+    "無料時間がない。15分ごと200円（時間800円）。最大料金がないので長時間は青天井。",
+    "サービスはポイント制で、1,000円ごとに1ポイント。5ポイント以上で2時間、10ポイント以上で4時間、30ポイント以上で6時間（30ポイントが上限）。この画面は金額に読み替えて計算している。",
+    "ヒルズカード Mastercard とTOHOシネマズの半券は各2時間。",
+    "P1〜P12と North Tower を合わせて2,762台。",
+    "P3（グランドハイアット東京）だけは10分350円で、通常の割引サービスの対象外。"
+  ]
+},
+{
+  id:"toranomon-hills", name:"虎ノ門ヒルズ", pref:"東京", area:"港区（虎ノ門）",
+  src:"official", url:"https://www.toranomonhills.com/access/",
+  rate:{unitMin:15, yen:200},
+  weekday:{freeAllDay:false, tiers:[[3000,60],[5000,120]]},
+  holiday:{freeAllDay:false, tiers:[[3000,60],[5000,120]]},
+  extras:[{id:"hillscard", label:"ヒルズカード Mastercard を提示", min:60, days:"all"}],
+  notes:[
+    "無料時間がない。15分ごと200円（時間800円）で全日同じ。最大料金の記載がない。",
+    "サービスは「1店舗につき」の判定で、3,000円以上なら1時間、5,000円以上なら2時間。3店舗まで重ねられる。",
+    "この画面は合計金額で計算しているため、複数店舗で買った場合は実際より短く出る。目安として見てください。",
+    "ヒルズカード Mastercard があれば毎回1時間無料。"
+  ]
+},
+{
+  id:"miyashita-park", name:"MIYASHITA PARK", pref:"東京", area:"渋谷区",
+  src:"secondary", url:"https://www.miyashita-park.tokyo/",
+  rate:{unitMin:30, yen:400},
+  weekday:{freeAllDay:false, tiers:[], maxFee:2000},
+  holiday:{freeAllDay:false, tiers:[]},
+  extras:[],
+  notes:[
+    "全日30分ごと400円。平日7:00〜23:00は最大2,000円（普通車）。ハイルーフ車は3,200円。",
+    "買い上げによる無料サービスの条件を確認できていないため、この画面は無料時間なしで計算している。実際にはもっと安くなる可能性がある。",
+    "料金は二次情報のため要確認。現地の掲示で確認してください。"
+  ]
+},
+{
+  id:"mop-tama", name:"三井アウトレットパーク多摩南大沢", pref:"東京", area:"八王子市",
+  src:"secondary", url:"https://mitsui-shopping-park.com/mop/tama/access/",
+  rate:{unitMin:30, yen:0}, rateUnknown:true,
+  weekday:{freeAllDay:false, tiers:[[2000,120],[3000,180]]},
+  holiday:{freeAllDay:false, tiers:[[2000,120],[3000,180]]},
+  extras:[],
+  notes:[
+    "館内で合計2,000円以上の買い上げで2時間、3,000円以上で3時間無料。",
+    "三井ショッピングパークカード《セゾン》会員は平日限定でA/C駐車場・第1駐車場（パオレ）が4時間無料。プレミアムメダル会員はさらに+1時間。",
+    "基本料金を確認できていないため、無料枠を過ぎたあとの金額は出せない。二次情報のため要確認。"
   ]
 },
 {
