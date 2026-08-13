@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>駐車場の無料時間と料金がわかる | Free Parking Clock</title>
-<meta name="description" content="入庫時刻と買い物金額を入れるだけで、駐車場の無料時間が切れる時刻・いま出た場合の料金・あといくら買えば延びるかがわかります。関西と関東のショッピングモール100施設以上に対応。">
+<title>モール駐車場の無料時間と料金の計算｜あといくら買えば無料？</title>
+<meta name="description" content="関東・関西のショッピングモール112施設を収録。施設を選んで入庫時刻と買い上げ金額を入れるだけで、無料時間が切れる時刻・いま出た場合の駐車料金・あといくら買えば無料が延びるかが分かります。イオンモールやららぽーとにも対応。">
 <link rel="canonical" href="https://nattom666.github.io/parking-free-calc/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Free Parking Clock">
-<meta property="og:title" content="駐車場の無料時間と料金がわかる | Free Parking Clock">
-<meta property="og:description" content="入庫時刻と買い物金額を入れるだけで、無料が切れる時刻といまの料金がわかります。関西と関東の100施設以上に対応。">
+<meta property="og:site_name" content="駐車場料金計算ツール">
+<meta property="og:title" content="モール駐車場の無料時間と料金の計算｜あといくら買えば無料？">
+<meta property="og:description" content="施設を選んで入庫時刻と買い上げ金額を入れるだけ。無料が切れる時刻といまの駐車料金、あといくら買えば無料が延びるかが分かります。関東・関西の112施設を収録。">
 <meta property="og:url" content="https://nattom666.github.io/parking-free-calc/">
 <meta property="og:image" content="https://nattom666.github.io/parking-free-calc/apple-touch-icon.png">
 <meta name="twitter:card" content="summary">
@@ -17,10 +17,10 @@
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Free Parking Clock",
-  "alternateName": "駐車券クロック",
+  "name": "駐車場料金計算ツール",
+  "alternateName": "駐車場の無料時間と料金の計算ツール",
   "url": "https://nattom666.github.io/parking-free-calc/",
-  "description": "入庫時刻と買い物金額から、駐車場の無料時間が切れる時刻といま出た場合の料金を計算する道具。関西と関東のショッピングモール100施設以上に対応。",
+  "description": "関東・関西のショッピングモール112施設を収録。施設を選んで入庫時刻と買い上げ金額を入れるだけで、無料時間が切れる時刻・いま出た場合の駐車料金・あといくら買えば無料が延びるかが分かります。イオンモールやららぽーとにも対応。",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Web",
   "browserRequirements": "JavaScript",
@@ -36,7 +36,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Parking Clock">
+<meta name="apple-mobile-web-app-title" content="駐車場料金計算ツール">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -143,8 +143,8 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
 <div class="wrap">
 
   <header class="masthead">
-    <h1>Free Parking Clock</h1>
-    <p>入庫時刻と買い物金額を入れると、無料が切れる時刻・いま出た場合の料金・あといくら買えば延びるかを出します。</p>
+    <h1>ショッピングモールの駐車料金・無料時間 計算ツール</h1>
+    <p>施設を選んで、入庫時刻と買い上げ金額を入れるだけ。無料が切れる時刻・いま出た場合の料金・あといくら買えば無料が延びるかを計算します。</p>
     <div class="count" id="count"></div>
   </header>
 
@@ -211,18 +211,6 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
     <div class="detail-body" id="condBody"></div>
   </details>
 
-  <details>
-    <summary>データを直す・施設を足す</summary>
-    <div class="detail-body">
-      <p style="margin-bottom:9px">選択中の施設の設定です。数値を直して「反映する」を押すとこの画面だけに反映されます。恒久的に残すには、このHTMLの <code>FACILITIES</code> 配列に貼り替えてください。</p>
-      <textarea id="jsonBox" spellcheck="false"></textarea>
-      <div class="err" id="jsonErr"></div>
-      <div class="chips" style="margin-top:8px">
-        <button class="mini" id="applyJson" type="button">反映する</button>
-        <button class="mini ghost" id="copyAll" type="button">全施設のデータをコピー</button>
-      </div>
-    </div>
-  </details>
 
   <!-- 施設一覧。<select> の option は検索エンジンが辿れないため、
        同じ内容を実体のリンクとして置いている。中身は sitemap と同じ手順で自動生成する。 -->
@@ -230,69 +218,7 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
     <summary>収録している施設の一覧</summary>
     <div class="facilist-body">
 <!-- FACILITY_LINKS_START -->
-      <p class="facilist-nav"><a href="p/free.html">駐車場が完全無料のモール一覧</a>　<a href="p/hyogo.html">兵庫県のまとめ</a>　<a href="p/osaka.html">大阪府のまとめ</a>　<a href="p/nara.html">奈良県のまとめ</a>　<a href="p/kyoto.html">京都府のまとめ</a>　<a href="p/wakayama.html">和歌山県のまとめ</a>　<a href="p/tokyo.html">東京都のまとめ</a>　<a href="p/chiba.html">千葉県のまとめ</a>　<a href="p/saitama.html">埼玉県のまとめ</a>　<a href="p/kanagawa.html">神奈川県のまとめ</a></p>
-      <h3>兵庫</h3>
-      <ul>
-        <li><a href="s/koshien.html">ららぽーと甲子園</a></li>
-        <li><a href="s/nishinomiya-gardens.html">阪急西宮ガーデンズ</a></li>
-        <li><a href="s/acta-nishinomiya.html">アクタ西宮</a></li>
-        <li><a href="s/corowa-koshien.html">コロワ甲子園</a></li>
-        <li><a href="s/ebista-nishinomiya.html">エビスタ西宮</a></li>
-        <li><a href="s/frente-nishinomiya.html">フレンテ西宮</a></li>
-        <li><a href="s/umie.html">神戸ハーバーランドumie 立体駐車場</a></li>
-        <li><a href="s/amagasaki-qs.html">あまがさきキューズモール</a></li>
-        <li><a href="s/aeon-kobeminami.html">イオンモール神戸南</a></li>
-        <li><a href="s/aeon-itami.html">イオンモール伊丹</a></li>
-        <li><a href="s/aeon-itamikoya.html">イオンモール伊丹昆陽</a></li>
-        <li><a href="s/aeon-kobekita.html">イオンモール神戸北</a></li>
-        <li><a href="s/aeon-himeji-river.html">イオンモール姫路リバーシティー</a></li>
-        <li><a href="s/aeon-himeji-otsu.html">イオンモール姫路大津</a></li>
-        <li><a href="s/aeon-kasai.html">イオンモール加西北条</a></li>
-        <li><a href="s/aeon-inagawa.html">イオンモール猪名川</a></li>
-      </ul>
-      <h3>大阪</h3>
-      <ul>
-        <li><a href="s/expocity.html">ららぽーとEXPOCITY</a></li>
-        <li><a href="s/kadoma.html">ららぽーと門真／三井アウトレットパーク大阪門真</a></li>
-        <li><a href="s/sakai.html">ららぽーと堺</a></li>
-        <li><a href="s/abeno-qs.html">あべのキューズモール</a></li>
-        <li><a href="s/minoh-qs.html">みのおキューズモール</a></li>
-        <li><a href="s/morinomiya-qs.html">もりのみやキューズモールBASE</a></li>
-        <li><a href="s/aeon-shijonawate.html">イオンモール四條畷</a></li>
-        <li><a href="s/aeon-domecity.html">イオンモール大阪ドームシティ</a></li>
-        <li><a href="s/aeon-sakaikitahanada.html">イオンモール堺北花田</a></li>
-        <li><a href="s/aeon-ibaraki.html">イオンモール茨木</a></li>
-        <li><a href="s/aeon-dainichi.html">イオンモール大日</a></li>
-        <li><a href="s/aeon-tsurumiryokuchi.html">イオンモール鶴見緑地</a></li>
-        <li><a href="s/aeon-sakaiteppocho.html">イオンモール堺鉄砲町</a></li>
-        <li><a href="s/aeon-rinkusennan.html">イオンモールりんくう泉南</a></li>
-        <li><a href="s/aeon-hineno.html">イオンモール日根野</a></li>
-        <li><a href="s/aeon-senrito.html">イオンSENRITO専門館</a></li>
-        <li><a href="s/grand-front-osaka.html">グランフロント大阪</a></li>
-        <li><a href="s/namba-parks.html">なんばパークス</a></li>
-      </ul>
-      <h3>奈良</h3>
-      <ul>
-        <li><a href="s/aeon-yamatokoriyama.html">イオンモール大和郡山</a></li>
-        <li><a href="s/aeon-kashihara.html">イオンモール橿原</a></li>
-        <li><a href="s/aeon-tomigaoka.html">イオンモール奈良登美ヶ丘</a></li>
-        <li><a href="s/nara-family.html">ならファミリー</a></li>
-      </ul>
-      <h3>京都</h3>
-      <ul>
-        <li><a href="s/aeon-katsuragawa.html">イオンモール京都桂川</a></li>
-        <li><a href="s/aeon-kyotogojo.html">イオンモール京都五条</a></li>
-        <li><a href="s/aeon-takanohara.html">イオンモール高の原</a></li>
-        <li><a href="s/aeon-kyoto.html">イオンモールKYOTO</a></li>
-        <li><a href="s/aeon-kitaoji.html">イオンモール北大路</a></li>
-      </ul>
-      <h3>和歌山</h3>
-      <ul>
-        <li><a href="s/aeon-wakayama.html">イオンモール和歌山</a></li>
-        <li><a href="s/kintetsu-wakayama.html">近鉄百貨店 和歌山店</a></li>
-        <li><a href="s/wakayama-mio.html">和歌山ミオ</a></li>
-        <li><a href="s/palm-city-wakayama.html">パームシティ和歌山</a></li>
-      </ul>
+      <p class="facilist-nav"><a href="p/free.html">駐車場が完全無料のモール一覧</a>　<a href="p/tokyo.html">東京都のまとめ</a>　<a href="p/kanagawa.html">神奈川県のまとめ</a>　<a href="p/chiba.html">千葉県のまとめ</a>　<a href="p/saitama.html">埼玉県のまとめ</a>　<a href="p/osaka.html">大阪府のまとめ</a>　<a href="p/hyogo.html">兵庫県のまとめ</a>　<a href="p/kyoto.html">京都府のまとめ</a>　<a href="p/nara.html">奈良県のまとめ</a>　<a href="p/wakayama.html">和歌山県のまとめ</a></p>
       <h3>東京</h3>
       <ul>
         <li><a href="s/aeon-musashimurayama.html">イオンモールむさし村山</a></li>
@@ -319,6 +245,20 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
         <li><a href="s/grandberry-park.html">南町田グランベリーパーク</a></li>
         <li><a href="s/aeon-tamadaira.html">イオンモール多摩平の森</a></li>
         <li><a href="s/aeon-higashikurume.html">イオンモール東久留米</a></li>
+      </ul>
+      <h3>神奈川</h3>
+      <ul>
+        <li><a href="s/lalaport-ebina.html">ららぽーと海老名</a></li>
+        <li><a href="s/markis-minatomirai.html">MARK IS みなとみらい</a></li>
+        <li><a href="s/tressa-yokohama.html">トレッサ横浜</a></li>
+        <li><a href="s/outlets-shonan-hiratsuka.html">THE OUTLETS SHONAN HIRATSUKA</a></li>
+        <li><a href="s/grandtree-musashikosugi.html">グランツリー武蔵小杉</a></li>
+        <li><a href="s/lazona-kawasaki.html">ラゾーナ川崎プラザ</a></li>
+        <li><a href="s/terrace-mall-shonan.html">テラスモール湘南</a></li>
+        <li><a href="s/mop-yokohama-bayside.html">三井アウトレットパーク横浜ベイサイド</a></li>
+        <li><a href="s/aeon-yamato.html">イオンモール大和</a></li>
+        <li><a href="s/aeon-zama.html">イオンモール座間</a></li>
+        <li><a href="s/yokohama.html">ららぽーと横浜</a></li>
       </ul>
       <h3>千葉</h3>
       <ul>
@@ -356,19 +296,67 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
         <li><a href="s/aeon-urawamisono.html">イオンモール浦和美園</a></li>
         <li><a href="s/aeon-laketown.html">イオンレイクタウン</a></li>
       </ul>
-      <h3>神奈川</h3>
+      <h3>大阪</h3>
       <ul>
-        <li><a href="s/lalaport-ebina.html">ららぽーと海老名</a></li>
-        <li><a href="s/markis-minatomirai.html">MARK IS みなとみらい</a></li>
-        <li><a href="s/tressa-yokohama.html">トレッサ横浜</a></li>
-        <li><a href="s/outlets-shonan-hiratsuka.html">THE OUTLETS SHONAN HIRATSUKA</a></li>
-        <li><a href="s/grandtree-musashikosugi.html">グランツリー武蔵小杉</a></li>
-        <li><a href="s/lazona-kawasaki.html">ラゾーナ川崎プラザ</a></li>
-        <li><a href="s/terrace-mall-shonan.html">テラスモール湘南</a></li>
-        <li><a href="s/mop-yokohama-bayside.html">三井アウトレットパーク横浜ベイサイド</a></li>
-        <li><a href="s/aeon-yamato.html">イオンモール大和</a></li>
-        <li><a href="s/aeon-zama.html">イオンモール座間</a></li>
-        <li><a href="s/yokohama.html">ららぽーと横浜</a></li>
+        <li><a href="s/expocity.html">ららぽーとEXPOCITY</a></li>
+        <li><a href="s/kadoma.html">ららぽーと門真／三井アウトレットパーク大阪門真</a></li>
+        <li><a href="s/sakai.html">ららぽーと堺</a></li>
+        <li><a href="s/abeno-qs.html">あべのキューズモール</a></li>
+        <li><a href="s/minoh-qs.html">みのおキューズモール</a></li>
+        <li><a href="s/morinomiya-qs.html">もりのみやキューズモールBASE</a></li>
+        <li><a href="s/aeon-shijonawate.html">イオンモール四條畷</a></li>
+        <li><a href="s/aeon-domecity.html">イオンモール大阪ドームシティ</a></li>
+        <li><a href="s/aeon-sakaikitahanada.html">イオンモール堺北花田</a></li>
+        <li><a href="s/aeon-ibaraki.html">イオンモール茨木</a></li>
+        <li><a href="s/aeon-dainichi.html">イオンモール大日</a></li>
+        <li><a href="s/aeon-tsurumiryokuchi.html">イオンモール鶴見緑地</a></li>
+        <li><a href="s/aeon-sakaiteppocho.html">イオンモール堺鉄砲町</a></li>
+        <li><a href="s/aeon-rinkusennan.html">イオンモールりんくう泉南</a></li>
+        <li><a href="s/aeon-hineno.html">イオンモール日根野</a></li>
+        <li><a href="s/aeon-senrito.html">イオンSENRITO専門館</a></li>
+        <li><a href="s/grand-front-osaka.html">グランフロント大阪</a></li>
+        <li><a href="s/namba-parks.html">なんばパークス</a></li>
+      </ul>
+      <h3>兵庫</h3>
+      <ul>
+        <li><a href="s/koshien.html">ららぽーと甲子園</a></li>
+        <li><a href="s/nishinomiya-gardens.html">阪急西宮ガーデンズ</a></li>
+        <li><a href="s/acta-nishinomiya.html">アクタ西宮</a></li>
+        <li><a href="s/corowa-koshien.html">コロワ甲子園</a></li>
+        <li><a href="s/ebista-nishinomiya.html">エビスタ西宮</a></li>
+        <li><a href="s/frente-nishinomiya.html">フレンテ西宮</a></li>
+        <li><a href="s/umie.html">神戸ハーバーランドumie 立体駐車場</a></li>
+        <li><a href="s/amagasaki-qs.html">あまがさきキューズモール</a></li>
+        <li><a href="s/aeon-kobeminami.html">イオンモール神戸南</a></li>
+        <li><a href="s/aeon-itami.html">イオンモール伊丹</a></li>
+        <li><a href="s/aeon-itamikoya.html">イオンモール伊丹昆陽</a></li>
+        <li><a href="s/aeon-kobekita.html">イオンモール神戸北</a></li>
+        <li><a href="s/aeon-himeji-river.html">イオンモール姫路リバーシティー</a></li>
+        <li><a href="s/aeon-himeji-otsu.html">イオンモール姫路大津</a></li>
+        <li><a href="s/aeon-kasai.html">イオンモール加西北条</a></li>
+        <li><a href="s/aeon-inagawa.html">イオンモール猪名川</a></li>
+      </ul>
+      <h3>京都</h3>
+      <ul>
+        <li><a href="s/aeon-katsuragawa.html">イオンモール京都桂川</a></li>
+        <li><a href="s/aeon-kyotogojo.html">イオンモール京都五条</a></li>
+        <li><a href="s/aeon-takanohara.html">イオンモール高の原</a></li>
+        <li><a href="s/aeon-kyoto.html">イオンモールKYOTO</a></li>
+        <li><a href="s/aeon-kitaoji.html">イオンモール北大路</a></li>
+      </ul>
+      <h3>奈良</h3>
+      <ul>
+        <li><a href="s/aeon-yamatokoriyama.html">イオンモール大和郡山</a></li>
+        <li><a href="s/aeon-kashihara.html">イオンモール橿原</a></li>
+        <li><a href="s/aeon-tomigaoka.html">イオンモール奈良登美ヶ丘</a></li>
+        <li><a href="s/nara-family.html">ならファミリー</a></li>
+      </ul>
+      <h3>和歌山</h3>
+      <ul>
+        <li><a href="s/aeon-wakayama.html">イオンモール和歌山</a></li>
+        <li><a href="s/kintetsu-wakayama.html">近鉄百貨店 和歌山店</a></li>
+        <li><a href="s/wakayama-mio.html">和歌山ミオ</a></li>
+        <li><a href="s/palm-city-wakayama.html">パームシティ和歌山</a></li>
       </ul>
 <!-- FACILITY_LINKS_END -->
     </div>
@@ -394,644 +382,6 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
    noData: true → 有料だが条件を未取得（計算せず案内のみ）
    ========================================================================= */
 const FACILITIES = [
-
-/* ============================== 兵庫 ============================== */
-{
-  id:"koshien", name:"ららぽーと甲子園", pref:"兵庫", area:"西宮市",
-  src:"secondary", url:"https://mitsui-shopping-park.com/lalaport/koshien/access/parking.html",
-  rate:{unitMin:30, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,120],[2000,180]]},
-  holiday:{freeAllDay:false, tiers:[[0,120],[2000,180]]},
-  extras:[{id:"card", label:"三井ショッピングパークカード／アプリ", min:60, days:"all"}],
-  notes:[
-    "買い上げの段階表は公式サイトが画像掲載のため未検証。現地の掲示で確認してください。",
-    "野球開催日は長時間駐車に特別料金6,000円が加算される。キッザニア利用時など免除条件あり。",
-    "入庫は9:30〜（キッザニア第1部利用時のみA駐車場が7:00〜）。高さ制限2.2m。"
-  ]
-},
-{
-  id:"nishinomiya-gardens", name:"阪急西宮ガーデンズ", pref:"兵庫", area:"西宮市",
-  src:"official", url:"https://nishinomiya-gardens.com/access/car",
-  rate:{unitMin:30, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,60],[3000,120],[10000,180]]},
-  holiday:{freeAllDay:false, tiers:[[0,60],[3000,120],[10000,180]]},
-  extras:[
-    {id:"annex", label:"別館駐車場に停めた（最初の無料が2時間）", min:60, days:"all"},
-    {id:"toho", label:"TOHOシネマズ西宮OS（映画1本）", min:120, days:"all"},
-    {id:"odekake", label:"阪急阪神おでかけカード（平日のみ）", min:60, days:"weekday"}
-  ],
-  notes:[
-    "本館（百貨店・中央・南）は最初の1時間、別館は最初の2時間無料。",
-    "買い上げは西宮阪急・イズミヤを含めて合算できる。",
-    "西宮阪急・イズミヤ分は各サービスカウンターで手続きが必要。インフォメーションでは不可。",
-    "平日16時以降が無料になるキャンペーンを実施する月がある。"
-  ]
-},
-{
-  id:"acta-nishinomiya", name:"アクタ西宮", pref:"兵庫", area:"西宮市（西宮北口）",
-  src:"secondary", url:"https://actafan.com/parking.html",
-  rate:{unitMin:30, yen:150},
-  weekday:{freeAllDay:false, tiers:[[1000,30],[2000,60],[3000,120]], maxFee:1200},
-  holiday:{freeAllDay:false, tiers:[[1000,30],[2000,60],[3000,120]], maxFee:1200},
-  extras:[],
-  notes:[
-    "買い物をしないと無料時間がない。1,000円以上で30分、2,000円以上で1時間、3,000円以上で2時間。対象店とコープ食彩館の合算ができる。",
-    "料金は西宮市立北口駐車場として市の公式ページで確認（30分150円、7:00〜24:00の当日最大1,200円、587台）。買い上げの段階はACTA公式が画像掲載のため未検証。",
-    "24:00〜7:00は一律700円。この時間帯は途中の入出庫ができない。",
-    "東館・西館の地下1階にある割引認証機で、各店のQRコード付きレシートを読ませる。"
-  ]
-},
-{
-  id:"corowa-koshien", name:"コロワ甲子園", pref:"兵庫", area:"西宮市（甲子園）",
-  src:"official", url:"https://corowa.jp/parking/",
-  rate:{unitMin:30, yen:500},
-  weekday:{freeAllDay:false, tiers:[[2000,120],[10000,240]], maxFee:500},
-  holiday:{freeAllDay:false, tiers:[[2000,120],[10000,240]], maxFee:500},
-  extras:[],
-  special:{label:"特定日（甲子園のイベント開催日など）",
-           tiers:[[2000,120],[10000,240]], maxFee:5000},
-  notes:[
-    "買い物をしないと無料時間がない。2,000円以上で最大2時間、10,000円以上で最大4時間無料。複数店舗の合算ができる。",
-    "超過は30分ごと500円。上限は8:00〜23:00の間だけで、通常日500円・特定日5,000円。",
-    "23:00〜翌8:00は30分ごと500円で上限の適用がない。この画面は入庫からの経過時間だけで計算するので、深夜をまたぐと実際と違う。",
-    "2026年8月の特定日は5〜23日と28〜30日。特定日カレンダーは公式ページで確認してください。",
-    "駐車場の営業は8:00〜23:00。23:00以降は入出庫できない。",
-    "駐車サービスを受けるには駐車券が必要。イオンでの買い上げ分はイオンサービスカウンターで対応。",
-    "商品券・図書カード・POSAカードの購入と電子マネーチャージは対象外。一部対象外店舗あり。",
-    "事前精算後に30分以上たってから出庫すると追加料金がかかる場合がある。"
-  ]
-},
-{
-  id:"ebista-nishinomiya", name:"エビスタ西宮", pref:"兵庫", area:"西宮市（阪神西宮）",
-  src:"official", url:"https://www.ebista.com/access/",
-  rate:{unitMin:60, yen:300},
-  weekday:{freeAllDay:false, tiers:[[2000,60],[4000,120]], maxFreeMin:240, maxFee:1500},
-  holiday:{freeAllDay:false, tiers:[[2000,60],[4000,120]], maxFreeMin:240},
-  extras:[{id:"odekake", label:"阪急阪神おでかけアプリ会員（3,000円以上）", min:60, days:"all"}],
-  notes:[
-    "買い物をしないと無料時間がない。2,000円以上で1時間、4,000円以上で2時間。エビスタ専門街と阪神・にしのみやで共通。",
-    "各種サービスを合算しても1回の駐車につき最大4時間まで。",
-    "阪神・にしのみやの1階食料品と2階アフタヌーンティー・ティールームは合わせて1店舗扱い。2階デコホーム・N+・ダイソー&スタンダードプロダクツは各1店舗扱い。",
-    "平日の1日最大料金は1,500円。土日祝の最大料金は記載がない。",
-    "営業時間 6:00〜25:00。520台。"
-  ]
-},
-{
-  id:"frente-nishinomiya", name:"フレンテ西宮", pref:"兵庫", area:"西宮市（JR西宮）",
-  src:"official", url:"https://www.frente-nishinomiya.com/facility/",
-  rate:{unitMin:20, yen:100},
-  weekday:{freeAllDay:false, tiers:[[1000,120],[10000,180]], maxFee:900},
-  holiday:{freeAllDay:false, tiers:[[1000,120],[10000,180]], maxFee:900},
-  extras:[],
-  notes:[
-    "買い物をしないと無料時間がない。1,000円以上で2時間、10,000円以上で3時間。",
-    "全日20分ごと100円。入庫から24時間の最大は900円。",
-    "営業時間 6:00〜25:00。500台。"
-  ]
-},
-{
-  id:"umie", name:"神戸ハーバーランドumie 立体駐車場", pref:"兵庫", area:"神戸市中央区（ハーバーランド）",
-  src:"official", url:"https://umie.jp/static-pages/access",
-  rate:{unitMin:30, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,180],[2000,240]]},
-  holiday:{freeAllDay:false, tiers:[[0,120],[2000,180]]},
-  extras:[
-    {id:"app", label:"umieメンバーズアプリ提示", min:60, days:"all"},
-    {id:"cinema", label:"OSシネマズ神戸ハーバーランド利用", min:120, days:"all"}
-  ],
-  notes:[
-    "対象はumie立体・地下・モザイク駐車場。30分ごとに200円（無料サービス時間の経過後）。",
-    "平日は3時間、土日祝は2時間無料。2,000円以上の買上げでさらに1時間無料。",
-    "umieメンバーズアプリ提示でさらに1時間、OSシネマズ利用でさらに2時間無料。最大無料は平日7時間・土日祝6時間。",
-    "神戸アンパンマンこどもミュージアム＆モール、バイキンひみつ基地は駐車サービス対象外。立体駐車場は7:30〜24:30（入庫22:30まで）。"
-  ]
-},
-{
-  id:"amagasaki-qs", name:"あまがさきキューズモール", pref:"兵庫", area:"尼崎市",
-  src:"official", url:"https://qs-mall.jp/amagasaki/access/",
-  rate:{unitMin:60, yen:400},
-  weekday:{freeAllDay:false, tiers:[[0,60],[4000,120]], maxFreeMin:420, maxFee:1100},
-  holiday:{freeAllDay:false, tiers:[[0,60],[4000,120]], maxFreeMin:420, maxFee:1100},
-  extras:[
-    {id:"friend", label:"キューズモールフレンズ会員", min:60, days:"all"},
-    {id:"movix", label:"MOVIXあまがさき利用", min:120, days:"all"},
-    {id:"central", label:"セントラルスポーツ利用", min:60, days:"all"}
-  ],
-  notes:[
-    "最初の1時間無料。4,000円以上の買い上げで2時間になる。以降は60分ごと400円。",
-    "24時間の最大料金は1,100円。駐車サービスが付くと最大800円。",
-    "この画面の上限は安全側に倒して1,100円で頭打ちにしている。サービスが付いていれば実際は800円で止まる。",
-    "公式は併用で最大7時間無料としているが、記載の内訳を足すと6時間にしかならない。現地の掲示で確認してください。",
-    "利用時間 8:30〜25:30（4階は10:00〜）。約1,400台。平日は6階・7階を閉鎖。"
-  ]
-},
-{
-  id:"aeon-kobeminami", name:"イオンモール神戸南", pref:"兵庫", area:"神戸市兵庫区",
-  src:"official", url:"https://kobeminami.aeonmall.jp/access",
-  rate:{unitMin:60, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,180]], maxFreeMin:240, maxFee:800},
-  holiday:{freeAllDay:false, tiers:[[0,180]], maxFreeMin:240, maxFee:800},
-  extras:[{id:"app", label:"イオンモールアプリ会員", min:60, days:"all"}],
-  special:{label:"特定日（混雑日・イベント日）", rate:{unitMin:30, yen:500},
-           tiers:[[0,180]], maxFreeMin:180, noExtras:true},
-  notes:[
-    "買い上げ金額による段階はなく、誰でも入庫後3時間無料。3時間以内なら精算操作も不要。",
-    "通常日は24時間最大800円。特定日は最大料金の適用がなく、30分500円と高い。",
-    "アプリ会員の追加1時間は特定日には付かない。",
-    "カメラで車のナンバーを読むスマートパーク方式。"
-  ]
-},
-{
-  id:"aeon-itami", name:"イオンモール伊丹", pref:"兵庫", area:"伊丹市",
-  src:"official", url:"https://itami.aeonmall.jp/access",
-  rate:{unitMin:30, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,120]], maxFreeMin:420},
-  holiday:{freeAllDay:false, tiers:[[0,60]], maxFreeMin:360},
-  extras:[
-    {id:"app", label:"イオンモールアプリの1時間無料クーポン", min:60, days:"all"},
-    {id:"qr", label:"5,000円以上でもらえるQR駐車サービス券", min:60, days:"all"},
-    {id:"cinema", label:"TOHOシネマズ伊丹（割引券発行機）", min:120, days:"all"}
-  ],
-  notes:[
-    "平日は2時間、土日祝は1時間まで精算不要。JR伊丹駅直結。",
-    "QRサービス券とシネマ割引の無料時間は公式に明記がなく未確認。現地で確認してください。",
-    "電子マネーWAONへのチャージはQRサービス券の対象外。",
-    "2024年7月から駐車券を廃止し車両ナンバー認識に。帰りは館内の事前精算機で。",
-    "駐車場開放は7:45〜0:30。"
-  ]
-},
-{
-  id:"aeon-itamikoya", name:"イオンモール伊丹昆陽", pref:"兵庫", area:"伊丹市",
-  src:"secondary", url:"https://www.aeon.jp/sc/itamikoya/access/parking.html",
-  rate:{unitMin:60, yen:0},
-  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
-  extras:[],
-  notes:["駐車場は無料（駐輪場は有料）。利用時間8:30〜23:00。","無料であることは公式ページで明示されていないため要確認。"]
-},
-{
-  id:"aeon-kobekita", name:"イオンモール神戸北", pref:"兵庫", area:"神戸市北区",
-  src:"secondary", url:"https://kobekita.aeonmall.jp/",
-  rate:{unitMin:60, yen:0},
-  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
-  extras:[],
-  notes:["無料とみられるが公式ページで未確認。現地で確認してください。","約4,000台。"]
-},
-{
-  id:"aeon-himeji-river", name:"イオンモール姫路リバーシティー", pref:"兵庫", area:"姫路市",
-  src:"secondary", url:"https://www.aeon.jp/sc/himeji-rivercity/access/parking.html",
-  rate:{unitMin:60, yen:0},
-  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
-  extras:[],
-  notes:["無料とみられるが公式ページに料金表の記載がなく要確認。","立体駐車場は高さ制限2.1m。"]
-},
-{
-  id:"aeon-himeji-otsu", name:"イオンモール姫路大津", pref:"兵庫", area:"姫路市",
-  src:"secondary", url:"https://www.aeon.jp/sc/himejiootsu/access/",
-  rate:{unitMin:60, yen:0},
-  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
-  extras:[],
-  notes:["無料とみられるが公式ページで未確認。約2,600台。"]
-},
-{
-  id:"aeon-kasai", name:"イオンモール加西北条", pref:"兵庫", area:"加西市",
-  src:"secondary", url:"https://kasaihojo.aeonmall.jp/",
-  rate:{unitMin:60, yen:0},
-  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
-  extras:[],
-  notes:["無料とみられるが公式ページで未確認。駐車場の利用時間は9:00〜23:00。約2,100台。"]
-},
-{
-  id:"aeon-inagawa", name:"イオンモール猪名川", pref:"兵庫", area:"川辺郡猪名川町",
-  src:"secondary", url:"https://inagawa.aeonmall.jp/",
-  rate:{unitMin:60, yen:0},
-  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
-  extras:[],
-  notes:["無料とみられるが公式ページで未確認。約2,000台。"]
-},
-
-/* ============================== 大阪 ============================== */
-{
-  id:"expocity", name:"ららぽーとEXPOCITY", pref:"大阪", area:"吹田市",
-  src:"official", url:"https://mitsui-shopping-park.com/lalaport/expocity/access/parking.html",
-  rate:{unitMin:30, yen:200},
-  weekday:{freeAllDay:true, tiers:[]},
-  holiday:{freeAllDay:false, tiers:[[0,60],[2000,120],[5000,180],[10000,240]], maxFreeMin:300},
-  extras:[
-    {id:"card", label:"三井ショッピングパークカード／ポイントカード", min:60, days:"all"},
-    {id:"cinema", label:"109シネマズ大阪エキスポシティ", min:180, days:"all"},
-    {id:"ent", label:"NIFREL・VS PARK・ムラサキパーク", min:120, days:"all"}
-  ],
-  notes:[
-    "平日は買い物なしでも終日無料。土日祝は最大5時間まで。",
-    "入庫は8:00〜26:00、高さ制限2.3m。",
-    "万博記念公園側の駐車場に停めるとサービス対象外。",
-    "お盆・年末年始・繁忙期は平日でも土日祝料金になることがある。"
-  ]
-},
-{
-  id:"kadoma", name:"ららぽーと門真／三井アウトレットパーク大阪門真", pref:"大阪", area:"門真市",
-  src:"official", url:"https://mitsui-shopping-park.com/lalaport/kadoma/access/parking.html",
-  rate:{unitMin:30, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,120],[2000,180],[5000,240],[10000,300]], maxFreeMin:540,
-           member:{freeAllDay:true, tiers:[]}},
-  holiday:{freeAllDay:false, tiers:[[0,60],[2000,120],[5000,180],[10000,240]], maxFreeMin:480,
-           member:{freeAllDay:false, tiers:[[0,120],[2000,180],[5000,240],[10000,300]]}},
-  extras:[
-    {id:"member", label:"三井ショッピングパークポイント会員", min:0, days:"all", isMember:true},
-    {id:"cinema", label:"TOHOシネマズ ららぽーと門真", min:180, days:"all"}
-  ],
-  notes:[
-    "ポイント会員は平日なら買い物なしでも終日無料。",
-    "コストコ門真倉庫店のレシートは対象外。",
-    "利用時間 8:00〜24:00、高さ制限2.3m（超える車は平面へ）。",
-    "車番認証のチケットレス方式。"
-  ]
-},
-{
-  id:"sakai", name:"ららぽーと堺", pref:"大阪", area:"堺市美原区",
-  src:"official", url:"https://mitsui-shopping-park.com/lalaport/sakai/access/parking.html",
-  rate:{unitMin:30, yen:0},
-  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
-  extras:[],
-  notes:["終日無料。買い物金額の条件なし。"]
-},
-{
-  id:"abeno-qs", name:"あべのキューズモール", pref:"大阪", area:"大阪市阿倍野区",
-  src:"secondary", url:"https://qs-mall.jp/abeno/access/",
-  rate:{unitMin:30, yen:350},
-  weekday:{freeAllDay:false, tiers:[[0,30],[1000,90],[5000,150],[20000,210]], maxFreeMin:420},
-  holiday:{freeAllDay:false, tiers:[[0,30],[1000,90],[5000,150],[20000,210]], maxFreeMin:420},
-  extras:[
-    {id:"friend", label:"キューズモールフレンド会員", min:30, days:"all"},
-    {id:"iy", label:"イトーヨーカドーで1,000円以上（別枠）", min:60, days:"all"}
-  ],
-  notes:[
-    "キューズモール各店の買い上げは合算されるが、イトーヨーカドーとは合算されない（別枠で加算）。",
-    "利用時間 8:45〜23:30。",
-    "超過料金は30分350円（300円との情報もあり要確認）。",
-    "インフォメーションでは駐車サービスを受け付けていない。毎回レジで駐車券を出すこと。"
-  ]
-},
-{
-  id:"minoh-qs", name:"みのおキューズモール", pref:"大阪", area:"箕面市",
-  src:"official", url:"https://qs-mall.jp/minoh/access/",
-  rate:{unitMin:30, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,120],[1,180],[1000,240],[5000,300],[20000,360]], maxFreeMin:480, maxFee:1000},
-  holiday:{freeAllDay:false, tiers:[[0,60],[1,120],[1000,180],[5000,240],[20000,300]], maxFreeMin:540},
-  extras:[
-    {id:"cinema-wd", label:"109シネマズ箕面を利用", min:60, days:"weekday"},
-    {id:"cinema-hd", label:"109シネマズ箕面を利用", min:120, days:"holiday"},
-    {id:"cospa-wd", label:"コ・ス・パ箕面萱野24を利用", min:60, days:"weekday"},
-    {id:"cospa-hd", label:"コ・ス・パ箕面萱野24を利用", min:120, days:"holiday"}
-  ],
-  notes:[
-    "平日は最初の2時間、土日祝は最初の1時間無料。買い上げ分はこれに加算される（1円以上+1時間／1,000円以上+2時間／5,000円以上+3時間／20,000円以上+4時間）。",
-    "最大は平日8時間・土日祝9時間。以降は30分ごと200円。",
-    "平日（土日祝を除く）は当日1日最大1,000円。1円以上の買い上げで最大800円に下がる。土日祝の最大料金は記載なし。",
-    "この画面の上限は安全側に倒して平日1,000円で頭打ちにしている。買い物をしていれば実際は800円で止まる。",
-    "映画とジムの無料時間は平日1時間・土日祝2時間で違う。曜日の切り替えで表示も入れ替わる。",
-    "利用時間 EAST・WEST 7:30〜24:30、CENTER 5:00〜24:30。高さ制限 EAST 2.2m／WEST 2.1m／CENTER 2.3m。"
-  ]
-},
-{
-  id:"morinomiya-qs", name:"もりのみやキューズモールBASE", pref:"大阪", area:"大阪市中央区",
-  src:"official", url:"https://qs-mall.jp/morinomiya/access/",
-  rate:{unitMin:30, yen:300},
-  weekday:{freeAllDay:false, tiers:[[0,30],[1000,60],[5000,120],[20000,180]]},
-  holiday:{freeAllDay:false, tiers:[[0,30],[1000,60],[5000,120],[20000,180]]},
-  extras:[{id:"friend", label:"キューズモールフレンズ会員", min:30, days:"all"}],
-  notes:[
-    "最初の30分無料。1,000円以上で1時間、5,000円以上で2時間、20,000円以上で3時間。以降は30分ごと300円。",
-    "公式は会員分を足して最大7時間無料としているが、記載の内訳では3時間30分にしかならない。現地の掲示で確認してください。",
-    "最大料金の上限がない日程があると公式に注意書きがある。",
-    "利用時間 WEST 9:30〜24:00、EAST 8:30〜23:30。高さ制限は2.3m。"
-  ]
-},
-{
-  id:"aeon-shijonawate", name:"イオンモール四條畷", pref:"大阪", area:"四條畷市",
-  src:"secondary", url:"https://shijonawate.aeonmall.jp/",
-  rate:{unitMin:60, yen:0},
-  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
-  extras:[],
-  notes:["大阪府内のイオンモールでは珍しく無料駐車場（約4,250台）。","公式ページで最新の記載を確認してください。"]
-},
-{
-  id:"aeon-domecity", name:"イオンモール大阪ドームシティ", pref:"大阪", area:"大阪市西区",
-  src:"secondary", url:"https://osakadomecity.aeonmall.jp/",
-  rate:{unitMin:20, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,120],[1000,240],[5000,300]], maxFee:700},
-  holiday:{freeAllDay:false, tiers:[[0,120],[1000,240],[5000,300]], maxFee:700},
-  extras:[],
-  special:{label:"京セラドームのイベント・野球開催日", rate:{unitMin:20, yen:200},
-           tiers:[[0,120]], noExtras:true, maxFee:2600},
-  notes:[
-    "京セラドーム大阪でイベント・コンサート・野球がある日は特別日となり、条件も上限料金も変わる。",
-    "通常日は24時間最大700円、イベント日は24時間最大2,600円との情報あり。",
-    "この上限は二次情報で、公式ページでは確認できていない。上限があるものとして計算しているので、上限そのものが無い・違う場合は表示より高くなる。",
-    "段階表・料金とも二次情報のため要確認。金額が大きい日は必ず現地掲示を見てください。"
-  ]
-},
-{
-  id:"aeon-sakaikitahanada", name:"イオンモール堺北花田", pref:"大阪", area:"堺市北区",
-  src:"nodata", noData:true, url:"https://sakaikitahanada.aeonmall.jp/access",
-  rate:{unitMin:30, yen:0},
-  weekday:{freeAllDay:false, tiers:[]}, holiday:{freeAllDay:false, tiers:[]},
-  extras:[],
-  notes:["有料の駐車場だが、無料時間と買い上げ条件を未取得。公式ページで確認してください。"]
-},
-
-{
-  id:"aeon-ibaraki", name:"イオンモール茨木", pref:"大阪", area:"茨木市",
-  src:"secondary", url:"https://www.aeon.jp/sc/ibaraki/access/parking.html",
-  rate:{unitMin:30, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,120],[2000,240]], maxFreeMin:420},
-  holiday:{freeAllDay:false, tiers:[[0,120],[2000,240]], maxFreeMin:420},
-  extras:[
-    {id:"cinema", label:"イオンシネマ茨木を利用", min:180, days:"all"},
-    {id:"konami", label:"コナミスポーツクラブを利用", min:180, days:"all"}
-  ],
-  notes:[
-    "入庫から2時間無料。2,000円以上の買い上げで合計4時間。最大7時間まで。",
-    "公式ページは料金表を画像で載せているため本文から検証できていない。現地の掲示で確認してください。",
-    "16時以降に入庫すると当日24:30までの出庫で無料になるキャンペーンを実施中（当面の間）。この計算には反映していない。",
-    "2,500台。高さ制限2.1m。"
-  ]
-},
-{
-  id:"aeon-dainichi", name:"イオンモール大日", pref:"大阪", area:"守口市",
-  src:"secondary", url:"https://www.aeon.jp/sc/dainichi/access/parking.html",
-  rate:{unitMin:30, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,120],[2000,240],[5000,300]], maxFreeMin:420},
-  holiday:{freeAllDay:false, tiers:[[0,120],[2000,240],[5000,300]], maxFreeMin:420},
-  extras:[{id:"cinema", label:"イオンシネマ大日を利用", min:120, days:"all"}],
-  special:{label:"大日WEEK・20日30日のお客さま感謝デー", freeAllDay:true, tiers:[]},
-  notes:[
-    "曜日を問わず入庫から2時間無料。2,000円以上で合計4時間、5,000円以上で合計5時間。以降は30分ごと200円。",
-    "公式ページは料金表を画像で載せているため本文から検証できていない。現地の掲示で確認してください。",
-    "大日WEEKと20日・30日のお客さま感謝デーは全員無料（公式の駐車場おトクカレンダーに記載）。",
-    "2025年2月21日から車両ナンバー認識方式に変わり、精算時にナンバー下4桁を入力する。"
-  ]
-},
-{
-  id:"aeon-tsurumiryokuchi", name:"イオンモール鶴見緑地", pref:"大阪", area:"大阪市鶴見区",
-  src:"official", url:"https://tsurumiryokuchi.aeonmall.jp/access",
-  rate:{unitMin:30, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,120],[5000,180]], maxFee:500},
-  holiday:{freeAllDay:false, tiers:[[0,120]]},
-  extras:[{id:"app", label:"イオンモールアプリのクーポン提示", min:60, days:"all"}],
-  notes:[
-    "最初の2時間無料。5,000円以上で+1時間は平日限定で、土日祝は買い上げによる延長がない。",
-    "平日（月〜金 6:30〜23:00）は最大500円。土日祝と特定日は最大料金の適用がない。",
-    "特定日は8/13〜8/15と12/30〜1/3。",
-    "2023年10月20日から車両ナンバー認識方式。2,170台。",
-    "1階は6:30〜23:00。2階〜屋上は平日8:45〜23:00・土日祝8:30〜23:00（4階・7階・屋上は平日閉鎖）。"
-  ]
-},
-{
-  id:"aeon-sakaiteppocho", name:"イオンモール堺鉄砲町", pref:"大阪", area:"堺市堺区",
-  src:"official", url:"https://sakaiteppocho.aeonmall.jp/access",
-  rate:{unitMin:30, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,180],[3000,240]]},
-  holiday:{freeAllDay:false, tiers:[[0,120],[3000,180]]},
-  extras:[{id:"app", label:"イオンモールアプリのQRクーポン提示", min:60, days:"all"}],
-  notes:[
-    "平日は3時間、土日祝は2時間無料。3,000円以上の買い上げで+1時間。以降は30分ごと200円。",
-    "最大料金は公式ページに記載がない。長時間停める場合は現地で確認してください。",
-    "利用時間 8:30〜23:30。約2,300台。"
-  ]
-},
-{
-  id:"aeon-rinkusennan", name:"イオンモールりんくう泉南", pref:"大阪", area:"泉南市",
-  src:"official", url:"https://rinkusennan.aeonmall.jp/access",
-  rate:{unitMin:60, yen:0},
-  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
-  extras:[],
-  notes:["すべての駐車場を無料で利用できると公式に明記されている。約4,300台。"]
-},
-{
-  id:"aeon-hineno", name:"イオンモール日根野", pref:"大阪", area:"泉佐野市",
-  src:"nodata", noData:true, url:"https://www.aeon.jp/sc/hineno/access/parking.html",
-  rate:{unitMin:30, yen:0},
-  weekday:{freeAllDay:false, tiers:[]}, holiday:{freeAllDay:false, tiers:[]},
-  extras:[],
-  notes:[
-    "公式ページには約1,400台とあるだけで、無料か有料かも料金も書かれていない。",
-    "入庫後3時間無料で買い上げによる延長はない、という二次情報があるが未確認。",
-    "駐車場の管理は外部会社（ピットデザイン）。"
-  ]
-},
-{
-  id:"aeon-senrito", name:"イオンSENRITO専門館", pref:"大阪", area:"豊中市（千里中央）",
-  src:"nodata", noData:true, url:"https://senrito.aeonmall.jp/access",
-  rate:{unitMin:30, yen:200},
-  weekday:{freeAllDay:false, tiers:[]}, holiday:{freeAllDay:false, tiers:[]},
-  extras:[],
-  notes:[
-    "入庫後の無料時間がなく、買い上げでもらうサービス券で割り引く方式のため、この画面の計算には載せていない。",
-    "SENRITOよみうり駐車場は60分ごと500円（5階は最大2,000円、6階・7階は最大900円）。サービス券は駐車券1枚につき最大4枚。",
-    "第1〜第3立体駐車場は最初の1時間400円・以降30分ごと200円（第3は最大1,200円、第2は上限なし）。サービス券は最大3枚。",
-    "何円の買い上げでサービス券が何枚もらえるかは公式ページに記載がない。"
-  ]
-},
-
-{
-  id:"grand-front-osaka", name:"グランフロント大阪", pref:"大阪", area:"大阪市北区（梅田）",
-  src:"official", url:"https://www.grandfront-osaka.jp/about/parking/",
-  rate:{unitMin:30, yen:300},
-  weekday:{freeAllDay:false, tiers:[[5000,60],[10000,120]]},
-  holiday:{freeAllDay:false, tiers:[[5000,60],[10000,120]]},
-  extras:[],
-  notes:[
-    "無料時間がない。最初の60分が600円で、以降は30分ごと300円（どちらも時間600円）。",
-    "5,000円以上でQR駐車サービス券1時間分、10,000円以上で2時間分。最大料金の記載はない。",
-    "この画面は30分300円で通して計算している。最初の1時間はちょうど600円になるので、実際と一致する。",
-    "約330台と梅田の規模のわりに少ない（南館B2F 約170台・北館B3F 約160台）。南館9:00〜24:00、北館7:00〜24:00。"
-  ]
-},
-{
-  id:"namba-parks", name:"なんばパークス", pref:"大阪", area:"大阪市浪速区（難波）",
-  src:"official", url:"https://nambaparks.com/access",
-  rate:{unitMin:30, yen:500},
-  weekday:{freeAllDay:false, tiers:[[5000,120]], maxFee:1300},
-  holiday:{freeAllDay:false, tiers:[[5000,120]]},
-  extras:[{id:"cinema", label:"なんばパークスシネマを利用", min:60, days:"all"}],
-  notes:[
-    "無料時間がない。5,000円以上の買い上げで2時間無料（全日）。シネマ利用でさらに1時間。",
-    "平日は30分250円、土日祝は30分500円。この画面は単価を1つしか持てないため高いほうの500円で通している。平日は実際より高く出る。",
-    "平日の最大料金は1,300円（7:00〜23:30）。土日祝の最大料金は記載がない。",
-    "地下は23:30〜翌7:00、立体は0:30〜9:00がお泊まり料金0円。深夜をまたぐ場合はこの画面より安くなる。",
-    "隣接するなんばCITY駐車場は30分300円・平日最大1,800円で別体系。"
-  ]
-},
-
-/* ============================== 奈良 ============================== */
-{
-  id:"aeon-yamatokoriyama", name:"イオンモール大和郡山", pref:"奈良", area:"大和郡山市",
-  src:"official", url:"https://yamatokoriyama-aeonmall.com/static/detail/access",
-  rate:{unitMin:60, yen:0},
-  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
-  extras:[],
-  notes:["全駐車場が無料。約4,200台。"]
-},
-{
-  id:"aeon-kashihara", name:"イオンモール橿原", pref:"奈良", area:"橿原市",
-  src:"official", url:"https://kashihara-aeonmall.com/special/lists/chusya_jyoho",
-  rate:{unitMin:60, yen:0},
-  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
-  extras:[],
-  notes:["駐車場・駐輪場とも無料。土日祝は西平面のF区画も開放。"]
-},
-{
-  id:"aeon-tomigaoka", name:"イオンモール奈良登美ヶ丘", pref:"奈良", area:"生駒市",
-  src:"secondary", url:"https://www.aeon.jp/sc/naratomigaoka/access/parking.html",
-  rate:{unitMin:60, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,60],[2000,120],[3000,180],[20000,240]], maxFee:1000},
-  holiday:{freeAllDay:false, tiers:[[0,60],[2000,120],[3000,180],[20000,240]], maxFee:1000},
-  extras:[{id:"app", label:"イオンモールアプリのQRコード提示", min:60, days:"all"}],
-  notes:[
-    "最初の60分無料、以降は60分ごと200円。",
-    "買い物なしで長時間停める場合は入庫後24時間ごとの上限料金あり（平面・4F 1,000円／屋上 800円）。",
-    "上限は停めた場所で違うため、この画面では高いほうの1,000円で頭打ちにしている。屋上なら実際は800円で止まる。",
-    "この上限は二次情報で、公式ページでは確認できていない。上限そのものが無い・違う場合は表示より高くなる。",
-    "段階表は二次情報のため要確認。"
-  ]
-},
-{
-  id:"nara-family", name:"ならファミリー", pref:"奈良", area:"奈良市",
-  src:"secondary", url:"https://www.d-kintetsu.co.jp/nara/access/",
-  rate:{unitMin:30, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,120]]},
-  holiday:{freeAllDay:false, tiers:[[0,120]]},
-  extras:[{id:"flat", label:"平面（北・北第2・北第3・南）に停めた", min:60, days:"all"}],
-  notes:[
-    "ならファミリー利用で最初の2時間無料。平面の北・北第2・北第3・南は最初の3時間無料。",
-    "買い上げ金額による追加サービスの有無は未確認。現地掲示で確認してください。"
-  ]
-},
-
-/* ============================== 京都 ============================== */
-{
-  id:"aeon-katsuragawa", name:"イオンモール京都桂川", pref:"京都", area:"京都市南区",
-  src:"official", url:"https://kyotokatsuragawa.aeonmall.jp/access",
-  rate:{unitMin:20, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,60],[1,120],[50000,1440]]},
-  holiday:{freeAllDay:false, tiers:[[0,60],[1,120],[50000,1440]]},
-  extras:[
-    {id:"twoshops", label:"2店舗以上で買い物した", min:60, days:"all"},
-    {id:"cinema", label:"映画館を利用", min:180, days:"all"},
-    {id:"fitness", label:"フィットネスを利用", min:180, days:"all"}
-  ],
-  notes:[
-    "全日同じ料金。最初の1時間無料、1円以上の買い上げでさらに1時間、2店舗以上でさらに1時間。",
-    "50,000円以上の買い上げで終日無料。この画面では24時間として計算している。",
-    "超過は20分ごと200円と刻みが細かい。最大料金の記載はない。",
-    "映画館とフィットネスは各3時間で、両方使うと6時間。約3,100台。"
-  ]
-},
-{
-  id:"aeon-kyotogojo", name:"イオンモール京都五条", pref:"京都", area:"京都市右京区",
-  src:"secondary", url:"https://kyotogojo.aeonmall.jp/access",
-  rate:{unitMin:30, yen:0}, rateUnknown:true,
-  weekday:{freeAllDay:false, tiers:[[0,180]]},
-  holiday:{freeAllDay:false, tiers:[[0,180]]},
-  extras:[{id:"coupon", label:"土日祝限定クーポン", min:60, days:"holiday"}],
-  notes:[
-    "最初の3時間無料。土日祝は限定クーポンでさらに1時間。",
-    "専門店やイオンスタイル京都五条のレシートをモールインフォメーションに出すと、当日無料になる二次元バーコードがもらえる。",
-    "公式ページは料金表を画像で載せているため未検証。超過料金も分からない。",
-    "1,700台。立体駐車場の高さ制限2.1m。精算はタイムズパーキングの管理。"
-  ]
-},
-{
-  id:"aeon-takanohara", name:"イオンモール高の原", pref:"京都", area:"木津川市",
-  src:"secondary", url:"https://www.aeon.jp/sc/takanohara/access/parking.html",
-  rate:{unitMin:30, yen:0}, rateUnknown:true,
-  weekday:{freeAllDay:false, tiers:[[0,120],[2000,180],[10000,240]], maxFreeMin:420},
-  holiday:{freeAllDay:false, tiers:[[0,120],[2000,180],[10000,240]], maxFreeMin:420},
-  extras:[{id:"cinema", label:"イオンシネマ高の原を利用", min:120, days:"all"}],
-  notes:[
-    "入庫から2時間無料。2,000円以上で合計3時間、10,000円以上で合計4時間。シネマ利用で+2時間、最大7時間。",
-    "屋上駐車場は最大600円で、平日はイオンモールアプリ会員だと400円（ここは公式に記載あり）。停める場所で変わるため上限は入れていない。",
-    "無料時間の段階は二次情報で未検証。超過料金も分からない。現地の掲示で確認してください。",
-    "所在は京都府木津川市だが、奈良市に隣接していて奈良側からの利用も多い。"
-  ]
-},
-{
-  id:"aeon-kyoto", name:"イオンモールKYOTO", pref:"京都", area:"京都市南区（京都駅前）",
-  src:"nodata", noData:true, url:"https://kyoto.aeonmall.jp/access",
-  rate:{unitMin:30, yen:0},
-  weekday:{freeAllDay:false, tiers:[]}, holiday:{freeAllDay:false, tiers:[]},
-  extras:[],
-  notes:[
-    "公式ページの料金表が画像掲載で、入庫後の無料時間も超過料金も読み取れないため計算に載せていない。",
-    "公式に書かれているのは、50,000円以上の買い上げで終日無料、平日の最大料金1,100円、駐車サービスの上限は5時間、約1,100台まで。",
-    "シネマを2本以上見ても割引は5時間が上限。京都駅前で長時間になりやすいので現地の掲示で確認してください。"
-  ]
-},
-{
-  id:"aeon-kitaoji", name:"イオンモール北大路", pref:"京都", area:"京都市北区",
-  src:"official", url:"https://kitaoji.aeonmall.jp/access",
-  rate:{unitMin:30, yen:300},
-  weekday:{freeAllDay:false, tiers:[[1000,60],[2000,120],[7000,180]], maxFee:1500},
-  holiday:{freeAllDay:false, tiers:[[1000,60],[2000,120],[7000,180]], maxFee:1800},
-  extras:[],
-  notes:[
-    "買い物をしないと無料時間がない。1,000円以上で1時間、2,000円以上で2時間、7,000円以上で3時間。",
-    "超過は30分ごと300円。最大は平日1,500円・土日祝1,800円。",
-    "24:00〜翌7:00の泊まり料金は500円。この画面は時間帯を見ていないため深夜は実際と違う。",
-    "地下駐車場476台。営業時間7:00〜23:00。"
-  ]
-},
-
-/* ============================== 和歌山 ============================== */
-{
-  id:"aeon-wakayama", name:"イオンモール和歌山", pref:"和歌山", area:"和歌山市",
-  src:"official", url:"https://wakayama.aeonmall.jp/access",
-  rate:{unitMin:60, yen:0},
-  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
-  extras:[],
-  notes:["すべての駐車場を無料で利用できると公式に明記されている。約3,500台。"]
-},
-{
-  id:"kintetsu-wakayama", name:"近鉄百貨店 和歌山店", pref:"和歌山", area:"和歌山市（JR和歌山駅）",
-  src:"official", url:"https://www.d-kintetsu.co.jp/wakayama/access/",
-  rate:{unitMin:20, yen:100},
-  weekday:{freeAllDay:false, tiers:[[2000,90]]},
-  holiday:{freeAllDay:false, tiers:[[2000,90]]},
-  extras:[],
-  notes:[
-    "買い物をしないと無料時間がない。2,000円以上のレシートで1時間30分無料。",
-    "この画面は和歌山ターミナルビル駐車場（20分ごと100円）で計算している。けやき大通り地下駐車場は30分ごと150円だが、1時間あたりは同じ300円。",
-    "レシートと駐車券を各階の駐車券捺印所か地階食品サービスカウンターに出して証印を受ける。",
-    "どちらの駐車場も24時間営業。最大料金の記載はない。",
-    "シティイン駐車場の割引サービスは終了している。"
-  ]
-},
-{
-  id:"wakayama-mio", name:"和歌山ミオ", pref:"和歌山", area:"和歌山市（JR和歌山駅）",
-  src:"official", url:"https://www.wakayama-mio.co.jp/access",
-  rate:{unitMin:20, yen:100},
-  weekday:{freeAllDay:false, tiers:[[3000,90]]},
-  holiday:{freeAllDay:false, tiers:[[3000,90]]},
-  extras:[],
-  notes:[
-    "買い物をしないと無料時間がない。館内で合計3,000円以上で90分無料。",
-    "近鉄百貨店和歌山店と同じ和歌山ターミナルビル駐車場・けやき大通り地下駐車場を使う。単価はそちらの公式ページの値（20分ごと100円）を入れている。ミオ側のページには金額の記載がない。",
-    "和歌山MIO直営店舗、ホテルグランヴィア和歌山直営店舗、DAISO和歌山ターミナルビル店は割引の対象外。",
-    "近鉄百貨店で2,000円以上買えば1時間30分無料になるので、同じ駅ビルでも条件が違う。"
-  ]
-},
-{
-  id:"palm-city-wakayama", name:"パームシティ和歌山", pref:"和歌山", area:"和歌山市",
-  src:"secondary", url:"https://www.okuwa.net/store/wakayama/263.html",
-  rate:{unitMin:60, yen:0},
-  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
-  extras:[],
-  notes:[
-    "駐車場は無料で2,000台。核店舗はスーパーセンターオークワ。",
-    "公式ページの本文で確認できておらず二次情報のため要確認。"
-  ]
-},
 
 /* ============================== 東京 ============================== */
 {
@@ -1369,6 +719,151 @@ const FACILITIES = [
   notes:["駐車場・駐輪場とも無料と公式に明記されている。"]
 },
 
+/* ============================== 神奈川 ============================== */
+{
+  id:"lalaport-ebina", name:"ららぽーと海老名", pref:"神奈川", area:"海老名市",
+  src:"secondary", url:"https://mitsui-shopping-park.com/lalaport/ebina/access/parking.html",
+  rate:{unitMin:30, yen:0}, rateUnknown:true,
+  weekday:{freeAllDay:false, tiers:[[0,30],[1000,60],[2000,120],[5000,180]]},
+  holiday:{freeAllDay:false, tiers:[[1000,60],[2000,120],[5000,180]]},
+  extras:[],
+  notes:[
+    "平日だけ最初の30分無料。土日祝は買い物をしないと無料時間がない。",
+    "1,000円以上で1時間、2,000円以上で2時間、5,000円以上で3時間。買い物をしても3時間までしか延びない。",
+    "公式ページは料金表を画像で載せているため未検証。超過料金も分からない。",
+    "本館1,800台のほか臨時駐車場（Aエリア108台・Bエリア59台）がある。",
+    "三井ショッピングパークカード会員向けの優待もあるが、内容を確認できていない。"
+  ]
+},
+{
+  id:"markis-minatomirai", name:"MARK IS みなとみらい", pref:"神奈川", area:"横浜市西区（みなとみらい）",
+  src:"official", url:"https://www.mec-markis.jp/mm/access.html",
+  rate:{unitMin:30, yen:280},
+  weekday:{freeAllDay:false, tiers:[[2500,60],[5000,120],[10000,180]], maxFreeMin:180},
+  holiday:{freeAllDay:false, tiers:[[2500,60],[5000,120],[10000,180]], maxFreeMin:180},
+  extras:[
+    {id:"cinema", label:"5階の映画館で当日上映作品を鑑賞", min:180, days:"all"},
+    {id:"mmpoint", label:"みなとみらいポイントアプリを提示", min:60, days:"all"}
+  ],
+  notes:[
+    "無料時間がない。2,500円以上で1時間、5,000円以上で2時間、10,000円以上で3時間。買い上げによる無料は最長3時間まで。",
+    "超過は30分ごと280円。最大料金の記載はない。",
+    "MARK IS の駐車場は900台。ランドマーク地下1,400台、クイーンズスクエア地下1,700台も使えるが、料金体系はそれぞれ異なる。",
+    "MARK IS は8:45〜23:00。ランドマークは24時間（24:00〜6:00は施設利用者のみ）、クイーンズスクエアは7:00〜24:00。"
+  ]
+},
+{
+  id:"tressa-yokohama", name:"トレッサ横浜", pref:"神奈川", area:"横浜市港北区",
+  src:"official", url:"https://www.tressa-yokohama.jp/guide/parking.jsp",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:[
+    "公式に「駐車場 全日無料」と明記されている。買い上げの条件もない。",
+    "北棟1,300台・南棟1,400台の計2,700台。",
+    "南棟は9:30〜22:00。北棟は平日9:30〜23:30、土日9:30〜22:00。"
+  ]
+},
+{
+  id:"outlets-shonan-hiratsuka", name:"THE OUTLETS SHONAN HIRATSUKA", pref:"神奈川", area:"平塚市",
+  src:"secondary", url:"https://www.theoutlets-shonanhiratsuka.jp/",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:[
+    "約3,300台の駐車場が無料。",
+    "公式ページの本文で確認できておらず二次情報のため要確認。",
+    "同じ平塚市にあるららぽーと湘南平塚とは別の施設。"
+  ]
+},
+{
+  id:"grandtree-musashikosugi", name:"グランツリー武蔵小杉", pref:"神奈川", area:"川崎市中原区",
+  src:"secondary", url:"https://www.grandtree-musashikosugi.jp/",
+  rate:{unitMin:30, yen:300},
+  weekday:{freeAllDay:false, tiers:[], maxFee:2000},
+  holiday:{freeAllDay:false, tiers:[]},
+  extras:[],
+  notes:[
+    "30分ごと300円。平日は入庫当日24時までの最大料金2,000円。土日祝の最大料金は未確認。",
+    "買い物やセブンカード・nanacoの提示で1〜3時間の無料サービスがあるが、いくら買えば何時間になるかを確認できていない。",
+    "そのためこの画面は無料時間なしで計算している。実際にはもっと安くなる。現地の掲示で確認してください。"
+  ]
+},
+{
+  id:"lazona-kawasaki", name:"ラゾーナ川崎プラザ", pref:"神奈川", area:"川崎市幸区",
+  src:"secondary", url:"https://mitsui-shopping-park.com/lazona-kawasaki/access/car.html",
+  rate:{unitMin:20, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,30],[1100,90],[3300,150],[33000,210]]},
+  holiday:{freeAllDay:false, tiers:[[0,30],[1100,90],[3300,150],[33000,210]]},
+  extras:[{id:"cinema", label:"109シネマズ川崎で映画を鑑賞", min:120, days:"all"}],
+  notes:[
+    "最初の30分無料。1,100円以上で合計1時間30分、3,300円以上で2時間30分、33,000円以上で3時間30分。",
+    "超過は20分ごと200円と刻みが細かく、川崎駅前なので長時間は高くつく。",
+    "公式ページの本文に料金表が見当たらず二次情報のため要確認。現地の掲示で確認してください。",
+    "サービスを受けるには1階総合案内所（10:00〜21:00）に駐車券とレシートを出す。"
+  ]
+},
+{
+  id:"terrace-mall-shonan", name:"テラスモール湘南", pref:"神奈川", area:"藤沢市（辻堂）",
+  src:"official", url:"https://shonan.terracemall.com/access/",
+  rate:{unitMin:30, yen:150},
+  weekday:{freeAllDay:false, tiers:[[0,60],[1000,120],[3000,180],[10000,240]], maxFreeMin:420},
+  holiday:{freeAllDay:false, tiers:[[0,60],[1000,120],[3000,180],[10000,240]], maxFreeMin:420},
+  extras:[],
+  notes:[
+    "最初の1時間無料。1,000円以上で2時間、3,000円以上で3時間、10,000円以上で4時間。",
+    "他のサービスと併用して最大7時間まで無料。超過は30分ごと150円。",
+    "映画館の駐車サービスがあるという二次情報があるが、無料になる時間が公式ページに明記されていない。",
+    "6:00〜25:00。営業時間外は入庫できないが、出庫は24時間できる。"
+  ]
+},
+{
+  id:"mop-yokohama-bayside", name:"三井アウトレットパーク横浜ベイサイド", pref:"神奈川", area:"横浜市金沢区",
+  src:"official", url:"https://mitsui-shopping-park.com/mop/yokohama/access/",
+  rate:{unitMin:30, yen:250},
+  weekday:{freeAllDay:false, tiers:[[0,120]]},
+  holiday:{freeAllDay:false, tiers:[[0,120]]},
+  extras:[],
+  notes:[
+    "買い物をしなくても2時間無料と公式に明記されている。以降は30分ごと250円。",
+    "プレミアムメダル会員には限定特典があるが、内容が公式ページに明記されていない。",
+    "入庫は9:30〜20:30、出庫は9:30〜22:30。",
+    "高さ制限はPB・P2が2.3m、P1・P3・P4が2.1m。駐車券を失くすと2,000円かかる。"
+  ]
+},
+{
+  id:"aeon-yamato", name:"イオンモール大和", pref:"神奈川", area:"大和市",
+  src:"official", url:"https://yamato.aeonmall.jp/access",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["すべての駐車場を無料で利用できると公式に明記されている。約1,800台。"]
+},
+{
+  id:"aeon-zama", name:"イオンモール座間", pref:"神奈川", area:"座間市",
+  src:"official", url:"https://zama.aeonmall.jp/access",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["すべての駐車場を無料で利用できると公式に明記されている。約2,500台。"]
+},
+{
+  id:"yokohama", name:"ららぽーと横浜", pref:"神奈川", area:"横浜市都筑区",
+  src:"official", url:"https://mitsui-shopping-park.com/lalaport/yokohama/access/parking.html",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:true, tiers:[]},
+  holiday:{freeAllDay:false, tiers:[[1000,60],[2000,120],[3000,180],[4000,240]], maxFreeMin:300},
+  extras:[
+    {id:"point", label:"三井ショッピングパークポイントカード会員", min:60, days:"holiday"},
+    {id:"toho", label:"TOHOシネマズを利用（4時間サービス券）", min:240, days:"all"}
+  ],
+  notes:[
+    "平日は無料。ただし繁忙期などの特定日は平日でも有料になる。",
+    "土日祝は買い物なしだと無料時間がない。1,000円ごとに1時間ずつ延び、4,000円以上で4時間。",
+    "ポイントカード会員は土日祝に+1時間で、会員の上限は5時間。",
+    "約4,600台。平面駐車場の高さ制限2.4m、その他は2.2m。入庫時間は駐車場ごとに違い、出庫は24時間できる。"
+  ]
+},
 /* ============================== 千葉 ============================== */
 {
   id:"tokyo-bay", name:"ららぽーとTOKYO-BAY", pref:"千葉", area:"船橋市",
@@ -1750,151 +1245,644 @@ const FACILITIES = [
   ]
 },
 
-/* ============================== 神奈川 ============================== */
+/* ============================== 大阪 ============================== */
 {
-  id:"lalaport-ebina", name:"ららぽーと海老名", pref:"神奈川", area:"海老名市",
-  src:"secondary", url:"https://mitsui-shopping-park.com/lalaport/ebina/access/parking.html",
-  rate:{unitMin:30, yen:0}, rateUnknown:true,
-  weekday:{freeAllDay:false, tiers:[[0,30],[1000,60],[2000,120],[5000,180]]},
-  holiday:{freeAllDay:false, tiers:[[1000,60],[2000,120],[5000,180]]},
-  extras:[],
-  notes:[
-    "平日だけ最初の30分無料。土日祝は買い物をしないと無料時間がない。",
-    "1,000円以上で1時間、2,000円以上で2時間、5,000円以上で3時間。買い物をしても3時間までしか延びない。",
-    "公式ページは料金表を画像で載せているため未検証。超過料金も分からない。",
-    "本館1,800台のほか臨時駐車場（Aエリア108台・Bエリア59台）がある。",
-    "三井ショッピングパークカード会員向けの優待もあるが、内容を確認できていない。"
-  ]
-},
-{
-  id:"markis-minatomirai", name:"MARK IS みなとみらい", pref:"神奈川", area:"横浜市西区（みなとみらい）",
-  src:"official", url:"https://www.mec-markis.jp/mm/access.html",
-  rate:{unitMin:30, yen:280},
-  weekday:{freeAllDay:false, tiers:[[2500,60],[5000,120],[10000,180]], maxFreeMin:180},
-  holiday:{freeAllDay:false, tiers:[[2500,60],[5000,120],[10000,180]], maxFreeMin:180},
-  extras:[
-    {id:"cinema", label:"5階の映画館で当日上映作品を鑑賞", min:180, days:"all"},
-    {id:"mmpoint", label:"みなとみらいポイントアプリを提示", min:60, days:"all"}
-  ],
-  notes:[
-    "無料時間がない。2,500円以上で1時間、5,000円以上で2時間、10,000円以上で3時間。買い上げによる無料は最長3時間まで。",
-    "超過は30分ごと280円。最大料金の記載はない。",
-    "MARK IS の駐車場は900台。ランドマーク地下1,400台、クイーンズスクエア地下1,700台も使えるが、料金体系はそれぞれ異なる。",
-    "MARK IS は8:45〜23:00。ランドマークは24時間（24:00〜6:00は施設利用者のみ）、クイーンズスクエアは7:00〜24:00。"
-  ]
-},
-{
-  id:"tressa-yokohama", name:"トレッサ横浜", pref:"神奈川", area:"横浜市港北区",
-  src:"official", url:"https://www.tressa-yokohama.jp/guide/parking.jsp",
-  rate:{unitMin:60, yen:0},
-  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
-  extras:[],
-  notes:[
-    "公式に「駐車場 全日無料」と明記されている。買い上げの条件もない。",
-    "北棟1,300台・南棟1,400台の計2,700台。",
-    "南棟は9:30〜22:00。北棟は平日9:30〜23:30、土日9:30〜22:00。"
-  ]
-},
-{
-  id:"outlets-shonan-hiratsuka", name:"THE OUTLETS SHONAN HIRATSUKA", pref:"神奈川", area:"平塚市",
-  src:"secondary", url:"https://www.theoutlets-shonanhiratsuka.jp/",
-  rate:{unitMin:60, yen:0},
-  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
-  extras:[],
-  notes:[
-    "約3,300台の駐車場が無料。",
-    "公式ページの本文で確認できておらず二次情報のため要確認。",
-    "同じ平塚市にあるららぽーと湘南平塚とは別の施設。"
-  ]
-},
-{
-  id:"grandtree-musashikosugi", name:"グランツリー武蔵小杉", pref:"神奈川", area:"川崎市中原区",
-  src:"secondary", url:"https://www.grandtree-musashikosugi.jp/",
-  rate:{unitMin:30, yen:300},
-  weekday:{freeAllDay:false, tiers:[], maxFee:2000},
-  holiday:{freeAllDay:false, tiers:[]},
-  extras:[],
-  notes:[
-    "30分ごと300円。平日は入庫当日24時までの最大料金2,000円。土日祝の最大料金は未確認。",
-    "買い物やセブンカード・nanacoの提示で1〜3時間の無料サービスがあるが、いくら買えば何時間になるかを確認できていない。",
-    "そのためこの画面は無料時間なしで計算している。実際にはもっと安くなる。現地の掲示で確認してください。"
-  ]
-},
-{
-  id:"lazona-kawasaki", name:"ラゾーナ川崎プラザ", pref:"神奈川", area:"川崎市幸区",
-  src:"secondary", url:"https://mitsui-shopping-park.com/lazona-kawasaki/access/car.html",
-  rate:{unitMin:20, yen:200},
-  weekday:{freeAllDay:false, tiers:[[0,30],[1100,90],[3300,150],[33000,210]]},
-  holiday:{freeAllDay:false, tiers:[[0,30],[1100,90],[3300,150],[33000,210]]},
-  extras:[{id:"cinema", label:"109シネマズ川崎で映画を鑑賞", min:120, days:"all"}],
-  notes:[
-    "最初の30分無料。1,100円以上で合計1時間30分、3,300円以上で2時間30分、33,000円以上で3時間30分。",
-    "超過は20分ごと200円と刻みが細かく、川崎駅前なので長時間は高くつく。",
-    "公式ページの本文に料金表が見当たらず二次情報のため要確認。現地の掲示で確認してください。",
-    "サービスを受けるには1階総合案内所（10:00〜21:00）に駐車券とレシートを出す。"
-  ]
-},
-{
-  id:"terrace-mall-shonan", name:"テラスモール湘南", pref:"神奈川", area:"藤沢市（辻堂）",
-  src:"official", url:"https://shonan.terracemall.com/access/",
-  rate:{unitMin:30, yen:150},
-  weekday:{freeAllDay:false, tiers:[[0,60],[1000,120],[3000,180],[10000,240]], maxFreeMin:420},
-  holiday:{freeAllDay:false, tiers:[[0,60],[1000,120],[3000,180],[10000,240]], maxFreeMin:420},
-  extras:[],
-  notes:[
-    "最初の1時間無料。1,000円以上で2時間、3,000円以上で3時間、10,000円以上で4時間。",
-    "他のサービスと併用して最大7時間まで無料。超過は30分ごと150円。",
-    "映画館の駐車サービスがあるという二次情報があるが、無料になる時間が公式ページに明記されていない。",
-    "6:00〜25:00。営業時間外は入庫できないが、出庫は24時間できる。"
-  ]
-},
-{
-  id:"mop-yokohama-bayside", name:"三井アウトレットパーク横浜ベイサイド", pref:"神奈川", area:"横浜市金沢区",
-  src:"official", url:"https://mitsui-shopping-park.com/mop/yokohama/access/",
-  rate:{unitMin:30, yen:250},
-  weekday:{freeAllDay:false, tiers:[[0,120]]},
-  holiday:{freeAllDay:false, tiers:[[0,120]]},
-  extras:[],
-  notes:[
-    "買い物をしなくても2時間無料と公式に明記されている。以降は30分ごと250円。",
-    "プレミアムメダル会員には限定特典があるが、内容が公式ページに明記されていない。",
-    "入庫は9:30〜20:30、出庫は9:30〜22:30。",
-    "高さ制限はPB・P2が2.3m、P1・P3・P4が2.1m。駐車券を失くすと2,000円かかる。"
-  ]
-},
-{
-  id:"aeon-yamato", name:"イオンモール大和", pref:"神奈川", area:"大和市",
-  src:"official", url:"https://yamato.aeonmall.jp/access",
-  rate:{unitMin:60, yen:0},
-  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
-  extras:[],
-  notes:["すべての駐車場を無料で利用できると公式に明記されている。約1,800台。"]
-},
-{
-  id:"aeon-zama", name:"イオンモール座間", pref:"神奈川", area:"座間市",
-  src:"official", url:"https://zama.aeonmall.jp/access",
-  rate:{unitMin:60, yen:0},
-  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
-  extras:[],
-  notes:["すべての駐車場を無料で利用できると公式に明記されている。約2,500台。"]
-},
-{
-  id:"yokohama", name:"ららぽーと横浜", pref:"神奈川", area:"横浜市都筑区",
-  src:"official", url:"https://mitsui-shopping-park.com/lalaport/yokohama/access/parking.html",
+  id:"expocity", name:"ららぽーとEXPOCITY", pref:"大阪", area:"吹田市",
+  src:"official", url:"https://mitsui-shopping-park.com/lalaport/expocity/access/parking.html",
   rate:{unitMin:30, yen:200},
   weekday:{freeAllDay:true, tiers:[]},
-  holiday:{freeAllDay:false, tiers:[[1000,60],[2000,120],[3000,180],[4000,240]], maxFreeMin:300},
+  holiday:{freeAllDay:false, tiers:[[0,60],[2000,120],[5000,180],[10000,240]], maxFreeMin:300},
   extras:[
-    {id:"point", label:"三井ショッピングパークポイントカード会員", min:60, days:"holiday"},
-    {id:"toho", label:"TOHOシネマズを利用（4時間サービス券）", min:240, days:"all"}
+    {id:"card", label:"三井ショッピングパークカード／ポイントカード", min:60, days:"all"},
+    {id:"cinema", label:"109シネマズ大阪エキスポシティ", min:180, days:"all"},
+    {id:"ent", label:"NIFREL・VS PARK・ムラサキパーク", min:120, days:"all"}
   ],
   notes:[
-    "平日は無料。ただし繁忙期などの特定日は平日でも有料になる。",
-    "土日祝は買い物なしだと無料時間がない。1,000円ごとに1時間ずつ延び、4,000円以上で4時間。",
-    "ポイントカード会員は土日祝に+1時間で、会員の上限は5時間。",
-    "約4,600台。平面駐車場の高さ制限2.4m、その他は2.2m。入庫時間は駐車場ごとに違い、出庫は24時間できる。"
+    "平日は買い物なしでも終日無料。土日祝は最大5時間まで。",
+    "入庫は8:00〜26:00、高さ制限2.3m。",
+    "万博記念公園側の駐車場に停めるとサービス対象外。",
+    "お盆・年末年始・繁忙期は平日でも土日祝料金になることがある。"
   ]
-}
+},
+{
+  id:"kadoma", name:"ららぽーと門真／三井アウトレットパーク大阪門真", pref:"大阪", area:"門真市",
+  src:"official", url:"https://mitsui-shopping-park.com/lalaport/kadoma/access/parking.html",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120],[2000,180],[5000,240],[10000,300]], maxFreeMin:540,
+           member:{freeAllDay:true, tiers:[]}},
+  holiday:{freeAllDay:false, tiers:[[0,60],[2000,120],[5000,180],[10000,240]], maxFreeMin:480,
+           member:{freeAllDay:false, tiers:[[0,120],[2000,180],[5000,240],[10000,300]]}},
+  extras:[
+    {id:"member", label:"三井ショッピングパークポイント会員", min:0, days:"all", isMember:true},
+    {id:"cinema", label:"TOHOシネマズ ららぽーと門真", min:180, days:"all"}
+  ],
+  notes:[
+    "ポイント会員は平日なら買い物なしでも終日無料。",
+    "コストコ門真倉庫店のレシートは対象外。",
+    "利用時間 8:00〜24:00、高さ制限2.3m（超える車は平面へ）。",
+    "車番認証のチケットレス方式。"
+  ]
+},
+{
+  id:"sakai", name:"ららぽーと堺", pref:"大阪", area:"堺市美原区",
+  src:"official", url:"https://mitsui-shopping-park.com/lalaport/sakai/access/parking.html",
+  rate:{unitMin:30, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["終日無料。買い物金額の条件なし。"]
+},
+{
+  id:"abeno-qs", name:"あべのキューズモール", pref:"大阪", area:"大阪市阿倍野区",
+  src:"secondary", url:"https://qs-mall.jp/abeno/access/",
+  rate:{unitMin:30, yen:350},
+  weekday:{freeAllDay:false, tiers:[[0,30],[1000,90],[5000,150],[20000,210]], maxFreeMin:420},
+  holiday:{freeAllDay:false, tiers:[[0,30],[1000,90],[5000,150],[20000,210]], maxFreeMin:420},
+  extras:[
+    {id:"friend", label:"キューズモールフレンド会員", min:30, days:"all"},
+    {id:"iy", label:"イトーヨーカドーで1,000円以上（別枠）", min:60, days:"all"}
+  ],
+  notes:[
+    "キューズモール各店の買い上げは合算されるが、イトーヨーカドーとは合算されない（別枠で加算）。",
+    "利用時間 8:45〜23:30。",
+    "超過料金は30分350円（300円との情報もあり要確認）。",
+    "インフォメーションでは駐車サービスを受け付けていない。毎回レジで駐車券を出すこと。"
+  ]
+},
+{
+  id:"minoh-qs", name:"みのおキューズモール", pref:"大阪", area:"箕面市",
+  src:"official", url:"https://qs-mall.jp/minoh/access/",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120],[1,180],[1000,240],[5000,300],[20000,360]], maxFreeMin:480, maxFee:1000},
+  holiday:{freeAllDay:false, tiers:[[0,60],[1,120],[1000,180],[5000,240],[20000,300]], maxFreeMin:540},
+  extras:[
+    {id:"cinema-wd", label:"109シネマズ箕面を利用", min:60, days:"weekday"},
+    {id:"cinema-hd", label:"109シネマズ箕面を利用", min:120, days:"holiday"},
+    {id:"cospa-wd", label:"コ・ス・パ箕面萱野24を利用", min:60, days:"weekday"},
+    {id:"cospa-hd", label:"コ・ス・パ箕面萱野24を利用", min:120, days:"holiday"}
+  ],
+  notes:[
+    "平日は最初の2時間、土日祝は最初の1時間無料。買い上げ分はこれに加算される（1円以上+1時間／1,000円以上+2時間／5,000円以上+3時間／20,000円以上+4時間）。",
+    "最大は平日8時間・土日祝9時間。以降は30分ごと200円。",
+    "平日（土日祝を除く）は当日1日最大1,000円。1円以上の買い上げで最大800円に下がる。土日祝の最大料金は記載なし。",
+    "この画面の上限は安全側に倒して平日1,000円で頭打ちにしている。買い物をしていれば実際は800円で止まる。",
+    "映画とジムの無料時間は平日1時間・土日祝2時間で違う。曜日の切り替えで表示も入れ替わる。",
+    "利用時間 EAST・WEST 7:30〜24:30、CENTER 5:00〜24:30。高さ制限 EAST 2.2m／WEST 2.1m／CENTER 2.3m。"
+  ]
+},
+{
+  id:"morinomiya-qs", name:"もりのみやキューズモールBASE", pref:"大阪", area:"大阪市中央区",
+  src:"official", url:"https://qs-mall.jp/morinomiya/access/",
+  rate:{unitMin:30, yen:300},
+  weekday:{freeAllDay:false, tiers:[[0,30],[1000,60],[5000,120],[20000,180]]},
+  holiday:{freeAllDay:false, tiers:[[0,30],[1000,60],[5000,120],[20000,180]]},
+  extras:[{id:"friend", label:"キューズモールフレンズ会員", min:30, days:"all"}],
+  notes:[
+    "最初の30分無料。1,000円以上で1時間、5,000円以上で2時間、20,000円以上で3時間。以降は30分ごと300円。",
+    "公式は会員分を足して最大7時間無料としているが、記載の内訳では3時間30分にしかならない。現地の掲示で確認してください。",
+    "最大料金の上限がない日程があると公式に注意書きがある。",
+    "利用時間 WEST 9:30〜24:00、EAST 8:30〜23:30。高さ制限は2.3m。"
+  ]
+},
+{
+  id:"aeon-shijonawate", name:"イオンモール四條畷", pref:"大阪", area:"四條畷市",
+  src:"secondary", url:"https://shijonawate.aeonmall.jp/",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["大阪府内のイオンモールでは珍しく無料駐車場（約4,250台）。","公式ページで最新の記載を確認してください。"]
+},
+{
+  id:"aeon-domecity", name:"イオンモール大阪ドームシティ", pref:"大阪", area:"大阪市西区",
+  src:"secondary", url:"https://osakadomecity.aeonmall.jp/",
+  rate:{unitMin:20, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120],[1000,240],[5000,300]], maxFee:700},
+  holiday:{freeAllDay:false, tiers:[[0,120],[1000,240],[5000,300]], maxFee:700},
+  extras:[],
+  special:{label:"京セラドームのイベント・野球開催日", rate:{unitMin:20, yen:200},
+           tiers:[[0,120]], noExtras:true, maxFee:2600},
+  notes:[
+    "京セラドーム大阪でイベント・コンサート・野球がある日は特別日となり、条件も上限料金も変わる。",
+    "通常日は24時間最大700円、イベント日は24時間最大2,600円との情報あり。",
+    "この上限は二次情報で、公式ページでは確認できていない。上限があるものとして計算しているので、上限そのものが無い・違う場合は表示より高くなる。",
+    "段階表・料金とも二次情報のため要確認。金額が大きい日は必ず現地掲示を見てください。"
+  ]
+},
+{
+  id:"aeon-sakaikitahanada", name:"イオンモール堺北花田", pref:"大阪", area:"堺市北区",
+  src:"nodata", noData:true, url:"https://sakaikitahanada.aeonmall.jp/access",
+  rate:{unitMin:30, yen:0},
+  weekday:{freeAllDay:false, tiers:[]}, holiday:{freeAllDay:false, tiers:[]},
+  extras:[],
+  notes:["有料の駐車場だが、無料時間と買い上げ条件を未取得。公式ページで確認してください。"]
+},
+
+{
+  id:"aeon-ibaraki", name:"イオンモール茨木", pref:"大阪", area:"茨木市",
+  src:"secondary", url:"https://www.aeon.jp/sc/ibaraki/access/parking.html",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120],[2000,240]], maxFreeMin:420},
+  holiday:{freeAllDay:false, tiers:[[0,120],[2000,240]], maxFreeMin:420},
+  extras:[
+    {id:"cinema", label:"イオンシネマ茨木を利用", min:180, days:"all"},
+    {id:"konami", label:"コナミスポーツクラブを利用", min:180, days:"all"}
+  ],
+  notes:[
+    "入庫から2時間無料。2,000円以上の買い上げで合計4時間。最大7時間まで。",
+    "公式ページは料金表を画像で載せているため本文から検証できていない。現地の掲示で確認してください。",
+    "16時以降に入庫すると当日24:30までの出庫で無料になるキャンペーンを実施中（当面の間）。この計算には反映していない。",
+    "2,500台。高さ制限2.1m。"
+  ]
+},
+{
+  id:"aeon-dainichi", name:"イオンモール大日", pref:"大阪", area:"守口市",
+  src:"secondary", url:"https://www.aeon.jp/sc/dainichi/access/parking.html",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120],[2000,240],[5000,300]], maxFreeMin:420},
+  holiday:{freeAllDay:false, tiers:[[0,120],[2000,240],[5000,300]], maxFreeMin:420},
+  extras:[{id:"cinema", label:"イオンシネマ大日を利用", min:120, days:"all"}],
+  special:{label:"大日WEEK・20日30日のお客さま感謝デー", freeAllDay:true, tiers:[]},
+  notes:[
+    "曜日を問わず入庫から2時間無料。2,000円以上で合計4時間、5,000円以上で合計5時間。以降は30分ごと200円。",
+    "公式ページは料金表を画像で載せているため本文から検証できていない。現地の掲示で確認してください。",
+    "大日WEEKと20日・30日のお客さま感謝デーは全員無料（公式の駐車場おトクカレンダーに記載）。",
+    "2025年2月21日から車両ナンバー認識方式に変わり、精算時にナンバー下4桁を入力する。"
+  ]
+},
+{
+  id:"aeon-tsurumiryokuchi", name:"イオンモール鶴見緑地", pref:"大阪", area:"大阪市鶴見区",
+  src:"official", url:"https://tsurumiryokuchi.aeonmall.jp/access",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120],[5000,180]], maxFee:500},
+  holiday:{freeAllDay:false, tiers:[[0,120]]},
+  extras:[{id:"app", label:"イオンモールアプリのクーポン提示", min:60, days:"all"}],
+  notes:[
+    "最初の2時間無料。5,000円以上で+1時間は平日限定で、土日祝は買い上げによる延長がない。",
+    "平日（月〜金 6:30〜23:00）は最大500円。土日祝と特定日は最大料金の適用がない。",
+    "特定日は8/13〜8/15と12/30〜1/3。",
+    "2023年10月20日から車両ナンバー認識方式。2,170台。",
+    "1階は6:30〜23:00。2階〜屋上は平日8:45〜23:00・土日祝8:30〜23:00（4階・7階・屋上は平日閉鎖）。"
+  ]
+},
+{
+  id:"aeon-sakaiteppocho", name:"イオンモール堺鉄砲町", pref:"大阪", area:"堺市堺区",
+  src:"official", url:"https://sakaiteppocho.aeonmall.jp/access",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,180],[3000,240]]},
+  holiday:{freeAllDay:false, tiers:[[0,120],[3000,180]]},
+  extras:[{id:"app", label:"イオンモールアプリのQRクーポン提示", min:60, days:"all"}],
+  notes:[
+    "平日は3時間、土日祝は2時間無料。3,000円以上の買い上げで+1時間。以降は30分ごと200円。",
+    "最大料金は公式ページに記載がない。長時間停める場合は現地で確認してください。",
+    "利用時間 8:30〜23:30。約2,300台。"
+  ]
+},
+{
+  id:"aeon-rinkusennan", name:"イオンモールりんくう泉南", pref:"大阪", area:"泉南市",
+  src:"official", url:"https://rinkusennan.aeonmall.jp/access",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["すべての駐車場を無料で利用できると公式に明記されている。約4,300台。"]
+},
+{
+  id:"aeon-hineno", name:"イオンモール日根野", pref:"大阪", area:"泉佐野市",
+  src:"nodata", noData:true, url:"https://www.aeon.jp/sc/hineno/access/parking.html",
+  rate:{unitMin:30, yen:0},
+  weekday:{freeAllDay:false, tiers:[]}, holiday:{freeAllDay:false, tiers:[]},
+  extras:[],
+  notes:[
+    "公式ページには約1,400台とあるだけで、無料か有料かも料金も書かれていない。",
+    "入庫後3時間無料で買い上げによる延長はない、という二次情報があるが未確認。",
+    "駐車場の管理は外部会社（ピットデザイン）。"
+  ]
+},
+{
+  id:"aeon-senrito", name:"イオンSENRITO専門館", pref:"大阪", area:"豊中市（千里中央）",
+  src:"nodata", noData:true, url:"https://senrito.aeonmall.jp/access",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[]}, holiday:{freeAllDay:false, tiers:[]},
+  extras:[],
+  notes:[
+    "入庫後の無料時間がなく、買い上げでもらうサービス券で割り引く方式のため、この画面の計算には載せていない。",
+    "SENRITOよみうり駐車場は60分ごと500円（5階は最大2,000円、6階・7階は最大900円）。サービス券は駐車券1枚につき最大4枚。",
+    "第1〜第3立体駐車場は最初の1時間400円・以降30分ごと200円（第3は最大1,200円、第2は上限なし）。サービス券は最大3枚。",
+    "何円の買い上げでサービス券が何枚もらえるかは公式ページに記載がない。"
+  ]
+},
+
+{
+  id:"grand-front-osaka", name:"グランフロント大阪", pref:"大阪", area:"大阪市北区（梅田）",
+  src:"official", url:"https://www.grandfront-osaka.jp/about/parking/",
+  rate:{unitMin:30, yen:300},
+  weekday:{freeAllDay:false, tiers:[[5000,60],[10000,120]]},
+  holiday:{freeAllDay:false, tiers:[[5000,60],[10000,120]]},
+  extras:[],
+  notes:[
+    "無料時間がない。最初の60分が600円で、以降は30分ごと300円（どちらも時間600円）。",
+    "5,000円以上でQR駐車サービス券1時間分、10,000円以上で2時間分。最大料金の記載はない。",
+    "この画面は30分300円で通して計算している。最初の1時間はちょうど600円になるので、実際と一致する。",
+    "約330台と梅田の規模のわりに少ない（南館B2F 約170台・北館B3F 約160台）。南館9:00〜24:00、北館7:00〜24:00。"
+  ]
+},
+{
+  id:"namba-parks", name:"なんばパークス", pref:"大阪", area:"大阪市浪速区（難波）",
+  src:"official", url:"https://nambaparks.com/access",
+  rate:{unitMin:30, yen:500},
+  weekday:{freeAllDay:false, tiers:[[5000,120]], maxFee:1300},
+  holiday:{freeAllDay:false, tiers:[[5000,120]]},
+  extras:[{id:"cinema", label:"なんばパークスシネマを利用", min:60, days:"all"}],
+  notes:[
+    "無料時間がない。5,000円以上の買い上げで2時間無料（全日）。シネマ利用でさらに1時間。",
+    "平日は30分250円、土日祝は30分500円。この画面は単価を1つしか持てないため高いほうの500円で通している。平日は実際より高く出る。",
+    "平日の最大料金は1,300円（7:00〜23:30）。土日祝の最大料金は記載がない。",
+    "地下は23:30〜翌7:00、立体は0:30〜9:00がお泊まり料金0円。深夜をまたぐ場合はこの画面より安くなる。",
+    "隣接するなんばCITY駐車場は30分300円・平日最大1,800円で別体系。"
+  ]
+},
+
+/* ============================== 兵庫 ============================== */
+{
+  id:"koshien", name:"ららぽーと甲子園", pref:"兵庫", area:"西宮市",
+  src:"secondary", url:"https://mitsui-shopping-park.com/lalaport/koshien/access/parking.html",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120],[2000,180]]},
+  holiday:{freeAllDay:false, tiers:[[0,120],[2000,180]]},
+  extras:[{id:"card", label:"三井ショッピングパークカード／アプリ", min:60, days:"all"}],
+  notes:[
+    "買い上げの段階表は公式サイトが画像掲載のため未検証。現地の掲示で確認してください。",
+    "野球開催日は長時間駐車に特別料金6,000円が加算される。キッザニア利用時など免除条件あり。",
+    "入庫は9:30〜（キッザニア第1部利用時のみA駐車場が7:00〜）。高さ制限2.2m。"
+  ]
+},
+{
+  id:"nishinomiya-gardens", name:"阪急西宮ガーデンズ", pref:"兵庫", area:"西宮市",
+  src:"official", url:"https://nishinomiya-gardens.com/access/car",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,60],[3000,120],[10000,180]]},
+  holiday:{freeAllDay:false, tiers:[[0,60],[3000,120],[10000,180]]},
+  extras:[
+    {id:"annex", label:"別館駐車場に停めた（最初の無料が2時間）", min:60, days:"all"},
+    {id:"toho", label:"TOHOシネマズ西宮OS（映画1本）", min:120, days:"all"},
+    {id:"odekake", label:"阪急阪神おでかけカード（平日のみ）", min:60, days:"weekday"}
+  ],
+  notes:[
+    "本館（百貨店・中央・南）は最初の1時間、別館は最初の2時間無料。",
+    "買い上げは西宮阪急・イズミヤを含めて合算できる。",
+    "西宮阪急・イズミヤ分は各サービスカウンターで手続きが必要。インフォメーションでは不可。",
+    "平日16時以降が無料になるキャンペーンを実施する月がある。"
+  ]
+},
+{
+  id:"acta-nishinomiya", name:"アクタ西宮", pref:"兵庫", area:"西宮市（西宮北口）",
+  src:"secondary", url:"https://actafan.com/parking.html",
+  rate:{unitMin:30, yen:150},
+  weekday:{freeAllDay:false, tiers:[[1000,30],[2000,60],[3000,120]], maxFee:1200},
+  holiday:{freeAllDay:false, tiers:[[1000,30],[2000,60],[3000,120]], maxFee:1200},
+  extras:[],
+  notes:[
+    "買い物をしないと無料時間がない。1,000円以上で30分、2,000円以上で1時間、3,000円以上で2時間。対象店とコープ食彩館の合算ができる。",
+    "料金は西宮市立北口駐車場として市の公式ページで確認（30分150円、7:00〜24:00の当日最大1,200円、587台）。買い上げの段階はACTA公式が画像掲載のため未検証。",
+    "24:00〜7:00は一律700円。この時間帯は途中の入出庫ができない。",
+    "東館・西館の地下1階にある割引認証機で、各店のQRコード付きレシートを読ませる。"
+  ]
+},
+{
+  id:"corowa-koshien", name:"コロワ甲子園", pref:"兵庫", area:"西宮市（甲子園）",
+  src:"official", url:"https://corowa.jp/parking/",
+  rate:{unitMin:30, yen:500},
+  weekday:{freeAllDay:false, tiers:[[2000,120],[10000,240]], maxFee:500},
+  holiday:{freeAllDay:false, tiers:[[2000,120],[10000,240]], maxFee:500},
+  extras:[],
+  special:{label:"特定日（甲子園のイベント開催日など）",
+           tiers:[[2000,120],[10000,240]], maxFee:5000},
+  notes:[
+    "買い物をしないと無料時間がない。2,000円以上で最大2時間、10,000円以上で最大4時間無料。複数店舗の合算ができる。",
+    "超過は30分ごと500円。上限は8:00〜23:00の間だけで、通常日500円・特定日5,000円。",
+    "23:00〜翌8:00は30分ごと500円で上限の適用がない。この画面は入庫からの経過時間だけで計算するので、深夜をまたぐと実際と違う。",
+    "2026年8月の特定日は5〜23日と28〜30日。特定日カレンダーは公式ページで確認してください。",
+    "駐車場の営業は8:00〜23:00。23:00以降は入出庫できない。",
+    "駐車サービスを受けるには駐車券が必要。イオンでの買い上げ分はイオンサービスカウンターで対応。",
+    "商品券・図書カード・POSAカードの購入と電子マネーチャージは対象外。一部対象外店舗あり。",
+    "事前精算後に30分以上たってから出庫すると追加料金がかかる場合がある。"
+  ]
+},
+{
+  id:"ebista-nishinomiya", name:"エビスタ西宮", pref:"兵庫", area:"西宮市（阪神西宮）",
+  src:"official", url:"https://www.ebista.com/access/",
+  rate:{unitMin:60, yen:300},
+  weekday:{freeAllDay:false, tiers:[[2000,60],[4000,120]], maxFreeMin:240, maxFee:1500},
+  holiday:{freeAllDay:false, tiers:[[2000,60],[4000,120]], maxFreeMin:240},
+  extras:[{id:"odekake", label:"阪急阪神おでかけアプリ会員（3,000円以上）", min:60, days:"all"}],
+  notes:[
+    "買い物をしないと無料時間がない。2,000円以上で1時間、4,000円以上で2時間。エビスタ専門街と阪神・にしのみやで共通。",
+    "各種サービスを合算しても1回の駐車につき最大4時間まで。",
+    "阪神・にしのみやの1階食料品と2階アフタヌーンティー・ティールームは合わせて1店舗扱い。2階デコホーム・N+・ダイソー&スタンダードプロダクツは各1店舗扱い。",
+    "平日の1日最大料金は1,500円。土日祝の最大料金は記載がない。",
+    "営業時間 6:00〜25:00。520台。"
+  ]
+},
+{
+  id:"frente-nishinomiya", name:"フレンテ西宮", pref:"兵庫", area:"西宮市（JR西宮）",
+  src:"official", url:"https://www.frente-nishinomiya.com/facility/",
+  rate:{unitMin:20, yen:100},
+  weekday:{freeAllDay:false, tiers:[[1000,120],[10000,180]], maxFee:900},
+  holiday:{freeAllDay:false, tiers:[[1000,120],[10000,180]], maxFee:900},
+  extras:[],
+  notes:[
+    "買い物をしないと無料時間がない。1,000円以上で2時間、10,000円以上で3時間。",
+    "全日20分ごと100円。入庫から24時間の最大は900円。",
+    "営業時間 6:00〜25:00。500台。"
+  ]
+},
+{
+  id:"umie", name:"神戸ハーバーランドumie 立体駐車場", pref:"兵庫", area:"神戸市中央区（ハーバーランド）",
+  src:"official", url:"https://umie.jp/static-pages/access",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,180],[2000,240]]},
+  holiday:{freeAllDay:false, tiers:[[0,120],[2000,180]]},
+  extras:[
+    {id:"app", label:"umieメンバーズアプリ提示", min:60, days:"all"},
+    {id:"cinema", label:"OSシネマズ神戸ハーバーランド利用", min:120, days:"all"}
+  ],
+  notes:[
+    "対象はumie立体・地下・モザイク駐車場。30分ごとに200円（無料サービス時間の経過後）。",
+    "平日は3時間、土日祝は2時間無料。2,000円以上の買上げでさらに1時間無料。",
+    "umieメンバーズアプリ提示でさらに1時間、OSシネマズ利用でさらに2時間無料。最大無料は平日7時間・土日祝6時間。",
+    "神戸アンパンマンこどもミュージアム＆モール、バイキンひみつ基地は駐車サービス対象外。立体駐車場は7:30〜24:30（入庫22:30まで）。"
+  ]
+},
+{
+  id:"amagasaki-qs", name:"あまがさきキューズモール", pref:"兵庫", area:"尼崎市",
+  src:"official", url:"https://qs-mall.jp/amagasaki/access/",
+  rate:{unitMin:60, yen:400},
+  weekday:{freeAllDay:false, tiers:[[0,60],[4000,120]], maxFreeMin:420, maxFee:1100},
+  holiday:{freeAllDay:false, tiers:[[0,60],[4000,120]], maxFreeMin:420, maxFee:1100},
+  extras:[
+    {id:"friend", label:"キューズモールフレンズ会員", min:60, days:"all"},
+    {id:"movix", label:"MOVIXあまがさき利用", min:120, days:"all"},
+    {id:"central", label:"セントラルスポーツ利用", min:60, days:"all"}
+  ],
+  notes:[
+    "最初の1時間無料。4,000円以上の買い上げで2時間になる。以降は60分ごと400円。",
+    "24時間の最大料金は1,100円。駐車サービスが付くと最大800円。",
+    "この画面の上限は安全側に倒して1,100円で頭打ちにしている。サービスが付いていれば実際は800円で止まる。",
+    "公式は併用で最大7時間無料としているが、記載の内訳を足すと6時間にしかならない。現地の掲示で確認してください。",
+    "利用時間 8:30〜25:30（4階は10:00〜）。約1,400台。平日は6階・7階を閉鎖。"
+  ]
+},
+{
+  id:"aeon-kobeminami", name:"イオンモール神戸南", pref:"兵庫", area:"神戸市兵庫区",
+  src:"official", url:"https://kobeminami.aeonmall.jp/access",
+  rate:{unitMin:60, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,180]], maxFreeMin:240, maxFee:800},
+  holiday:{freeAllDay:false, tiers:[[0,180]], maxFreeMin:240, maxFee:800},
+  extras:[{id:"app", label:"イオンモールアプリ会員", min:60, days:"all"}],
+  special:{label:"特定日（混雑日・イベント日）", rate:{unitMin:30, yen:500},
+           tiers:[[0,180]], maxFreeMin:180, noExtras:true},
+  notes:[
+    "買い上げ金額による段階はなく、誰でも入庫後3時間無料。3時間以内なら精算操作も不要。",
+    "通常日は24時間最大800円。特定日は最大料金の適用がなく、30分500円と高い。",
+    "アプリ会員の追加1時間は特定日には付かない。",
+    "カメラで車のナンバーを読むスマートパーク方式。"
+  ]
+},
+{
+  id:"aeon-itami", name:"イオンモール伊丹", pref:"兵庫", area:"伊丹市",
+  src:"official", url:"https://itami.aeonmall.jp/access",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120]], maxFreeMin:420},
+  holiday:{freeAllDay:false, tiers:[[0,60]], maxFreeMin:360},
+  extras:[
+    {id:"app", label:"イオンモールアプリの1時間無料クーポン", min:60, days:"all"},
+    {id:"qr", label:"5,000円以上でもらえるQR駐車サービス券", min:60, days:"all"},
+    {id:"cinema", label:"TOHOシネマズ伊丹（割引券発行機）", min:120, days:"all"}
+  ],
+  notes:[
+    "平日は2時間、土日祝は1時間まで精算不要。JR伊丹駅直結。",
+    "QRサービス券とシネマ割引の無料時間は公式に明記がなく未確認。現地で確認してください。",
+    "電子マネーWAONへのチャージはQRサービス券の対象外。",
+    "2024年7月から駐車券を廃止し車両ナンバー認識に。帰りは館内の事前精算機で。",
+    "駐車場開放は7:45〜0:30。"
+  ]
+},
+{
+  id:"aeon-itamikoya", name:"イオンモール伊丹昆陽", pref:"兵庫", area:"伊丹市",
+  src:"secondary", url:"https://www.aeon.jp/sc/itamikoya/access/parking.html",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["駐車場は無料（駐輪場は有料）。利用時間8:30〜23:00。","無料であることは公式ページで明示されていないため要確認。"]
+},
+{
+  id:"aeon-kobekita", name:"イオンモール神戸北", pref:"兵庫", area:"神戸市北区",
+  src:"secondary", url:"https://kobekita.aeonmall.jp/",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["無料とみられるが公式ページで未確認。現地で確認してください。","約4,000台。"]
+},
+{
+  id:"aeon-himeji-river", name:"イオンモール姫路リバーシティー", pref:"兵庫", area:"姫路市",
+  src:"secondary", url:"https://www.aeon.jp/sc/himeji-rivercity/access/parking.html",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["無料とみられるが公式ページに料金表の記載がなく要確認。","立体駐車場は高さ制限2.1m。"]
+},
+{
+  id:"aeon-himeji-otsu", name:"イオンモール姫路大津", pref:"兵庫", area:"姫路市",
+  src:"secondary", url:"https://www.aeon.jp/sc/himejiootsu/access/",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["無料とみられるが公式ページで未確認。約2,600台。"]
+},
+{
+  id:"aeon-kasai", name:"イオンモール加西北条", pref:"兵庫", area:"加西市",
+  src:"secondary", url:"https://kasaihojo.aeonmall.jp/",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["無料とみられるが公式ページで未確認。駐車場の利用時間は9:00〜23:00。約2,100台。"]
+},
+{
+  id:"aeon-inagawa", name:"イオンモール猪名川", pref:"兵庫", area:"川辺郡猪名川町",
+  src:"secondary", url:"https://inagawa.aeonmall.jp/",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["無料とみられるが公式ページで未確認。約2,000台。"]
+},
+
+/* ============================== 京都 ============================== */
+{
+  id:"aeon-katsuragawa", name:"イオンモール京都桂川", pref:"京都", area:"京都市南区",
+  src:"official", url:"https://kyotokatsuragawa.aeonmall.jp/access",
+  rate:{unitMin:20, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,60],[1,120],[50000,1440]]},
+  holiday:{freeAllDay:false, tiers:[[0,60],[1,120],[50000,1440]]},
+  extras:[
+    {id:"twoshops", label:"2店舗以上で買い物した", min:60, days:"all"},
+    {id:"cinema", label:"映画館を利用", min:180, days:"all"},
+    {id:"fitness", label:"フィットネスを利用", min:180, days:"all"}
+  ],
+  notes:[
+    "全日同じ料金。最初の1時間無料、1円以上の買い上げでさらに1時間、2店舗以上でさらに1時間。",
+    "50,000円以上の買い上げで終日無料。この画面では24時間として計算している。",
+    "超過は20分ごと200円と刻みが細かい。最大料金の記載はない。",
+    "映画館とフィットネスは各3時間で、両方使うと6時間。約3,100台。"
+  ]
+},
+{
+  id:"aeon-kyotogojo", name:"イオンモール京都五条", pref:"京都", area:"京都市右京区",
+  src:"secondary", url:"https://kyotogojo.aeonmall.jp/access",
+  rate:{unitMin:30, yen:0}, rateUnknown:true,
+  weekday:{freeAllDay:false, tiers:[[0,180]]},
+  holiday:{freeAllDay:false, tiers:[[0,180]]},
+  extras:[{id:"coupon", label:"土日祝限定クーポン", min:60, days:"holiday"}],
+  notes:[
+    "最初の3時間無料。土日祝は限定クーポンでさらに1時間。",
+    "専門店やイオンスタイル京都五条のレシートをモールインフォメーションに出すと、当日無料になる二次元バーコードがもらえる。",
+    "公式ページは料金表を画像で載せているため未検証。超過料金も分からない。",
+    "1,700台。立体駐車場の高さ制限2.1m。精算はタイムズパーキングの管理。"
+  ]
+},
+{
+  id:"aeon-takanohara", name:"イオンモール高の原", pref:"京都", area:"木津川市",
+  src:"secondary", url:"https://www.aeon.jp/sc/takanohara/access/parking.html",
+  rate:{unitMin:30, yen:0}, rateUnknown:true,
+  weekday:{freeAllDay:false, tiers:[[0,120],[2000,180],[10000,240]], maxFreeMin:420},
+  holiday:{freeAllDay:false, tiers:[[0,120],[2000,180],[10000,240]], maxFreeMin:420},
+  extras:[{id:"cinema", label:"イオンシネマ高の原を利用", min:120, days:"all"}],
+  notes:[
+    "入庫から2時間無料。2,000円以上で合計3時間、10,000円以上で合計4時間。シネマ利用で+2時間、最大7時間。",
+    "屋上駐車場は最大600円で、平日はイオンモールアプリ会員だと400円（ここは公式に記載あり）。停める場所で変わるため上限は入れていない。",
+    "無料時間の段階は二次情報で未検証。超過料金も分からない。現地の掲示で確認してください。",
+    "所在は京都府木津川市だが、奈良市に隣接していて奈良側からの利用も多い。"
+  ]
+},
+{
+  id:"aeon-kyoto", name:"イオンモールKYOTO", pref:"京都", area:"京都市南区（京都駅前）",
+  src:"nodata", noData:true, url:"https://kyoto.aeonmall.jp/access",
+  rate:{unitMin:30, yen:0},
+  weekday:{freeAllDay:false, tiers:[]}, holiday:{freeAllDay:false, tiers:[]},
+  extras:[],
+  notes:[
+    "公式ページの料金表が画像掲載で、入庫後の無料時間も超過料金も読み取れないため計算に載せていない。",
+    "公式に書かれているのは、50,000円以上の買い上げで終日無料、平日の最大料金1,100円、駐車サービスの上限は5時間、約1,100台まで。",
+    "シネマを2本以上見ても割引は5時間が上限。京都駅前で長時間になりやすいので現地の掲示で確認してください。"
+  ]
+},
+{
+  id:"aeon-kitaoji", name:"イオンモール北大路", pref:"京都", area:"京都市北区",
+  src:"official", url:"https://kitaoji.aeonmall.jp/access",
+  rate:{unitMin:30, yen:300},
+  weekday:{freeAllDay:false, tiers:[[1000,60],[2000,120],[7000,180]], maxFee:1500},
+  holiday:{freeAllDay:false, tiers:[[1000,60],[2000,120],[7000,180]], maxFee:1800},
+  extras:[],
+  notes:[
+    "買い物をしないと無料時間がない。1,000円以上で1時間、2,000円以上で2時間、7,000円以上で3時間。",
+    "超過は30分ごと300円。最大は平日1,500円・土日祝1,800円。",
+    "24:00〜翌7:00の泊まり料金は500円。この画面は時間帯を見ていないため深夜は実際と違う。",
+    "地下駐車場476台。営業時間7:00〜23:00。"
+  ]
+},
+
+/* ============================== 奈良 ============================== */
+{
+  id:"aeon-yamatokoriyama", name:"イオンモール大和郡山", pref:"奈良", area:"大和郡山市",
+  src:"official", url:"https://yamatokoriyama-aeonmall.com/static/detail/access",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["全駐車場が無料。約4,200台。"]
+},
+{
+  id:"aeon-kashihara", name:"イオンモール橿原", pref:"奈良", area:"橿原市",
+  src:"official", url:"https://kashihara-aeonmall.com/special/lists/chusya_jyoho",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["駐車場・駐輪場とも無料。土日祝は西平面のF区画も開放。"]
+},
+{
+  id:"aeon-tomigaoka", name:"イオンモール奈良登美ヶ丘", pref:"奈良", area:"生駒市",
+  src:"secondary", url:"https://www.aeon.jp/sc/naratomigaoka/access/parking.html",
+  rate:{unitMin:60, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,60],[2000,120],[3000,180],[20000,240]], maxFee:1000},
+  holiday:{freeAllDay:false, tiers:[[0,60],[2000,120],[3000,180],[20000,240]], maxFee:1000},
+  extras:[{id:"app", label:"イオンモールアプリのQRコード提示", min:60, days:"all"}],
+  notes:[
+    "最初の60分無料、以降は60分ごと200円。",
+    "買い物なしで長時間停める場合は入庫後24時間ごとの上限料金あり（平面・4F 1,000円／屋上 800円）。",
+    "上限は停めた場所で違うため、この画面では高いほうの1,000円で頭打ちにしている。屋上なら実際は800円で止まる。",
+    "この上限は二次情報で、公式ページでは確認できていない。上限そのものが無い・違う場合は表示より高くなる。",
+    "段階表は二次情報のため要確認。"
+  ]
+},
+{
+  id:"nara-family", name:"ならファミリー", pref:"奈良", area:"奈良市",
+  src:"secondary", url:"https://www.d-kintetsu.co.jp/nara/access/",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120]]},
+  holiday:{freeAllDay:false, tiers:[[0,120]]},
+  extras:[{id:"flat", label:"平面（北・北第2・北第3・南）に停めた", min:60, days:"all"}],
+  notes:[
+    "ならファミリー利用で最初の2時間無料。平面の北・北第2・北第3・南は最初の3時間無料。",
+    "買い上げ金額による追加サービスの有無は未確認。現地掲示で確認してください。"
+  ]
+},
+
+/* ============================== 和歌山 ============================== */
+{
+  id:"aeon-wakayama", name:"イオンモール和歌山", pref:"和歌山", area:"和歌山市",
+  src:"official", url:"https://wakayama.aeonmall.jp/access",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:["すべての駐車場を無料で利用できると公式に明記されている。約3,500台。"]
+},
+{
+  id:"kintetsu-wakayama", name:"近鉄百貨店 和歌山店", pref:"和歌山", area:"和歌山市（JR和歌山駅）",
+  src:"official", url:"https://www.d-kintetsu.co.jp/wakayama/access/",
+  rate:{unitMin:20, yen:100},
+  weekday:{freeAllDay:false, tiers:[[2000,90]]},
+  holiday:{freeAllDay:false, tiers:[[2000,90]]},
+  extras:[],
+  notes:[
+    "買い物をしないと無料時間がない。2,000円以上のレシートで1時間30分無料。",
+    "この画面は和歌山ターミナルビル駐車場（20分ごと100円）で計算している。けやき大通り地下駐車場は30分ごと150円だが、1時間あたりは同じ300円。",
+    "レシートと駐車券を各階の駐車券捺印所か地階食品サービスカウンターに出して証印を受ける。",
+    "どちらの駐車場も24時間営業。最大料金の記載はない。",
+    "シティイン駐車場の割引サービスは終了している。"
+  ]
+},
+{
+  id:"wakayama-mio", name:"和歌山ミオ", pref:"和歌山", area:"和歌山市（JR和歌山駅）",
+  src:"official", url:"https://www.wakayama-mio.co.jp/access",
+  rate:{unitMin:20, yen:100},
+  weekday:{freeAllDay:false, tiers:[[3000,90]]},
+  holiday:{freeAllDay:false, tiers:[[3000,90]]},
+  extras:[],
+  notes:[
+    "買い物をしないと無料時間がない。館内で合計3,000円以上で90分無料。",
+    "近鉄百貨店和歌山店と同じ和歌山ターミナルビル駐車場・けやき大通り地下駐車場を使う。単価はそちらの公式ページの値（20分ごと100円）を入れている。ミオ側のページには金額の記載がない。",
+    "和歌山MIO直営店舗、ホテルグランヴィア和歌山直営店舗、DAISO和歌山ターミナルビル店は割引の対象外。",
+    "近鉄百貨店で2,000円以上買えば1時間30分無料になるので、同じ駅ビルでも条件が違う。"
+  ]
+},
+{
+  id:"palm-city-wakayama", name:"パームシティ和歌山", pref:"和歌山", area:"和歌山市",
+  src:"secondary", url:"https://www.okuwa.net/store/wakayama/263.html",
+  rate:{unitMin:60, yen:0},
+  weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
+  extras:[],
+  notes:[
+    "駐車場は無料で2,000台。核店舗はスーパーセンターオークワ。",
+    "公式ページの本文で確認できておらず二次情報のため要確認。"
+  ]
+},
+
 ];
 
 /* 日本の祝日（振替休日・国民の休日を含む）2026-2027 */
@@ -1908,7 +1896,7 @@ const HOLIDAYS = new Set([
 ]);
 
 /* 起動時に選ばれる施設。この県が絞り込みから外れたときは先頭に戻る */
-const DEFAULT_ID = "nishinomiya-gardens";
+const DEFAULT_ID = "toyosu";
 
 /* 施設ごとのURL。?id=aeon-ibaraki のように開くとその施設で起動し、
    タイトル・description・canonical もその施設のものに書き換える。
@@ -1986,7 +1974,7 @@ function freeSummary(f){
 function updateMeta(){
   if(!current) return;
   if(!HAD_URL_ID && !userPicked) return;   /* トップページのメタはそのまま残す */
-  const title = current.name + "の駐車場 無料時間と料金 | Free Parking Clock";
+  const title = current.name + "の駐車場 無料時間と料金｜駐車場料金計算ツール";
   document.title = title;
   const desc = current.name + "（" + current.area + "）の駐車場は" + freeSummary(current) +
     "。入庫時刻と買い物金額を入れると、無料が切れる時刻・いま出た場合の料金・あといくら買えば延びるかが分かります。";
@@ -2006,7 +1994,7 @@ function updateMeta(){
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Free Parking Clock", "item": SITE_URL },
+      { "@type": "ListItem", "position": 1, "name": "駐車場料金計算ツール", "item": SITE_URL },
       { "@type": "ListItem", "position": 2, "name": current.pref, "item": SITE_URL + "?id=" + current.id },
       { "@type": "ListItem", "position": 3, "name": current.name }
     ]
@@ -2015,7 +2003,7 @@ function updateMeta(){
 function select(id){
   current = data.find(f => f.id===id) || null;
   Object.keys(on).forEach(k => delete on[k]);
-  renderExtras(); renderSpecial(); renderCond(); renderJson(); compute(); updateMeta();
+  renderExtras(); renderSpecial(); renderCond(); compute(); updateMeta();
 }
 function renderSpecial(){
   const w = $("specialWrap");
@@ -2211,11 +2199,6 @@ function renderCond(){
   html += current.notes.map(n => '<p class="note">・'+n+'</p>').join("");
   $("condBody").innerHTML = html;
 }
-function renderJson(){
-  if(!current) return;
-  $("jsonBox").value = JSON.stringify(current, null, 2);
-  $("jsonErr").textContent = "";
-}
 
 // アクセス解析（GA4）へ送る。タグを読めていないとき（file:// で開いた・ブロッカー）は何もしない。
 // 入力した時刻や金額そのものは送らない。送るのは選ばれた都道府県と施設名まで。
@@ -2246,23 +2229,6 @@ document.querySelectorAll(".chip[data-add]").forEach(b =>
     compute();
     track("tap_spend_chip", { amount: add });
   }));
-$("applyJson").addEventListener("click", () => {
-  try{
-    const obj = JSON.parse($("jsonBox").value);
-    if(!obj.id || !obj.name) throw new Error("id と name は必須です");
-    const i = data.findIndex(f => f.id === current.id);
-    if(i >= 0) data[i] = obj; else data.push(obj);
-    $("jsonErr").textContent = "";
-    fillFacilities();
-    $("fac").value = obj.id; select(obj.id);
-  }catch(err){ $("jsonErr").textContent = "読み込めません：" + err.message; }
-});
-$("copyAll").addEventListener("click", async e => {
-  const txt = "const FACILITIES = " + JSON.stringify(data, null, 2) + ";";
-  try{ await navigator.clipboard.writeText(txt); e.target.textContent = "コピーしました"; }
-  catch(err){ e.target.textContent = "コピーできません"; }
-  setTimeout(() => e.target.textContent = "全施設のデータをコピー", 1800);
-});
 
 $("entry").value = hhmm(new Date());
 $("holidayOvr").checked = isHolidayToday();
