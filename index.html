@@ -127,6 +127,13 @@ a{color:var(--green)}
 textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);padding:9px;height:190px;background:#fff}
 .disclaimer{margin-top:22px;font-size:11.5px;color:var(--ink-2);border-top:1px solid var(--concrete-dk);padding-top:12px}
 .credit{margin-top:16px;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--ink-2);opacity:.6}
+.facilist{margin-top:20px;border-top:1px solid var(--concrete-dk);padding-top:12px}
+.facilist summary{font-size:12.5px;color:var(--ink-2);cursor:pointer}
+.facilist-body{margin-top:10px}
+.facilist h3{font-size:11px;font-family:var(--mono);letter-spacing:.12em;color:var(--ink-2);margin:12px 0 4px}
+.facilist ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:4px 10px}
+.facilist li{font-size:12.5px}
+.facilist a{color:var(--ink)}
 .footlinks{margin-top:16px;text-align:center;font-size:12px}
 .footlinks a{color:var(--ink-2)}
 .err{color:var(--red);font-size:12px;margin-top:6px;min-height:1em}
@@ -214,6 +221,155 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
         <button class="mini" id="applyJson" type="button">反映する</button>
         <button class="mini ghost" id="copyAll" type="button">全施設のデータをコピー</button>
       </div>
+    </div>
+  </details>
+
+  <!-- 施設一覧。<select> の option は検索エンジンが辿れないため、
+       同じ内容を実体のリンクとして置いている。中身は sitemap と同じ手順で自動生成する。 -->
+  <details class="facilist">
+    <summary>収録している施設の一覧</summary>
+    <div class="facilist-body">
+<!-- FACILITY_LINKS_START -->
+      <h3>兵庫</h3>
+      <ul>
+        <li><a href="?id=koshien">ららぽーと甲子園</a></li>
+        <li><a href="?id=nishinomiya-gardens">阪急西宮ガーデンズ</a></li>
+        <li><a href="?id=acta-nishinomiya">アクタ西宮</a></li>
+        <li><a href="?id=corowa-koshien">コロワ甲子園</a></li>
+        <li><a href="?id=ebista-nishinomiya">エビスタ西宮</a></li>
+        <li><a href="?id=frente-nishinomiya">フレンテ西宮</a></li>
+        <li><a href="?id=umie">神戸ハーバーランドumie 立体駐車場</a></li>
+        <li><a href="?id=amagasaki-qs">あまがさきキューズモール</a></li>
+        <li><a href="?id=aeon-kobeminami">イオンモール神戸南</a></li>
+        <li><a href="?id=aeon-itami">イオンモール伊丹</a></li>
+        <li><a href="?id=aeon-itamikoya">イオンモール伊丹昆陽</a></li>
+        <li><a href="?id=aeon-kobekita">イオンモール神戸北</a></li>
+        <li><a href="?id=aeon-himeji-river">イオンモール姫路リバーシティー</a></li>
+        <li><a href="?id=aeon-himeji-otsu">イオンモール姫路大津</a></li>
+        <li><a href="?id=aeon-kasai">イオンモール加西北条</a></li>
+        <li><a href="?id=aeon-inagawa">イオンモール猪名川</a></li>
+      </ul>
+      <h3>大阪</h3>
+      <ul>
+        <li><a href="?id=expocity">ららぽーとEXPOCITY</a></li>
+        <li><a href="?id=kadoma">ららぽーと門真／三井アウトレットパーク大阪門真</a></li>
+        <li><a href="?id=sakai">ららぽーと堺</a></li>
+        <li><a href="?id=abeno-qs">あべのキューズモール</a></li>
+        <li><a href="?id=minoh-qs">みのおキューズモール</a></li>
+        <li><a href="?id=morinomiya-qs">もりのみやキューズモールBASE</a></li>
+        <li><a href="?id=aeon-shijonawate">イオンモール四條畷</a></li>
+        <li><a href="?id=aeon-domecity">イオンモール大阪ドームシティ</a></li>
+        <li><a href="?id=aeon-sakaikitahanada">イオンモール堺北花田</a></li>
+        <li><a href="?id=aeon-ibaraki">イオンモール茨木</a></li>
+        <li><a href="?id=aeon-dainichi">イオンモール大日</a></li>
+        <li><a href="?id=aeon-tsurumiryokuchi">イオンモール鶴見緑地</a></li>
+        <li><a href="?id=aeon-sakaiteppocho">イオンモール堺鉄砲町</a></li>
+        <li><a href="?id=aeon-rinkusennan">イオンモールりんくう泉南</a></li>
+        <li><a href="?id=aeon-hineno">イオンモール日根野</a></li>
+        <li><a href="?id=aeon-senrito">イオンSENRITO専門館</a></li>
+        <li><a href="?id=grand-front-osaka">グランフロント大阪</a></li>
+        <li><a href="?id=namba-parks">なんばパークス</a></li>
+      </ul>
+      <h3>奈良</h3>
+      <ul>
+        <li><a href="?id=aeon-yamatokoriyama">イオンモール大和郡山</a></li>
+        <li><a href="?id=aeon-kashihara">イオンモール橿原</a></li>
+        <li><a href="?id=aeon-tomigaoka">イオンモール奈良登美ヶ丘</a></li>
+        <li><a href="?id=nara-family">ならファミリー</a></li>
+      </ul>
+      <h3>京都</h3>
+      <ul>
+        <li><a href="?id=aeon-katsuragawa">イオンモール京都桂川</a></li>
+        <li><a href="?id=aeon-kyotogojo">イオンモール京都五条</a></li>
+        <li><a href="?id=aeon-takanohara">イオンモール高の原</a></li>
+        <li><a href="?id=aeon-kyoto">イオンモールKYOTO</a></li>
+        <li><a href="?id=aeon-kitaoji">イオンモール北大路</a></li>
+      </ul>
+      <h3>和歌山</h3>
+      <ul>
+        <li><a href="?id=aeon-wakayama">イオンモール和歌山</a></li>
+        <li><a href="?id=kintetsu-wakayama">近鉄百貨店 和歌山店</a></li>
+        <li><a href="?id=wakayama-mio">和歌山ミオ</a></li>
+        <li><a href="?id=palm-city-wakayama">パームシティ和歌山</a></li>
+      </ul>
+      <h3>東京</h3>
+      <ul>
+        <li><a href="?id=aeon-musashimurayama">イオンモールむさし村山</a></li>
+        <li><a href="?id=toyosu">アーバンドック ららぽーと豊洲</a></li>
+        <li><a href="?id=tachikawa-tachihi">ららぽーと立川立飛</a></li>
+        <li><a href="?id=aeon-hinode">イオンモール日の出</a></li>
+        <li><a href="?id=newoman-takanawa">ニュウマン高輪（TAKANAWA GATEWAY CITY）</a></li>
+        <li><a href="?id=tokyo-midtown">東京ミッドタウン</a></li>
+        <li><a href="?id=shibuya-stream">渋谷ストリーム駐車場</a></li>
+        <li><a href="?id=toyosu-senkyakubanrai">豊洲 千客万来</a></li>
+        <li><a href="?id=tamagawa-takashimaya">玉川高島屋S・C</a></li>
+        <li><a href="?id=roppongi-hills">六本木ヒルズ</a></li>
+        <li><a href="?id=toranomon-hills">虎ノ門ヒルズ</a></li>
+        <li><a href="?id=miyashita-park">MIYASHITA PARK</a></li>
+        <li><a href="?id=mop-tama">三井アウトレットパーク多摩南大沢</a></li>
+        <li><a href="?id=azabudai-hills">麻布台ヒルズ</a></li>
+        <li><a href="?id=midtown-yaesu">東京ミッドタウン八重洲</a></li>
+        <li><a href="?id=ariake-garden">有明ガーデン</a></li>
+        <li><a href="?id=aquacity-odaiba">アクアシティお台場</a></li>
+        <li><a href="?id=sunshine-city">サンシャインシティ</a></li>
+        <li><a href="?id=futako-tamagawa-rise">二子玉川ライズ</a></li>
+        <li><a href="?id=tokyo-solamachi">東京ソラマチ</a></li>
+        <li><a href="?id=divercity-tokyo">ダイバーシティ東京 プラザ</a></li>
+        <li><a href="?id=grandberry-park">南町田グランベリーパーク</a></li>
+        <li><a href="?id=aeon-tamadaira">イオンモール多摩平の森</a></li>
+        <li><a href="?id=aeon-higashikurume">イオンモール東久留米</a></li>
+      </ul>
+      <h3>千葉</h3>
+      <ul>
+        <li><a href="?id=tokyo-bay">ららぽーとTOKYO-BAY</a></li>
+        <li><a href="?id=aeon-makuhari">イオンモール幕張新都心</a></li>
+        <li><a href="?id=aeon-chibanewtown">イオンモール千葉ニュータウン</a></li>
+        <li><a href="?id=mop-kisarazu">三井アウトレットパーク木更津</a></li>
+        <li><a href="?id=aeon-kisarazu">イオンモール木更津</a></li>
+        <li><a href="?id=aeon-narita">イオンモール成田</a></li>
+        <li><a href="?id=terrace-mall-matsudo">テラスモール松戸</a></li>
+        <li><a href="?id=lalaport-kashiwanoha">ららぽーと柏の葉</a></li>
+        <li><a href="?id=aeon-futtsu">イオンモール富津</a></li>
+        <li><a href="?id=unimo-chiharadai">ユニモちはら台</a></li>
+        <li><a href="?id=ikspiari">イクスピアリ</a></li>
+        <li><a href="?id=aeon-chiba-kashiwa">イオンモール柏</a></li>
+        <li><a href="?id=aeon-tsudanuma">イオンモール津田沼</a></li>
+        <li><a href="?id=aeon-choshi">イオンモール銚子</a></li>
+        <li><a href="?id=aeon-yachiyomidorigaoka">イオンモール八千代緑が丘</a></li>
+      </ul>
+      <h3>埼玉</h3>
+      <ul>
+        <li><a href="?id=fujimi">ららぽーと富士見</a></li>
+        <li><a href="?id=shinmisato">ららぽーと新三郷</a></li>
+        <li><a href="?id=ario-kawaguchi">アリオ川口</a></li>
+        <li><a href="?id=stella-town">ステラタウン</a></li>
+        <li><a href="?id=mop-iruma">三井アウトレットパーク入間</a></li>
+        <li><a href="?id=cocoon-city">コクーンシティ</a></li>
+        <li><a href="?id=aeon-kawaguchi">イオンモール川口</a></li>
+        <li><a href="?id=aeon-kawaguchimaekawa">イオンモール川口前川</a></li>
+        <li><a href="?id=aeon-kasukabe">イオンモール春日部</a></li>
+        <li><a href="?id=aeon-ageo">イオンモール上尾</a></li>
+        <li><a href="?id=aeon-hanyu">イオンモール羽生</a></li>
+        <li><a href="?id=aeon-yono">イオンモール与野</a></li>
+        <li><a href="?id=aeon-kitatoda">イオンモール北戸田</a></li>
+        <li><a href="?id=aeon-urawamisono">イオンモール浦和美園</a></li>
+        <li><a href="?id=aeon-laketown">イオンレイクタウン</a></li>
+      </ul>
+      <h3>神奈川</h3>
+      <ul>
+        <li><a href="?id=lalaport-ebina">ららぽーと海老名</a></li>
+        <li><a href="?id=markis-minatomirai">MARK IS みなとみらい</a></li>
+        <li><a href="?id=tressa-yokohama">トレッサ横浜</a></li>
+        <li><a href="?id=outlets-shonan-hiratsuka">THE OUTLETS SHONAN HIRATSUKA</a></li>
+        <li><a href="?id=grandtree-musashikosugi">グランツリー武蔵小杉</a></li>
+        <li><a href="?id=lazona-kawasaki">ラゾーナ川崎プラザ</a></li>
+        <li><a href="?id=terrace-mall-shonan">テラスモール湘南</a></li>
+        <li><a href="?id=mop-yokohama-bayside">三井アウトレットパーク横浜ベイサイド</a></li>
+        <li><a href="?id=aeon-yamato">イオンモール大和</a></li>
+        <li><a href="?id=aeon-zama">イオンモール座間</a></li>
+        <li><a href="?id=yokohama">ららぽーと横浜</a></li>
+      </ul>
+<!-- FACILITY_LINKS_END -->
     </div>
   </details>
 
@@ -674,6 +830,36 @@ const FACILITIES = [
     "SENRITOよみうり駐車場は60分ごと500円（5階は最大2,000円、6階・7階は最大900円）。サービス券は駐車券1枚につき最大4枚。",
     "第1〜第3立体駐車場は最初の1時間400円・以降30分ごと200円（第3は最大1,200円、第2は上限なし）。サービス券は最大3枚。",
     "何円の買い上げでサービス券が何枚もらえるかは公式ページに記載がない。"
+  ]
+},
+
+{
+  id:"grand-front-osaka", name:"グランフロント大阪", pref:"大阪", area:"大阪市北区（梅田）",
+  src:"official", url:"https://www.grandfront-osaka.jp/about/parking/",
+  rate:{unitMin:30, yen:300},
+  weekday:{freeAllDay:false, tiers:[[5000,60],[10000,120]]},
+  holiday:{freeAllDay:false, tiers:[[5000,60],[10000,120]]},
+  extras:[],
+  notes:[
+    "無料時間がない。最初の60分が600円で、以降は30分ごと300円（どちらも時間600円）。",
+    "5,000円以上でQR駐車サービス券1時間分、10,000円以上で2時間分。最大料金の記載はない。",
+    "この画面は30分300円で通して計算している。最初の1時間はちょうど600円になるので、実際と一致する。",
+    "約330台と梅田の規模のわりに少ない（南館B2F 約170台・北館B3F 約160台）。南館9:00〜24:00、北館7:00〜24:00。"
+  ]
+},
+{
+  id:"namba-parks", name:"なんばパークス", pref:"大阪", area:"大阪市浪速区（難波）",
+  src:"official", url:"https://nambaparks.com/access",
+  rate:{unitMin:30, yen:500},
+  weekday:{freeAllDay:false, tiers:[[5000,120]], maxFee:1300},
+  holiday:{freeAllDay:false, tiers:[[5000,120]]},
+  extras:[{id:"cinema", label:"なんばパークスシネマを利用", min:60, days:"all"}],
+  notes:[
+    "無料時間がない。5,000円以上の買い上げで2時間無料（全日）。シネマ利用でさらに1時間。",
+    "平日は30分250円、土日祝は30分500円。この画面は単価を1つしか持てないため高いほうの500円で通している。平日は実際より高く出る。",
+    "平日の最大料金は1,300円（7:00〜23:30）。土日祝の最大料金は記載がない。",
+    "地下は23:30〜翌7:00、立体は0:30〜9:00がお泊まり料金0円。深夜をまたぐ場合はこの画面より安くなる。",
+    "隣接するなんばCITY駐車場は30分300円・平日最大1,800円で別体系。"
   ]
 },
 
@@ -1577,6 +1763,23 @@ const FACILITIES = [
     "公式ページは料金表を画像で載せているため未検証。超過料金も分からない。",
     "本館1,800台のほか臨時駐車場（Aエリア108台・Bエリア59台）がある。",
     "三井ショッピングパークカード会員向けの優待もあるが、内容を確認できていない。"
+  ]
+},
+{
+  id:"markis-minatomirai", name:"MARK IS みなとみらい", pref:"神奈川", area:"横浜市西区（みなとみらい）",
+  src:"official", url:"https://www.mec-markis.jp/mm/access.html",
+  rate:{unitMin:30, yen:280},
+  weekday:{freeAllDay:false, tiers:[[2500,60],[5000,120],[10000,180]], maxFreeMin:180},
+  holiday:{freeAllDay:false, tiers:[[2500,60],[5000,120],[10000,180]], maxFreeMin:180},
+  extras:[
+    {id:"cinema", label:"5階の映画館で当日上映作品を鑑賞", min:180, days:"all"},
+    {id:"mmpoint", label:"みなとみらいポイントアプリを提示", min:60, days:"all"}
+  ],
+  notes:[
+    "無料時間がない。2,500円以上で1時間、5,000円以上で2時間、10,000円以上で3時間。買い上げによる無料は最長3時間まで。",
+    "超過は30分ごと280円。最大料金の記載はない。",
+    "MARK IS の駐車場は900台。ランドマーク地下1,400台、クイーンズスクエア地下1,700台も使えるが、料金体系はそれぞれ異なる。",
+    "MARK IS は8:45〜23:00。ランドマークは24時間（24:00〜6:00は施設利用者のみ）、クイーンズスクエアは7:00〜24:00。"
   ]
 },
 {

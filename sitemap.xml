@@ -205,6 +205,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://nattom666.github.io/parking-free-calc/?id=grand-front-osaka</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nattom666.github.io/parking-free-calc/?id=namba-parks</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://nattom666.github.io/parking-free-calc/?id=aeon-yamatokoriyama</loc>
     <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -608,6 +620,12 @@
   </url>
   <url>
     <loc>https://nattom666.github.io/parking-free-calc/?id=lalaport-ebina</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nattom666.github.io/parking-free-calc/?id=markis-minatomirai</loc>
     <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
