@@ -1615,6 +1615,17 @@ const HOLIDAYS = new Set([
 /* 起動時に選ばれる施設。この県が絞り込みから外れたときは先頭に戻る */
 const DEFAULT_ID = "nishinomiya-gardens";
 
+/* 施設ごとのURL。?id=aeon-ibaraki のように開くとその施設で起動し、
+   タイトル・description・canonical もその施設のものに書き換える。
+   検索から施設名で入ってこられるようにするための仕掛け。 */
+const SITE_URL = "https://nattom666.github.io/parking-free-calc/";
+let pendingUrlId = new URLSearchParams(location.search).get("id");
+/* ?id なしで開いたトップは、トップのまま canonical させる。
+   ここを施設URLに向けるとトップページが検索結果から落ちる。
+   利用者が施設を選び直した時点で施設URLに切り替える。 */
+const HAD_URL_ID = !!pendingUrlId;
+let userPicked = false;
+
 let data = JSON.parse(JSON.stringify(FACILITIES));
 let current = null;
 const on = {};
@@ -1658,14 +1669,44 @@ function fillFacilities(){
   data.forEach(f => byPref[f.pref] = (byPref[f.pref]||0)+1);
   $("count").textContent = "収録 " + data.length + "施設　" +
     prefOrder().map(p => p + " " + byPref[p]).join("／");
-  const pick = list.some(f => f.id === DEFAULT_ID) ? DEFAULT_ID : (list[0] ? list[0].id : null);
+  const wanted = [pendingUrlId, DEFAULT_ID].find(id => id && list.some(f => f.id === id));
+  pendingUrlId = null;
+  const pick = wanted || (list[0] ? list[0].id : null);
   if(pick) $("fac").value = pick;
   select(pick);
+}
+/* その施設の無料条件を一行にまとめる。description に使う */
+function freeSummary(f){
+  if(f.weekday.freeAllDay && f.holiday.freeAllDay) return "駐車場は無料";
+  if(f.noData) return "有料（条件は未収録）";
+  const first = (r) => {
+    if(r.freeAllDay) return "終日無料";
+    const t = (r.tiers||[])[0];
+    if(!t) return "無料時間なし";
+    return t[0] === 0 ? dur(t[1]) + "無料" : yen(t[0]) + "以上で" + dur(t[1]) + "無料";
+  };
+  const w = first(f.weekday), h = first(f.holiday);
+  return w === h ? w : "平日は" + w + "、土日祝は" + h;
+}
+function updateMeta(){
+  if(!current) return;
+  if(!HAD_URL_ID && !userPicked) return;   /* トップページのメタはそのまま残す */
+  const title = current.name + "の駐車場 無料時間と料金 | Free Parking Clock";
+  document.title = title;
+  const desc = current.name + "（" + current.area + "）の駐車場は" + freeSummary(current) +
+    "。入庫時刻と買い物金額を入れると、無料が切れる時刻・いま出た場合の料金・あといくら買えば延びるかが分かります。";
+  const set = (sel, attr, val) => { const el = document.querySelector(sel); if(el) el.setAttribute(attr, val); };
+  set('meta[name="description"]', "content", desc);
+  set('meta[property="og:title"]', "content", title);
+  set('meta[property="og:description"]', "content", desc);
+  set('meta[property="og:url"]', "content", SITE_URL + "?id=" + current.id);
+  set('link[rel="canonical"]', "href", SITE_URL + "?id=" + current.id);
+  if(history.replaceState) history.replaceState(null, "", "?id=" + current.id);
 }
 function select(id){
   current = data.find(f => f.id===id) || null;
   Object.keys(on).forEach(k => delete on[k]);
-  renderExtras(); renderSpecial(); renderCond(); renderJson(); compute();
+  renderExtras(); renderSpecial(); renderCond(); renderJson(); compute(); updateMeta();
 }
 function renderSpecial(){
   const w = $("specialWrap");
@@ -1877,6 +1918,7 @@ $("pref").addEventListener("change", e => {
   track("select_pref", { pref: e.target.value });
 });
 $("fac").addEventListener("change", e => {
+  userPicked = true;
   select(e.target.value);
   track("select_facility", { facility: current ? current.name : e.target.value,
                              pref: current ? current.pref : "" });

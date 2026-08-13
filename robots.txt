@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nattom666.github.io/parking-free-calc/sitemap.xml
