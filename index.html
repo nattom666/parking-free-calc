@@ -156,9 +156,13 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
 
     <div class="field">
       <label for="pref">都道府県</label>
-      <select id="pref">
-        <option value="all">すべて</option>
-      </select>
+      <div class="row">
+        <select id="pref">
+          <option value="all">すべて</option>
+        </select>
+        <button class="mini ghost" id="geoBtn" type="button">現在地から探す</button>
+      </div>
+      <div class="sub" id="geoMsg" hidden></div>
     </div>
 
     <div class="field">
@@ -2408,6 +2412,26 @@ function prefOrder(){
   data.forEach(f => { if(seen.indexOf(f.pref) < 0) seen.push(f.pref); });
   return seen;
 }
+/* 「現在地から探す」用。県庁所在地の座標を代表点として、いちばん近い県を選ぶだけ。
+   施設ごとの緯度経度は持っていないので、これ以上の精度は出さない方針。
+   県を足したらここにも足すこと（無いと候補から漏れる）。 */
+const PREF_POINT = {
+  東京:[35.6895,139.6917], 神奈川:[35.4478,139.6425], 千葉:[35.6050,140.1233], 埼玉:[35.8570,139.6489],
+  大阪:[34.6863,135.5200], 兵庫:[34.6913,135.1830], 京都:[35.0212,135.7556], 奈良:[34.6851,135.8048],
+  和歌山:[34.2260,135.1675], 北海道:[43.0642,141.3469], 宮城:[38.2688,140.8721], 愛知:[35.1802,136.9066],
+  広島:[34.3963,132.4596], 福岡:[33.6064,130.4183]
+};
+/* 緯度差と経度差から距離の大小だけ比べる。順位が分かればよいので平方根も地球半径も要らない */
+function nearestPref(lat, lng){
+  let best=null, bestD=Infinity;
+  prefOrder().forEach(p => {
+    const q = PREF_POINT[p]; if(!q) return;
+    const dy = lat - q[0], dx = (lng - q[1]) * Math.cos(lat * Math.PI / 180);
+    const d = dy*dy + dx*dx;
+    if(d < bestD){ bestD = d; best = p; }
+  });
+  return best;
+}
 function fillPrefs(){
   const sel = $("pref"), keep = sel.value;
   sel.innerHTML = '<option value="all">すべて</option>' +
@@ -2686,6 +2710,22 @@ $("fac").addEventListener("change", e => {
   select(e.target.value);
   track("select_facility", { facility: current ? current.name : e.target.value,
                              pref: current ? current.pref : "" });
+});
+$("geoBtn").addEventListener("click", () => {
+  const msg = $("geoMsg");
+  const show = t => { msg.textContent = t; msg.hidden = false; };
+  if(!navigator.geolocation){ show("この端末では現在地を取得できません。"); return; }
+  show("現在地を確認しています…");
+  navigator.geolocation.getCurrentPosition(pos => {
+    const p = nearestPref(pos.coords.latitude, pos.coords.longitude);
+    if(!p){ show("近くの都道府県が見つかりませんでした。"); return; }
+    $("pref").value = p;
+    fillFacilities();
+    show(p + "の施設を表示しています。近くにない場合は手で選び直してください。");
+    track("use_geolocation", { pref: p });
+  }, () => {
+    show("現在地を取得できませんでした。都道府県を選んでください。");
+  }, { timeout: 8000, maximumAge: 300000 });
 });
 $("entry").addEventListener("input", compute);
 $("spend").addEventListener("input", compute);
