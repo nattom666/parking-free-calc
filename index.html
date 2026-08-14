@@ -253,6 +253,8 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
         <li><a href="s/midtown-hibiya.html">東京ミッドタウン日比谷</a></li>
         <li><a href="s/ikebukuro-parco.html">池袋パルコ</a></li>
         <li><a href="s/shibuya-parco.html">渋谷パルコ</a></li>
+        <li><a href="s/lumine-shinjuku.html">ルミネ新宿</a></li>
+        <li><a href="s/lumine-est-shinjuku.html">ルミネエスト新宿</a></li>
       </ul>
       <h3>神奈川</h3>
       <ul>
@@ -267,6 +269,8 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
         <li><a href="s/aeon-yamato.html">イオンモール大和</a></li>
         <li><a href="s/aeon-zama.html">イオンモール座間</a></li>
         <li><a href="s/yokohama.html">ららぽーと横浜</a></li>
+        <li><a href="s/yokohama-joinus.html">横浜ジョイナス（相鉄ジョイナス）</a></li>
+        <li><a href="s/lumine-yokohama.html">ルミネ横浜</a></li>
       </ul>
       <h3>千葉</h3>
       <ul>
@@ -325,6 +329,8 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
         <li><a href="s/grand-front-osaka.html">グランフロント大阪</a></li>
         <li><a href="s/namba-parks.html">なんばパークス</a></li>
         <li><a href="s/lucua-osaka.html">ルクア大阪（大阪ステーションシティ）</a></li>
+        <li><a href="s/namba-city.html">なんばCITY</a></li>
+        <li><a href="s/abeno-harukas-kintetsu.html">あべのハルカス近鉄本店</a></li>
       </ul>
       <h3>兵庫</h3>
       <ul>
@@ -843,6 +849,33 @@ const FACILITIES = [
     "機械式134台と平置き2台。ハイルーフ枠が68台ある。"
   ]
 },
+{
+  id:"lumine-shinjuku", name:"ルミネ新宿", pref:"東京", area:"新宿区",
+  src:"official", url:"https://www.lumine.ne.jp/shinjuku/access/",
+  rate:{unitMin:30, yen:400},
+  weekday:{freeAllDay:false, tiers:[[3000,120]]},
+  holiday:{freeAllDay:false, tiers:[[3000,120]]},
+  extras:[],
+  notes:[
+    "買い物をしないと無料時間はない。当日のレシート合計3,000円以上で2時間無料。",
+    "1店舗ではなく合計額で判定されるため、複数店舗のレシートを合算できる。",
+    "超過は30分ごと400円（2026年7月1日改定）。",
+    "新宿駅東口駐車場144台、JR新宿ミライナタワー駐車場160台。"
+  ]
+},
+{
+  id:"lumine-est-shinjuku", name:"ルミネエスト新宿", pref:"東京", area:"新宿区",
+  src:"official", url:"https://www.lumine.ne.jp/est/access/",
+  rate:{unitMin:30, yen:400},
+  weekday:{freeAllDay:false, tiers:[[3000,120]]},
+  holiday:{freeAllDay:false, tiers:[[3000,120]]},
+  extras:[],
+  notes:[
+    "買い物をしないと無料時間はない。当日のレシート合計3,000円以上で2時間無料。",
+    "新宿駅東口駐車場・JR新宿ミライナタワー駐車場が対象で、どちらも超過は30分ごと400円（2026年7月1日改定）。",
+    "ルミネ新宿と同じ駐車場を使うが、無料サービスの判定は各館のレシートで行う。"
+  ]
+},
 /* ============================== 神奈川 ============================== */
 {
   id:"lalaport-ebina", name:"ららぽーと海老名", pref:"神奈川", area:"海老名市",
@@ -989,6 +1022,34 @@ const FACILITIES = [
   ]
 },
 
+{
+  id:"yokohama-joinus", name:"横浜ジョイナス（相鉄ジョイナス）", pref:"神奈川", area:"横浜市西区",
+  src:"official", url:"https://www.sotetsu-joinus.com/access/",
+  rate:{unitMin:30, yen:350},
+  weekday:{freeAllDay:false, tiers:[[3000,90]]},
+  holiday:{freeAllDay:false, tiers:[[3000,90]]},
+  extras:[],
+  notes:[
+    "1店舗での利用3,000円以上で1時間30分無料。合計額ではなく1店舗ごとの判定。",
+    "この条件はジョイナス駐車場のもの。横浜駅西口地下駐車場・第2駐車場は同じ3,000円でも1時間と短い。",
+    "超過は30分ごと350円（西口第2駐車場のみ300円）。西口地下の地下2・3階は平日のみ最大2,750円。"
+  ]
+},
+{
+  id:"lumine-yokohama", name:"ルミネ横浜", pref:"神奈川", area:"横浜市西区",
+  src:"official", url:"https://www.lumine.ne.jp/yokohama/access/",
+  rate:{unitMin:30, yen:340},
+  weekday:{freeAllDay:false, tiers:[[3000,60]]},
+  holiday:{freeAllDay:false, tiers:[[3000,60]]},
+  extras:[
+    {id:"luminecard", label:"ルミネカードで支払う（2,000円以上に緩和）", min:0, days:"all", isMember:true}
+  ],
+  notes:[
+    "当日の買い上げ合計3,000円以上で1時間無料。ルミネカード利用なら2,000円以上で1時間になる。",
+    "カード利用は無料時間が増えるのではなく、条件金額が下がる仕組み。この画面では加算として扱えないため0分としている。",
+    "超過は平日30分ごと340円、土日祝・繁忙期は350円。この画面は平日の単価で通している。"
+  ]
+},
 /* ============================== 千葉 ============================== */
 {
   id:"tokyo-bay", name:"ららぽーとTOKYO-BAY", pref:"千葉", area:"船橋市",
@@ -1636,6 +1697,34 @@ const FACILITIES = [
     "買い物をしないと無料時間はない。5,000円以上で2時間無料。",
     "超過は30分ごと310円。0:00〜6:00は60分110円。入庫後24時間の最大料金は3,000円。",
     "大阪ステーションシティ駐車場（約550台）の条件。サウスゲートビル地下駐車場は30分360円で条件が異なる。"
+  ]
+},
+{
+  id:"namba-city", name:"なんばCITY", pref:"大阪", area:"大阪市中央区",
+  src:"official", url:"https://nambacity.com/access",
+  rate:{unitMin:30, yen:300},
+  weekday:{freeAllDay:false, tiers:[[5000,120]], maxFee:1800},
+  holiday:{freeAllDay:false, tiers:[[5000,120]]},
+  extras:[
+    {id:"cinema", label:"映画を鑑賞する", min:60, days:"all"}
+  ],
+  notes:[
+    "買い物をしないと無料時間はない。税込5,000円以上で2時間無料。",
+    "映画鑑賞でさらに1時間。ミナピタカード会員はランクに応じて追加の無料時間がある（この画面では未収録）。",
+    "超過は30分ごと300円。平日は最大1,800円（7:00〜23:30）。"
+  ]
+},
+{
+  id:"abeno-harukas-kintetsu", name:"あべのハルカス近鉄本店", pref:"大阪", area:"大阪市阿倍野区",
+  src:"official", url:"https://abenoharukas.d-kintetsu.co.jp/access/",
+  rate:{unitMin:30, yen:350},
+  weekday:{freeAllDay:false, tiers:[[3000,120],[20000,180],[50000,240]]},
+  holiday:{freeAllDay:false, tiers:[[3000,120],[20000,180],[50000,240]]},
+  extras:[],
+  notes:[
+    "買い物をしないと無料時間はない。3,000円以上で2時間、20,000円以上で3時間、50,000円以上で4時間。",
+    "基本料金は終日30分350円。",
+    "3,000円で2時間は都市型百貨店としては条件が良い部類。"
   ]
 },
 /* ============================== 兵庫 ============================== */
