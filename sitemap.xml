@@ -247,6 +247,30 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://nattom666.github.io/parking-free-calc/s/shibuya-hikarie.html</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nattom666.github.io/parking-free-calc/s/midtown-hibiya.html</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nattom666.github.io/parking-free-calc/s/ikebukuro-parco.html</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nattom666.github.io/parking-free-calc/s/shibuya-parco.html</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://nattom666.github.io/parking-free-calc/s/lalaport-ebina.html</loc>
     <lastmod>2026-08-14</lastmod>
     <changefreq>monthly</changefreq>
@@ -601,6 +625,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://nattom666.github.io/parking-free-calc/s/lucua-osaka.html</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://nattom666.github.io/parking-free-calc/s/koshien.html</loc>
     <lastmod>2026-08-14</lastmod>
     <changefreq>monthly</changefreq>
@@ -823,6 +853,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://nattom666.github.io/parking-free-calc/s/sapporo-parco.html</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://nattom666.github.io/parking-free-calc/s/aeon-natori.html</loc>
     <lastmod>2026-08-14</lastmod>
     <changefreq>monthly</changefreq>
@@ -998,6 +1034,12 @@
   </url>
   <url>
     <loc>https://nattom666.github.io/parking-free-calc/s/marinoa-city.html</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nattom666.github.io/parking-free-calc/s/fukuoka-parco.html</loc>
     <lastmod>2026-08-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

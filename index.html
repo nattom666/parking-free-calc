@@ -249,6 +249,10 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
         <li><a href="s/grandberry-park.html">南町田グランベリーパーク</a></li>
         <li><a href="s/aeon-tamadaira.html">イオンモール多摩平の森</a></li>
         <li><a href="s/aeon-higashikurume.html">イオンモール東久留米</a></li>
+        <li><a href="s/shibuya-hikarie.html">渋谷ヒカリエ</a></li>
+        <li><a href="s/midtown-hibiya.html">東京ミッドタウン日比谷</a></li>
+        <li><a href="s/ikebukuro-parco.html">池袋パルコ</a></li>
+        <li><a href="s/shibuya-parco.html">渋谷パルコ</a></li>
       </ul>
       <h3>神奈川</h3>
       <ul>
@@ -320,6 +324,7 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
         <li><a href="s/aeon-senrito.html">イオンSENRITO専門館</a></li>
         <li><a href="s/grand-front-osaka.html">グランフロント大阪</a></li>
         <li><a href="s/namba-parks.html">なんばパークス</a></li>
+        <li><a href="s/lucua-osaka.html">ルクア大阪（大阪ステーションシティ）</a></li>
       </ul>
       <h3>兵庫</h3>
       <ul>
@@ -372,6 +377,7 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
         <li><a href="s/aeon-asahikawa-ekimae.html">イオンモール旭川駅前</a></li>
         <li><a href="s/aeon-tomakomai.html">イオンモール苫小牧</a></li>
         <li><a href="s/ario-sapporo.html">アリオ札幌</a></li>
+        <li><a href="s/sapporo-parco.html">札幌パルコ</a></li>
       </ul>
       <h3>宮城</h3>
       <ul>
@@ -414,6 +420,7 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
         <li><a href="s/riverwalk-kitakyushu.html">リバーウォーク北九州</a></li>
         <li><a href="s/canalcity-hakata.html">キャナルシティ博多</a></li>
         <li><a href="s/marinoa-city.html">マリノアシティ福岡</a></li>
+        <li><a href="s/fukuoka-parco.html">福岡パルコ</a></li>
       </ul>
 <!-- FACILITY_LINKS_END -->
     </div>
@@ -423,7 +430,7 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
     条件は変更されます。金額が大きいときは必ず施設の公式ページで確認してください。
     <span class="flag ok">公式確認済</span> は公式サイトの記載、
     <span class="flag chk">要確認</span> は二次情報、
-    <span class="flag no">条件未収録</span> は有料と分かっているが詳細が未取得のものです。データ収集日：関西 2026-08-05／関東 2026-08-13／北海道・宮城・愛知・広島・福岡 2026-08-15。<br>
+    <span class="flag no">条件未収録</span> は有料と分かっているが詳細が未取得のものです。データ収集日：関西 2026-08-05／関東 2026-08-13／その他 2026-08-15。<br>
     アクセス状況の把握に Google アナリティクスを使用しています。入力した時刻や金額は送信していません。
   </p>
 
@@ -776,6 +783,66 @@ const FACILITIES = [
   notes:["駐車場・駐輪場とも無料と公式に明記されている。"]
 },
 
+{
+  id:"shibuya-hikarie", name:"渋谷ヒカリエ", pref:"東京", area:"渋谷区",
+  src:"official", url:"https://www.hikarie.jp/access/",
+  rate:{unitMin:30, yen:400},
+  weekday:{freeAllDay:false, tiers:[[3000,60],[10000,120],[30000,180]], maxFee:3200},
+  holiday:{freeAllDay:false, tiers:[]},
+  extras:[],
+  notes:[
+    "平日の営業時間内だけ無料サービスがある。3,000円以上で1時間、10,000円以上で2時間、30,000円以上で3時間。",
+    "土日祝はサービス対象外で、買い物をしても無料時間は付かない。",
+    "超過は30分ごと400円。平日の最大料金は3,200円。",
+    "東急シアターオーブの利用は割引の対象外。"
+  ]
+},
+{
+  id:"midtown-hibiya", name:"東京ミッドタウン日比谷", pref:"東京", area:"千代田区",
+  src:"official", url:"https://www.hibiya.tokyo-midtown.com/jp/access/car-bike/",
+  rate:{unitMin:30, yen:400}, rateUnknown:true,
+  weekday:{freeAllDay:false, tiers:[[3000,60],[6000,120],[20000,240]]},
+  holiday:{freeAllDay:false, tiers:[[3000,60],[6000,120],[20000,240]]},
+  extras:[
+    {id:"toho", label:"TOHOシネマズ日比谷で4,000円以上利用", min:120, days:"all"},
+    {id:"saison", label:"三井ショッピングパークカード《セゾン》会員", min:60, days:"all", isMember:true}
+  ],
+  notes:[
+    "買い物をしないと無料時間はない。3,000円以上で1時間、6,000円以上で2時間、20,000円以上で4時間。",
+    "TOHOシネマズ日比谷で4,000円以上の利用は別枠で2時間。セゾン会員はさらに1時間。",
+    "超過料金は公式ページに記載がなく未確認。この画面の単価は目安のため、金額は現地の掲示で確認してください。",
+    "約200台。"
+  ]
+},
+{
+  id:"ikebukuro-parco", name:"池袋パルコ", pref:"東京", area:"豊島区",
+  src:"official", url:"https://ikebukuro.parco.jp/info/",
+  rate:{unitMin:30, yen:330},
+  weekday:{freeAllDay:false, tiers:[[2000,60],[10000,120]], maxFee:1800},
+  holiday:{freeAllDay:false, tiers:[[2000,60],[10000,120]], maxFee:2600},
+  extras:[
+    {id:"second", label:"別の1店舗でさらに10,000円以上買う", min:60, days:"all"}
+  ],
+  notes:[
+    "1店舗あたりの買い上げで判定する。2,000〜9,999円で1時間、10,000円以上で2時間。",
+    "サービスを受けたうえで別の1店舗で10,000円以上買うと、さらに1時間追加される。",
+    "超過は30分ごと330円。最大料金は平日1,800円・土日祝2,600円（営業時間〜22:00）。",
+    "機械式で24台しかないため、満車のことが多い。"
+  ]
+},
+{
+  id:"shibuya-parco", name:"渋谷パルコ", pref:"東京", area:"渋谷区",
+  src:"official", url:"https://shibuya.parco.jp/info/",
+  rate:{unitMin:30, yen:320},
+  weekday:{freeAllDay:false, tiers:[[3000,60],[10000,120],[30000,180]]},
+  holiday:{freeAllDay:false, tiers:[[3000,60],[10000,120],[30000,180]]},
+  extras:[],
+  notes:[
+    "買い物をしないと無料時間はない。3,000円以上で1時間、10,000円以上で2時間、30,000円以上で3時間。",
+    "超過は平日30分ごと320円、土日祝は400円。この画面は平日の単価で通しているため、土日祝は実際より安く出る。",
+    "機械式134台と平置き2台。ハイルーフ枠が68台ある。"
+  ]
+},
 /* ============================== 神奈川 ============================== */
 {
   id:"lalaport-ebina", name:"ららぽーと海老名", pref:"神奈川", area:"海老名市",
@@ -1558,6 +1625,19 @@ const FACILITIES = [
   ]
 },
 
+{
+  id:"lucua-osaka", name:"ルクア大阪（大阪ステーションシティ）", pref:"大阪", area:"大阪市北区",
+  src:"official", url:"https://www.lucua.jp/access/",
+  rate:{unitMin:30, yen:310},
+  weekday:{freeAllDay:false, tiers:[[5000,120]], maxFee:3000},
+  holiday:{freeAllDay:false, tiers:[[5000,120]], maxFee:3000},
+  extras:[],
+  notes:[
+    "買い物をしないと無料時間はない。5,000円以上で2時間無料。",
+    "超過は30分ごと310円。0:00〜6:00は60分110円。入庫後24時間の最大料金は3,000円。",
+    "大阪ステーションシティ駐車場（約550台）の条件。サウスゲートビル地下駐車場は30分360円で条件が異なる。"
+  ]
+},
 /* ============================== 兵庫 ============================== */
 {
   id:"koshien", name:"ららぽーと甲子園", pref:"兵庫", area:"西宮市",
@@ -2038,6 +2118,22 @@ const FACILITIES = [
   ]
 },
 
+{
+  id:"sapporo-parco", name:"札幌パルコ", pref:"北海道", area:"札幌市中央区",
+  src:"official", url:"https://sapporo.parco.jp/info/",
+  rate:{unitMin:30, yen:200},
+  weekday:{freeAllDay:false, tiers:[[2000,120]]},
+  holiday:{freeAllDay:false, tiers:[[2000,120]]},
+  extras:[
+    {id:"app", label:"パルコのアプリを提示する", min:60, days:"all", isMember:true}
+  ],
+  notes:[
+    "1店舗で2,000円以上の利用で120分無料。アプリ提示でさらに60分、合計180分になる。",
+    "8階のスシローだけは5,000円以上が条件。",
+    "料金は最初が普通車400円で、以後30分ごと200円。ハイルーフ車は510円／以後30分ごと260円。この画面は普通車の以後料金で通している。",
+    "88台（普通車64台・ハイルーフ24台）。"
+  ]
+},
 /* ============================== 宮城 ============================== */
 {
   id:"aeon-natori", name:"イオンモール名取", pref:"宮城", area:"名取市",
@@ -2358,7 +2454,21 @@ const FACILITIES = [
     "公式サイトの証明書が失効しており内容を確認できなかった。二次情報のため要確認。"
   ]
 },
-
+{
+  id:"fukuoka-parco", name:"福岡パルコ", pref:"福岡", area:"福岡市中央区（天神）",
+  src:"official", url:"https://fukuoka.parco.jp/info/",
+  rate:{unitMin:30, yen:200}, rateUnknown:true,
+  weekday:{freeAllDay:false, tiers:[[3000,60],[10000,120]]},
+  holiday:{freeAllDay:false, tiers:[[3000,60],[10000,120]]},
+  extras:[
+    {id:"premium", label:"プレミアムステージ会員がPARCOカード等で5,000円以上", min:60, days:"all", isMember:true}
+  ],
+  notes:[
+    "契約駐車場ごとに条件が違う。1店舗3,000円以上で1時間、10,000円以上で2時間が基本。",
+    "天神地下街駐車場とソラリアターミナル駐車場だけは1店舗5,000円以上で1時間と条件が厳しい。",
+    "超過料金は駐車場ごとに異なり公式ページに記載がないため未収録。現地の掲示で確認してください。"
+  ]
+}
 ];
 
 /* 日本の祝日（振替休日・国民の休日を含む）2026-2027 */
