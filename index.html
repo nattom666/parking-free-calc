@@ -74,6 +74,9 @@ html{-webkit-text-size-adjust:100%}
 body{background:var(--concrete);color:var(--ink);font-family:var(--jp);line-height:1.6;padding:20px 14px 64px;min-height:100vh}
 .wrap{max-width:520px;margin:0 auto}
 .masthead{margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.brand img{width:34px;height:34px;border-radius:6px;flex:0 0 auto}
+.brandname{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--ink-2)}
 .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--ink-2)}
 .masthead h1{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-top:4px}
 .masthead p{font-size:12.5px;color:var(--ink-2);margin-top:6px}
@@ -155,6 +158,8 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
 <div class="wrap">
 
   <header class="masthead">
+    <div class="brand"><img src="apple-touch-icon.png" width="34" height="34" alt=""
+      decoding="async"><span class="brandname">Free Parking Clock</span></div>
     <h1>ショッピングモールの駐車料金・無料時間 計算ツール</h1>
     <p>施設を選んで、入庫時刻と買い上げ金額を入れるだけ。無料が切れる時刻・いま出た場合の料金・あといくら買えば無料が延びるかを計算します。</p>
     <div class="count" id="count"></div>
@@ -692,8 +697,8 @@ const FACILITIES = [
 },
 {
   id:"aquacity-odaiba", name:"アクアシティお台場", pref:"東京", area:"港区（台場）",
-  src:"secondary", url:"https://www.aquacity.jp/", rateUnknown:true,
-  rate:{unitMin:30, yen:0},
+  src:"official", url:"https://www.aquacity.jp/access/parking/",
+  rate:{unitMin:30, yen:250},
   weekday:{freeAllDay:false, tiers:[[3000,120],[6000,240],[9000,360]]},
   holiday:{freeAllDay:false, tiers:[[3000,60],[6000,120],[9000,180]]},
   extras:[],
@@ -701,24 +706,26 @@ const FACILITIES = [
     "1会計3,000円以上ごとに駐車サービス券が1枚もらえて、最大3枚まで。",
     "券1枚あたり平日2時間・土日祝1時間の計算で、平日最大6時間・土日祝最大3時間まで無料になる。",
     "1会計ごとの判定なので、同じ3,000円でも1回で買うか3回に分けるかで結果が変わる。この画面は合計金額で計算しているため目安として見てください。",
-    "超過料金を確認できていないため、無料枠を過ぎたあとの金額は出せない。二次情報のため要確認。"
+    "超過は平日30分ごと250円、土日祝は300円。この画面は平日の単価で通しているため、土日祝は実際より安く出る。",
+    "ユナイテッド・シネマの利用は認証機で駐車券1枚につき3時間無料。約900台（自走式）。"
   ]
 },
 {
   id:"sunshine-city", name:"サンシャインシティ", pref:"東京", area:"豊島区（池袋）",
-  src:"secondary", url:"https://sunshinecity.jp/information/access_car.html",
+  src:"official", url:"https://sunshinecity.jp/information/access_car.html",
   rate:{unitMin:30, yen:400},
   weekday:{freeAllDay:false, tiers:[[3000,120],[10000,180]]},
   holiday:{freeAllDay:false, tiers:[[3000,120],[10000,180]]},
   extras:[
-    {id:"aquarium", label:"サンシャイン水族館に2,000円以上で入場", min:60, days:"all"},
-    {id:"tenbo", label:"展望台てんぼうパークに1,000円以上で入場", min:60, days:"all"}
+    {id:"aquarium", label:"サンシャイン水族館に入場する", min:60, days:"all"},
+    {id:"tenbo", label:"サンシャイン60展望台に入場する", min:60, days:"all"},
+    {id:"setticket", label:"水族館と展望台のセットチケット（3,000円以上）", min:120, days:"all"}
   ],
   notes:[
     "買い物をしないと無料時間がない。アルパ・ALTAで3,000円以上の買い物か飲食で2時間、10,000円以上で3時間。",
     "超過は30分ごと400円。6〜24時間の駐車は4,800円。",
-    "水族館と展望台は買い物とは別枠で、それぞれ1時間ずつ付く。",
-    "料金は二次情報のため要確認。現地の掲示で確認してください。"
+    "水族館と展望台は買い物とは別枠で、入場すればそれぞれ1時間。セットチケット（3,000円以上）なら2時間。",
+    "1,800台。6〜24時間の駐車は4,800円。"
   ]
 },
 {
@@ -1544,11 +1551,11 @@ const FACILITIES = [
 },
 {
   id:"aeon-shijonawate", name:"イオンモール四條畷", pref:"大阪", area:"四條畷市",
-  src:"secondary", url:"https://shijonawate.aeonmall.jp/",
+  src:"official", url:"https://shijonawate.aeonmall.jp/access",
   rate:{unitMin:60, yen:0},
   weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
   extras:[],
-  notes:["大阪府内のイオンモールでは珍しく無料駐車場（約4,250台）。","公式ページで最新の記載を確認してください。"]
+  notes:["すべての駐車場を無料で利用できると公式に明記されている。約4,300台。","大阪府内のイオンモールでは珍しく完全無料。"]
 },
 {
   id:"aeon-domecity", name:"イオンモール大阪ドームシティ", pref:"大阪", area:"大阪市西区",
@@ -1915,11 +1922,11 @@ const FACILITIES = [
 },
 {
   id:"aeon-kobekita", name:"イオンモール神戸北", pref:"兵庫", area:"神戸市北区",
-  src:"secondary", url:"https://kobekita.aeonmall.jp/",
+  src:"official", url:"https://kobekita.aeonmall.jp/access",
   rate:{unitMin:60, yen:0},
   weekday:{freeAllDay:true, tiers:[]}, holiday:{freeAllDay:true, tiers:[]},
   extras:[],
-  notes:["無料とみられるが公式ページで未確認。現地で確認してください。","約4,000台。"]
+  notes:["すべての駐車場を無料で利用できると公式に明記されている。約4,000台。"]
 },
 {
   id:"aeon-himeji-river", name:"イオンモール姫路リバーシティー", pref:"兵庫", area:"姫路市",

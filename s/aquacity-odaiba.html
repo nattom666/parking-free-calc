@@ -16,7 +16,7 @@
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="icon" type="image/png" href="../apple-touch-icon.png">
 <meta name="theme-color" content="#DDE0DA">
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Free Parking Clock","item":"https://nattom666.github.io/parking-free-calc/"},{"@type":"ListItem","position":2,"name":"東京都","item":"https://nattom666.github.io/parking-free-calc/p/tokyo.html"},{"@type":"ListItem","position":3,"name":"アクアシティお台場"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"アクアシティお台場の駐車場は何時間無料ですか？","acceptedAnswer":{"@type":"Answer","text":"平日は3,000円以上の買い上げで2時間、6,000円以上の買い上げで4時間、9,000円以上の買い上げで6時間無料になります。土日祝は3,000円以上の買い上げで1時間、6,000円以上の買い上げで2時間、9,000円以上の買い上げで3時間無料になります。"}}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Free Parking Clock","item":"https://nattom666.github.io/parking-free-calc/"},{"@type":"ListItem","position":2,"name":"東京都","item":"https://nattom666.github.io/parking-free-calc/p/tokyo.html"},{"@type":"ListItem","position":3,"name":"アクアシティお台場"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"アクアシティお台場の駐車場は何時間無料ですか？","acceptedAnswer":{"@type":"Answer","text":"平日は3,000円以上の買い上げで2時間、6,000円以上の買い上げで4時間、9,000円以上の買い上げで6時間無料になります。土日祝は3,000円以上の買い上げで1時間、6,000円以上の買い上げで2時間、9,000円以上の買い上げで3時間無料になります。"}},{"@type":"Question","name":"アクアシティお台場の駐車料金はいくらですか？","acceptedAnswer":{"@type":"Answer","text":"無料時間を過ぎると30分ごとに250円かかります。"}}]}]</script>
 <style>
   :root{ --concrete:#DDE0DA; --paper:#FCFCFA; --ink:#16191B; --ink-2:#5B625F;
          --line:#C9CDC5; --green:#0A6E4E; --red:#A32B22; --amber:#B8720C; }
@@ -28,6 +28,8 @@
   a{color:var(--green)}
   .back{font-size:12.5px;display:inline-block;margin-bottom:18px}
   .crumb{font-size:12.5px;margin-bottom:18px;color:var(--ink-2)}
+  .crumb .home{display:inline-flex;align-items:center;gap:5px;vertical-align:-5px}
+  .crumb .home img{width:22px;height:22px;border-radius:4px}
   h1{font-size:21px;line-height:1.4;margin:0 0 4px;letter-spacing:-.01em}
   .area{color:var(--ink-2);font-size:13px;margin:0 0 12px}
   h2{font-size:14px;margin:28px 0 6px;padding-top:12px;border-top:1px solid var(--line)}
@@ -53,15 +55,15 @@
 </head>
 <body>
 
-<nav class="crumb"><a href="../">Free Parking Clock</a> ＞ <a href="../p/tokyo.html">東京都</a> ＞ アクアシティお台場</nav>
+<nav class="crumb"><a class="home" href="../"><img src="../apple-touch-icon.png" width="22" height="22" alt="" decoding="async">Free Parking Clock</a> ＞ <a href="../p/tokyo.html">東京都</a> ＞ アクアシティお台場</nav>
 
 <h1>アクアシティお台場の駐車場</h1>
 <p class="area">東京都 港区（台場）</p>
-<p><span class="flag chk">要確認</span>
-   <a href="https://www.aquacity.jp/" target="_blank" rel="noopener nofollow">公式ページ</a>　
+<p><span class="flag ok">公式確認済</span>
+   <a href="https://www.aquacity.jp/access/parking/" target="_blank" rel="noopener nofollow">公式ページ</a>　
    <a href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%A2%E3%82%AF%E3%82%A2%E3%82%B7%E3%83%86%E3%82%A3%E3%81%8A%E5%8F%B0%E5%A0%B4%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA" target="_blank" rel="noopener nofollow">Googleマップで開く</a></p>
 
-<p>アクアシティお台場の駐車場は<b>平日は¥3,000以上で2時間無料、土日祝は¥3,000以上で1時間無料</b>です。超過料金：未確認。</p>
+<p>アクアシティお台場の駐車場は<b>平日は¥3,000以上で2時間無料、土日祝は¥3,000以上で1時間無料</b>です。超過料金：30分ごと ¥250。</p>
 
 <a class="cta" href="../?id=aquacity-odaiba">無料の残り時間といまの料金を計算する</a>
 
@@ -70,16 +72,18 @@
 <table><thead><tr><th>買い上げ</th><th>無料になる合計時間</th></tr></thead><tbody><tr><td>¥3,000 以上</td><td>2時間</td></tr><tr><td>¥6,000 以上</td><td>4時間</td></tr><tr><td>¥9,000 以上</td><td>6時間</td></tr></tbody></table>
 <p><b>土・日・祝</b></p>
 <table><thead><tr><th>買い上げ</th><th>無料になる合計時間</th></tr></thead><tbody><tr><td>¥3,000 以上</td><td>1時間</td></tr><tr><td>¥6,000 以上</td><td>2時間</td></tr><tr><td>¥9,000 以上</td><td>3時間</td></tr></tbody></table>
-<p class="sub">超過料金：未確認</p>
+<p class="sub">超過料金：30分ごと ¥250</p>
 
 
 
+<h2>アクアシティお台場の駐車料金はいくら？（早見表）</h2><p><b>平日</b></p>
+<table><thead><tr><th>駐車時間</th><th>買い物なし</th><th>¥3,000以上</th><th>¥6,000以上</th><th>¥9,000以上</th></tr></thead><tbody><tr><th>1時間</th><td>¥500</td><td>無料</td><td>無料</td><td>無料</td></tr><tr><th>2時間</th><td>¥1,000</td><td>無料</td><td>無料</td><td>無料</td></tr><tr><th>3時間</th><td>¥1,500</td><td>¥500</td><td>無料</td><td>無料</td></tr><tr><th>4時間</th><td>¥2,000</td><td>¥1,000</td><td>無料</td><td>無料</td></tr><tr><th>5時間</th><td>¥2,500</td><td>¥1,500</td><td>¥500</td><td>無料</td></tr></tbody></table><p><b>土・日・祝</b></p>
+<table><thead><tr><th>駐車時間</th><th>買い物なし</th><th>¥3,000以上</th><th>¥6,000以上</th><th>¥9,000以上</th></tr></thead><tbody><tr><th>1時間</th><td>¥500</td><td>無料</td><td>無料</td><td>無料</td></tr><tr><th>2時間</th><td>¥1,000</td><td>¥500</td><td>無料</td><td>無料</td></tr><tr><th>3時間</th><td>¥1,500</td><td>¥1,000</td><td>¥500</td><td>無料</td></tr><tr><th>4時間</th><td>¥2,000</td><td>¥1,500</td><td>¥1,000</td><td>¥500</td></tr><tr><th>5時間</th><td>¥2,500</td><td>¥2,000</td><td>¥1,500</td><td>¥1,000</td></tr></tbody></table><p class="sub">買い上げ金額ごとに、その時間まで停めた場合の料金です。追加サービスは含みません。</p><p>買い物をせずに3時間停めると¥1,500かかります。¥3,000以上の買い上げなら¥500まで下がります。あと¥3,000買うだけで¥1,000ぶん得になる計算です。</p>
 
-
-<h2>よくある質問</h2><div class="qa"><p class="q">アクアシティお台場の駐車場は何時間無料ですか？</p><p class="a">平日は3,000円以上の買い上げで2時間、6,000円以上の買い上げで4時間、9,000円以上の買い上げで6時間無料になります。土日祝は3,000円以上の買い上げで1時間、6,000円以上の買い上げで2時間、9,000円以上の買い上げで3時間無料になります。</p></div>
+<h2>よくある質問</h2><div class="qa"><p class="q">アクアシティお台場の駐車場は何時間無料ですか？</p><p class="a">平日は3,000円以上の買い上げで2時間、6,000円以上の買い上げで4時間、9,000円以上の買い上げで6時間無料になります。土日祝は3,000円以上の買い上げで1時間、6,000円以上の買い上げで2時間、9,000円以上の買い上げで3時間無料になります。</p></div><div class="qa"><p class="q">アクアシティお台場の駐車料金はいくらですか？</p><p class="a">無料時間を過ぎると30分ごとに250円かかります。</p></div>
 
 <h2>注意点</h2>
-<ul><li>1会計3,000円以上ごとに駐車サービス券が1枚もらえて、最大3枚まで。</li><li>券1枚あたり平日2時間・土日祝1時間の計算で、平日最大6時間・土日祝最大3時間まで無料になる。</li><li>1会計ごとの判定なので、同じ3,000円でも1回で買うか3回に分けるかで結果が変わる。この画面は合計金額で計算しているため目安として見てください。</li><li>超過料金を確認できていないため、無料枠を過ぎたあとの金額は出せない。二次情報のため要確認。</li></ul>
+<ul><li>1会計3,000円以上ごとに駐車サービス券が1枚もらえて、最大3枚まで。</li><li>券1枚あたり平日2時間・土日祝1時間の計算で、平日最大6時間・土日祝最大3時間まで無料になる。</li><li>1会計ごとの判定なので、同じ3,000円でも1回で買うか3回に分けるかで結果が変わる。この画面は合計金額で計算しているため目安として見てください。</li><li>超過は平日30分ごと250円、土日祝は300円。この画面は平日の単価で通しているため、土日祝は実際より安く出る。</li><li>ユナイテッド・シネマの利用は認証機で駐車券1枚につき3時間無料。約900台（自走式）。</li></ul>
 
 <h2>東京都のほかの施設</h2><ul class="sib"><li><a href="aeon-musashimurayama.html">イオンモールむさし村山</a></li><li><a href="toyosu.html">アーバンドック ららぽーと豊洲</a></li><li><a href="tachikawa-tachihi.html">ららぽーと立川立飛</a></li><li><a href="aeon-hinode.html">イオンモール日の出</a></li><li><a href="newoman-takanawa.html">ニュウマン高輪（TAKANAWA GATEWAY CITY）</a></li><li><a href="tokyo-midtown.html">東京ミッドタウン</a></li><li><a href="shibuya-stream.html">渋谷ストリーム駐車場</a></li><li><a href="toyosu-senkyakubanrai.html">豊洲 千客万来</a></li><li><a href="tamagawa-takashimaya.html">玉川高島屋S・C</a></li><li><a href="roppongi-hills.html">六本木ヒルズ</a></li><li><a href="toranomon-hills.html">虎ノ門ヒルズ</a></li><li><a href="miyashita-park.html">MIYASHITA PARK</a></li><li><a href="mop-tama.html">三井アウトレットパーク多摩南大沢</a></li><li><a href="azabudai-hills.html">麻布台ヒルズ</a></li><li><a href="midtown-yaesu.html">東京ミッドタウン八重洲</a></li><li><a href="ariake-garden.html">有明ガーデン</a></li><li><a href="sunshine-city.html">サンシャインシティ</a></li><li><a href="futako-tamagawa-rise.html">二子玉川ライズ</a></li><li><a href="tokyo-solamachi.html">東京ソラマチ</a></li><li><a href="divercity-tokyo.html">ダイバーシティ東京 プラザ</a></li><li><a href="grandberry-park.html">南町田グランベリーパーク</a></li><li><a href="aeon-tamadaira.html">イオンモール多摩平の森</a></li><li><a href="aeon-higashikurume.html">イオンモール東久留米</a></li><li><a href="shibuya-hikarie.html">渋谷ヒカリエ</a></li><li><a href="midtown-hibiya.html">東京ミッドタウン日比谷</a></li><li><a href="ikebukuro-parco.html">池袋パルコ</a></li><li><a href="shibuya-parco.html">渋谷パルコ</a></li><li><a href="lumine-shinjuku.html">ルミネ新宿</a></li><li><a href="lumine-est-shinjuku.html">ルミネエスト新宿</a></li></ul>
 
