@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>データの集め方と、確認できていないこと｜Free Parking Clock</title>
+<meta name="description" content="164施設の駐車場条件をどう集めたか、出典バッジの意味、確認できていない施設について説明します。">
+<link rel="canonical" href="https://nattom666.github.io/parking-free-calc/p/about-data.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Free Parking Clock">
+<meta property="og:title" content="データの集め方と、確認できていないこと">
+<meta property="og:description" content="164施設の駐車場条件をどう集めたか、出典バッジの意味、確認できていない施設について説明します。">
+<meta property="og:url" content="https://nattom666.github.io/parking-free-calc/p/about-data.html">
+<meta property="og:image" content="https://nattom666.github.io/parking-free-calc/apple-touch-icon.png">
+<meta name="twitter:card" content="summary">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="icon" type="image/png" href="../apple-touch-icon.png">
+<meta name="theme-color" content="#DDE0DA">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Free Parking Clock","item":"https://nattom666.github.io/parking-free-calc/"},{"@type":"ListItem","position":2,"name":"データの集め方"}]}</script>
+<style>
+  :root{ --concrete:#DDE0DA; --paper:#FCFCFA; --ink:#16191B; --ink-2:#5B625F;
+         --line:#C9CDC5; --green:#0A6E4E; --red:#A32B22; --amber:#B8720C; }
+  *{box-sizing:border-box}
+  body{ margin:0 auto; padding:28px 18px 64px; max-width:44rem; background:var(--concrete);
+        color:var(--ink); line-height:1.85; font-size:15px;
+        font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN",
+                    "Yu Gothic",YuGothic,Meiryo,sans-serif; }
+  a{color:var(--green)}
+  .back{font-size:12.5px;display:inline-block;margin-bottom:18px}
+  .crumb{font-size:12.5px;margin-bottom:18px;color:var(--ink-2)}
+  .crumb .home{display:inline-flex;align-items:center;gap:5px;vertical-align:-5px}
+  .crumb .home img{width:22px;height:22px;border-radius:4px}
+  h1{font-size:21px;line-height:1.45;margin:0 0 8px;letter-spacing:-.01em}
+  .lead{color:var(--ink-2);font-size:13.5px;margin:0 0 4px}
+  h2{font-size:15px;margin:30px 0 8px;padding-top:12px;border-top:1px solid var(--line)}
+  p,li,td,th{font-size:14px}
+  table{border-collapse:collapse;width:100%;background:var(--paper);margin:8px 0;
+        display:block;overflow-x:auto;white-space:nowrap}
+  th,td{border:1px solid var(--line);padding:6px 10px;text-align:left}
+  th{background:#F2F3EF;font-weight:600;font-size:12.5px;color:var(--ink-2)}
+  td.name{white-space:normal;min-width:11em}
+  .flag{display:inline-block;font-size:10.5px;padding:0 5px;border:1px solid;border-radius:2px}
+  .flag.ok{color:var(--green);border-color:var(--green)}
+  .flag.chk{color:var(--amber);border-color:var(--amber)}
+  .flag.no{color:var(--red);border-color:var(--red)}
+  .cta{display:block;background:var(--ink);color:#fff;text-align:center;text-decoration:none;
+       padding:13px;border-radius:3px;margin:22px 0;font-weight:600;font-size:15px}
+  ul.nav{display:flex;flex-wrap:wrap;gap:4px 14px;list-style:none;padding:0;margin:8px 0}
+  footer{margin-top:36px;padding-top:12px;border-top:1px solid var(--line);
+         font-size:12px;color:var(--ink-2)}
+</style>
+</head>
+<body>
+<nav class="crumb"><a class="home" href="../"><img src="../apple-touch-icon.png" width="22" height="22" alt="" decoding="async">Free Parking Clock</a> ＞ データの集め方</nav>
+
+<h1>データの集め方と、確認できていないこと</h1>
+<p class="lead">このサイトの料金・無料時間は、14都道府県164施設ぶんを一件ずつ手作業で集めたものです。
+どこまで確認できていて、どこが確認できていないのかを正直に書いておきます。</p>
+
+<h2>集め方</h2>
+<p>各施設の公式サイトの駐車場ページを開いて、無料になる条件・超過料金・上限を読み取り、
+このサイトのデータ形式に落としています。まとめサイトや検索結果の要約は、
+それ単体では採用していません。</p>
+<p>公式サイトに書かれていない項目は、推測で埋めずに空欄のままにしています。
+料金は実際にお金がかかるところなので、それらしい数字を入れるより「分からない」と
+書くほうが安全だと考えているためです。</p>
+
+<h2>出典バッジの意味</h2>
+<table><thead><tr><th>バッジ</th><th>件数</th><th>意味</th></tr></thead><tbody>
+<tr><td><span class="flag ok">公式確認済</span></td><td>114</td>
+<td>公式サイトの本文から条件を読み取れたもの</td></tr>
+<tr><td><span class="flag chk">要確認</span></td><td>46</td>
+<td>公式サイトから読み取れず、二次情報に頼っているもの</td></tr>
+<tr><td><span class="flag no">条件未収録</span></td><td>4</td>
+<td>有料と分かっているが、条件を取得できていないもの</td></tr>
+</tbody></table>
+
+<h2>いちばん多い「読み取れない」理由</h2>
+<p>公式サイトが<b>料金表を画像で掲載している</b>ケースです。画面では読めますが、
+文字として取り出せないため、このサイトでは確認済みにできません。
+イオンモールの一部（茨木・大日・浦和美園ほか）、三井ショッピングパークの一部
+（ららぽーと海老名・甲子園、アウトレット木更津）などが該当します。</p>
+<p>ほかに、公式サイトの証明書が失効していて閲覧できない施設、駐車場ページ自体が
+用意されていない施設もあります。これらは「要確認」のまま残しています。</p>
+
+<h2>数字で見た164施設</h2>
+<ul>
+<li>買い物をしなくても終日無料：<b>53施設</b>（32%）</li>
+<li>買い上げ金額で無料時間が変わる：<b>77施設</b>（47%）</li>
+<li>平日と土日祝で条件が違う：<b>32施設</b></li>
+</ul>
+<p>郊外型のモールは無料が多く、都市部の駅前ほど条件が複雑になります。
+このサイトが役に立つのは主に後者です。</p>
+
+<h2>更新について</h2>
+<p>料金は改定されます。データ収集日は各ページの下部に書いてあるので、
+そこから時間が経っている場合は公式サイトも確認してください。</p>
+<p>掲載内容の誤りに気づかれた場合は、<a href="../privacy.html#contact">お問い合わせ</a>から
+お知らせいただけると助かります。確認のうえ修正します。</p>
+
+<h2>都道府県から探す</h2>
+<ul class="nav"><li><a href="hyogo.html">兵庫県</a></li><li><a href="osaka.html">大阪府</a></li><li><a href="nara.html">奈良県</a></li><li><a href="kyoto.html">京都府</a></li><li><a href="wakayama.html">和歌山県</a></li><li><a href="tokyo.html">東京都</a></li><li><a href="chiba.html">千葉県</a></li><li><a href="saitama.html">埼玉県</a></li><li><a href="kanagawa.html">神奈川県</a></li><li><a href="hokkaido.html">北海道</a></li><li><a href="miyagi.html">宮城県</a></li><li><a href="aichi.html">愛知県</a></li><li><a href="hiroshima.html">広島県</a></li><li><a href="fukuoka.html">福岡県</a></li></ul>
+
+<footer>
+  料金は変更されます。金額が大きいときは必ず公式ページか現地の掲示で確認してください。<br>
+  データ収集日：関西 2026-08-05／関東 2026-08-13／その他 2026-08-15。<br>
+  <a href="../privacy.html">免責事項・プライバシーポリシー</a>　<a href="../privacy.html#contact">お問い合わせ</a>　<a href="../">Free Parking Clock</a><br>
+  © 2026 Free Parking Clock
+</footer>
+</body>
+</html>
