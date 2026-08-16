@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>モール駐車場の無料時間と料金の計算｜あといくら買えば無料？</title>
-<meta name="description" content="全国14都道府県のショッピングモール163施設を収録。施設を選んで入庫時刻と買い上げ金額を入れるだけで、無料時間が切れる時刻・いま出た場合の駐車料金・あといくら買えば無料が延びるかが分かります。イオンモールやららぽーとにも対応。">
+<meta name="description" content="全国14都道府県のショッピングモール164施設を収録。施設を選んで入庫時刻と買い上げ金額を入れるだけで、無料時間が切れる時刻・いま出た場合の駐車料金・あといくら買えば無料が延びるかが分かります。イオンモールやららぽーとにも対応。">
 <link rel="canonical" href="https://nattom666.github.io/parking-free-calc/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Free Parking Clock">
 <meta property="og:title" content="モール駐車場の無料時間と料金の計算｜あといくら買えば無料？">
-<meta property="og:description" content="施設を選んで入庫時刻と買い上げ金額を入れるだけ。無料が切れる時刻といまの駐車料金、あといくら買えば無料が延びるかが分かります。全国14都道府県の163施設を収録。">
+<meta property="og:description" content="施設を選んで入庫時刻と買い上げ金額を入れるだけ。無料が切れる時刻といまの駐車料金、あといくら買えば無料が延びるかが分かります。全国14都道府県の164施設を収録。">
 <meta property="og:url" content="https://nattom666.github.io/parking-free-calc/">
 <meta property="og:image" content="https://nattom666.github.io/parking-free-calc/apple-touch-icon.png">
 <meta name="twitter:card" content="summary">
@@ -28,7 +28,7 @@
   "name": "Free Parking Clock",
   "alternateName": "駐車場の無料時間と料金の計算ツール",
   "url": "https://nattom666.github.io/parking-free-calc/",
-  "description": "全国14都道府県のショッピングモール163施設を収録。施設を選んで入庫時刻と買い上げ金額を入れるだけで、無料時間が切れる時刻・いま出た場合の駐車料金・あといくら買えば無料が延びるかが分かります。イオンモールやららぽーとにも対応。",
+  "description": "全国14都道府県のショッピングモール164施設を収録。施設を選んで入庫時刻と買い上げ金額を入れるだけで、無料時間が切れる時刻・いま出た場合の駐車料金・あといくら買えば無料が延びるかが分かります。イオンモールやららぽーとにも対応。",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Web",
   "browserRequirements": "JavaScript",
@@ -362,6 +362,7 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
         <li><a href="s/aeon-himeji-otsu.html">イオンモール姫路大津</a></li>
         <li><a href="s/aeon-kasai.html">イオンモール加西北条</a></li>
         <li><a href="s/aeon-inagawa.html">イオンモール猪名川</a></li>
+        <li><a href="s/tsukashin.html">グンゼタウンセンター つかしん</a></li>
       </ul>
       <h3>京都</h3>
       <ul>
@@ -1953,6 +1954,23 @@ const FACILITIES = [
   notes:["無料とみられるが公式ページで未確認。約2,000台。"]
 },
 
+{
+  id:"tsukashin", name:"グンゼタウンセンター つかしん", pref:"兵庫", area:"尼崎市",
+  src:"official", url:"https://www.tsukashin.com/shop/access.jsp",
+  rate:{unitMin:60, yen:200},
+  weekday:{freeAllDay:false, tiers:[[0,120],[2000,180],[5000,300]], maxFreeMin:300, maxFee:600},
+  holiday:{freeAllDay:false, tiers:[[0,120],[2000,180],[5000,300]], maxFreeMin:300},
+  extras:[
+    {id:"epos", label:"エポスカードを提示する", min:60, days:"all", isMember:true},
+    {id:"yunohanaro", label:"湯の華廊を利用する", min:120, days:"all"}
+  ],
+  notes:[
+    "買い物をしなくても2時間無料。2,000円以上で合計3時間、5,000円以上で合計5時間になる。",
+    "超過は60分ごと200円。平日は当日最大600円だが、土日祝に最大料金はない。",
+    "エポスカードの提示で+1時間、湯の華廊の利用で+2時間。ただし無料は合計5時間までが上限。",
+    "2,000台。西パーキングは7:00〜25:00（入庫は24:00まで）、東パーキングは8:45〜22:00。"
+  ]
+},
 /* ============================== 京都 ============================== */
 {
   id:"aeon-katsuragawa", name:"イオンモール京都桂川", pref:"京都", area:"京都市南区",
