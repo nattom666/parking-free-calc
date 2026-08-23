@@ -2919,6 +2919,15 @@ function compute(){
   }
 }
 
+/* 「Googleマップで開く」用。座標は持っていないので施設名と市区町村で検索させる。
+   スマホではマップアプリが直接開く。施設ページ（build-pages.js の mapUrl）と同じ形にすること。 */
+const PREF_FULL_MAP = {兵庫:"兵庫県",大阪:"大阪府",奈良:"奈良県",京都:"京都府",和歌山:"和歌山県",
+  東京:"東京都",千葉:"千葉県",埼玉:"埼玉県",神奈川:"神奈川県",北海道:"北海道",宮城:"宮城県",
+  愛知:"愛知県",広島:"広島県",福岡:"福岡県"};
+function mapUrl(f){
+  const q = f.name + " " + (PREF_FULL_MAP[f.pref]||f.pref) + f.area.replace(/（.*?）/g, "");
+  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+}
 function renderCond(){
   if(!current) return;
   const flags = {official:'<span class="flag ok">公式確認済</span>',
@@ -2935,7 +2944,8 @@ function renderCond(){
         yen(rule.maxFee) + '</p>' : '');
   };
   let html = '<p style="margin-bottom:10px">' + (flags[current.src]||flags.secondary) +
-    ' <a href="'+current.url+'" target="_blank" rel="noopener">公式ページを開く</a></p>';
+    ' <a href="'+current.url+'" target="_blank" rel="noopener">公式ページを開く</a>　' +
+    '<a href="'+mapUrl(current)+'" target="_blank" rel="noopener">Googleマップで開く</a></p>';
   if(!current.noData){
     const r = current.rate;
     html += '<p style="margin-bottom:8px;font-family:var(--mono);font-size:12px">超過料金 ' +
