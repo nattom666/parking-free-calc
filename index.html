@@ -74,7 +74,6 @@ html{-webkit-text-size-adjust:100%}
 body{background:var(--concrete);color:var(--ink);font-family:var(--jp);line-height:1.6;padding:20px 14px 64px;min-height:100vh}
 .wrap{max-width:520px;margin:0 auto}
 .masthead{margin-bottom:18px}
-.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--ink-2)}
 .masthead h1{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-top:4px}
 .masthead p{font-size:12.5px;color:var(--ink-2);margin-top:6px}
 .count{font-family:var(--mono);font-size:11px;color:var(--ink-2);margin-top:8px}
@@ -139,6 +138,11 @@ a{color:var(--green)}
 textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);padding:9px;height:190px;background:#fff}
 .disclaimer{margin-top:22px;font-size:11.5px;color:var(--ink-2);border-top:1px solid var(--concrete-dk);padding-top:12px}
 .credit{margin-top:16px;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--ink-2);opacity:.6}
+.quicknav{margin-top:20px;border-top:1px solid var(--concrete-dk);padding-top:12px}
+.quicknav h2{font-size:11px;font-family:var(--mono);letter-spacing:.12em;color:var(--ink-2);margin:0 0 6px;font-weight:400}
+.quicknav ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:5px 12px}
+.quicknav li{font-size:12.5px}
+.quicknav li.pref{font-size:12px;color:var(--ink-2)}
 .facilist{margin-top:20px;border-top:1px solid var(--concrete-dk);padding-top:12px}
 .facilist summary{font-size:12.5px;color:var(--ink-2);cursor:pointer}
 .facilist-body{margin-top:10px}
@@ -148,7 +152,6 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
 .facilist a{color:var(--ink)}
 .footlinks{margin-top:16px;text-align:center;font-size:12px}
 .footlinks a{color:var(--ink-2)}
-.err{color:var(--red);font-size:12px;margin-top:6px;min-height:1em}
 </style>
 </head>
 <body>
@@ -230,12 +233,40 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
 
   <!-- 施設一覧。<select> の option は検索エンジンが辿れないため、
        同じ内容を実体のリンクとして置いている。中身は sitemap と同じ手順で自動生成する。 -->
+  <nav class="quicknav">
+<!-- QUICK_NAV_START -->
+      <h2>条件から探す</h2>
+      <ul>
+        <li><a href="p/free.html">駐車場が完全無料のモール</a></li>
+        <li><a href="p/long-free.html">買い物なしで3時間以上停められるモール</a></li>
+        <li><a href="p/cinema.html">映画で無料になるモール</a></li>
+        <li><a href="p/weekend.html">平日と土日祝で条件が変わるモール</a></li>
+        <li><a href="p/about-data.html">データの集め方</a></li>
+      </ul>
+      <h2>都道府県から探す</h2>
+      <ul>
+        <li class="pref"><a href="p/tokyo.html">東京都</a></li>
+        <li class="pref"><a href="p/kanagawa.html">神奈川県</a></li>
+        <li class="pref"><a href="p/chiba.html">千葉県</a></li>
+        <li class="pref"><a href="p/saitama.html">埼玉県</a></li>
+        <li class="pref"><a href="p/osaka.html">大阪府</a></li>
+        <li class="pref"><a href="p/hyogo.html">兵庫県</a></li>
+        <li class="pref"><a href="p/kyoto.html">京都府</a></li>
+        <li class="pref"><a href="p/nara.html">奈良県</a></li>
+        <li class="pref"><a href="p/wakayama.html">和歌山県</a></li>
+        <li class="pref"><a href="p/hokkaido.html">北海道</a></li>
+        <li class="pref"><a href="p/miyagi.html">宮城県</a></li>
+        <li class="pref"><a href="p/aichi.html">愛知県</a></li>
+        <li class="pref"><a href="p/hiroshima.html">広島県</a></li>
+        <li class="pref"><a href="p/fukuoka.html">福岡県</a></li>
+      </ul>
+<!-- QUICK_NAV_END -->
+  </nav>
+
   <details class="facilist">
     <summary>収録している施設の一覧</summary>
     <div class="facilist-body">
 <!-- FACILITY_LINKS_START -->
-      <p class="facilist-nav"><a href="p/free.html">駐車場が完全無料のモール</a>　<a href="p/long-free.html">買い物なしで3時間以上停められるモール</a>　<a href="p/cinema.html">映画で無料になるモール</a>　<a href="p/weekend.html">平日と土日祝で条件が変わるモール</a>　<a href="p/about-data.html">データの集め方</a></p>
-      <p class="facilist-nav"><a href="p/tokyo.html">東京都のまとめ</a>　<a href="p/kanagawa.html">神奈川県のまとめ</a>　<a href="p/chiba.html">千葉県のまとめ</a>　<a href="p/saitama.html">埼玉県のまとめ</a>　<a href="p/osaka.html">大阪府のまとめ</a>　<a href="p/hyogo.html">兵庫県のまとめ</a>　<a href="p/kyoto.html">京都府のまとめ</a>　<a href="p/nara.html">奈良県のまとめ</a>　<a href="p/wakayama.html">和歌山県のまとめ</a>　<a href="p/hokkaido.html">北海道のまとめ</a>　<a href="p/miyagi.html">宮城県のまとめ</a>　<a href="p/aichi.html">愛知県のまとめ</a>　<a href="p/hiroshima.html">広島県のまとめ</a>　<a href="p/fukuoka.html">福岡県のまとめ</a></p>
       <h3>東京</h3>
       <ul>
         <li><a href="s/aeon-musashimurayama.html">イオンモールむさし村山</a></li>
@@ -450,7 +481,7 @@ textarea{font-size:11.5px;line-height:1.5;border:1px solid var(--concrete-dk);pa
     条件は変更されます。金額が大きいときは必ず施設の公式ページで確認してください。
     <span class="flag ok">公式確認済</span> は公式サイトの記載、
     <span class="flag chk">要確認</span> は二次情報、
-    <span class="flag no">条件未収録</span> は有料と分かっているが詳細が未取得のものです。データ収集日：関西 2026-08-05／関東 2026-08-13／その他 2026-08-15。<br>
+    <span class="flag no">条件未収録</span> は有料と分かっているが詳細が未取得のものです。データ収集日：関西 2026-08-17／関東 2026-08-13／その他 2026-08-15。<br>
     アクセス状況の把握に Google アナリティクスを使用しています。入力した時刻や金額は送信していません。
   </p>
 
